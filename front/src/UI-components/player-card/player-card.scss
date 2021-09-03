@@ -10,7 +10,7 @@
   padding: 10px;
   font-family: 'Roboto', sans-serif;
   line-break: 125%;
-  &__foto-container {
+  &__photo-container {
     display: flex;
     align-items: center;
     width: 50px;
@@ -19,7 +19,7 @@
     background: #60DABF;
     margin-right: 20px;
   }
-  &__foto {
+  &__photo {
     display: block;
     margin: auto;
     width: fit-content;
