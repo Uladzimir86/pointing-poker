@@ -1,0 +1,64 @@
+.player-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 72px;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  line-break: 125%;
+  &__foto-container {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #60DABF;
+    margin-right: 20px;
+  }
+  &__foto {
+    display: block;
+    margin: auto;
+    width: fit-content;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  &__text-container {
+    position: relative;
+    padding-top: 10px;
+  }
+  &__name {
+    font-size: 32px;
+    font-weight: 300;
+    overflow: hidden;
+  }
+  &__name-above {
+    position: absolute;
+    top: 0px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 2px;
+  }
+  &__position {
+    font-size: 10px;
+    font-weight: 300;
+    margin-left: 2px;
+    overflow: hidden;
+  }
+  &__button {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    background-image: url(./block_black_button.png);
+    background-size: contain;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
