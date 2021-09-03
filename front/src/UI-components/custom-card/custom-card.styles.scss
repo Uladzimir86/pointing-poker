@@ -1,0 +1,124 @@
+@mixin font-template {
+  font-family: Ruda;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.custom-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #ffffff;
+  border: 3px solid #eeeeee;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 67px;
+
+  width: 496px;
+  height: 806px;
+
+  user-select: none;
+}
+.upper-value {
+  position: absolute;
+  left: 14.11%;
+  right: 31.05%;
+  top: 0.12%;
+  bottom: 87.23%;
+
+  @include font-template();
+
+  font-size: 64px;
+  line-height: 81px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
+.lower-value {
+  position: absolute;
+  left: 87%;
+  right: 30%;
+  top: 80%;
+  bottom: -10%;
+
+  @include font-template();
+
+  font-size: 64px;
+  line-height: 81px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+
+  transform: rotate(179.72deg);
+}
+
+.center-value {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  @include font-template();
+
+  font-size: 288px;
+  line-height: 365px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  color: #000000;
+}
+
+.selected-card {
+  background-color: rgba($color: #60dabf, $alpha: 0.46);
+}
+
+.check-mark {
+  position: absolute;
+
+  background-image: url('./images/checkmark.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  top: 17%;
+
+  width: 500px;
+  height: 500px;
+
+  transform: scale(0.5);
+}
+
+.coffee {
+  position: absolute;
+
+  background-image: url('./images/coffee.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  top: 17%;
+
+  width: 500px;
+  height: 500px;
+
+  transform: scale(0.5);
+}
+
+.add-card {
+  position: absolute;
+
+  background-image: url('./images/add-card.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  top: 17%;
+
+  width: 500px;
+  height: 500px;
+
+  transform: scale(0.5);
+}
