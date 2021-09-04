@@ -9,12 +9,16 @@
 }
 
 .selected-option {
+  box-sizing: border-box;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 3rem;
   width: 200px;
-  border: 1px solid black;
+
+  padding-left: 10px;
+  padding-top: 8px;
 }
 
 .options {
@@ -25,11 +29,13 @@
 }
 
 .option {
+  box-sizing: border-box;
   height: 3rem;
   width: 200px;
-  border: 1px solid black;
-  background-color: rgba(0, 247, 255, 0.521);
+  border-top: 1px solid black;
 
+  padding-left: 10px;
+  padding-top: 8px;
 
   justify-content: center;
   align-items: center;
