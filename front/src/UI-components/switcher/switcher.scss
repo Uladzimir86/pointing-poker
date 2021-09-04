@@ -1,53 +1,24 @@
 
-input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100px; /* Specific width is required for Firefox. */
-  height: 40px;
-  background: transparent; /* Otherwise white in Chrome */
-  border: 1px solid blueviolet;
-  border-radius: 15px;
-  background-color: chocolate;
-}
-
-// input[type=range]::-webkit-slider-thumb {
-//   -webkit-appearance: none;
-// }
-
-// input[type=range]:focus {
-//   outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
-// }
-
-// input[type=range]::-ms-track {
-//   width: 100px;
-//   cursor: pointer;
-
-//   /* Hides the slider so custom styles can be added */
-//   background: transparent; 
-//   border-color: transparent;
-//   color: transparent;
-// }
-
-/* Special styling for WebKit/Blink */
-input[type=range]::-webkit-slider-thumb {
+.switcher {
   -webkit-appearance: none;
-  border: 1px solid #000000;
-  height: 38px;
-  width: 16px;
-  border-radius: 3px;
-  background: #ffffff;
+  width: 56px;
+  height: 30px;
+  padding: 0 4px;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  background-color: #C4C4C4;
   cursor: pointer;
- // margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  box-sizing: border-box;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  &_on {
+    background-color: #60DABF;
+  }
 }
-
-// /* All the same stuff for Firefox */
-// input[type=range]::-moz-range-thumb {
-//   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-//   border: 1px solid #000000;
-//   height: 36px;
-//   width: 16px;
-//   border-radius: 3px;
-//   background: #ffffff;
-//   cursor: pointer;
-// }
-
