@@ -1,7 +1,7 @@
 import React from 'react'
 import './StartPage.scss'
-import cardsLogo from './cards_startPage.svg'
-import line from './Line.svg'
+import cardsLogo from '../../assets/icons/cards_startPage.svg'
+import line from '../../assets/icons/Line.svg'
 import { Button } from '../../UI-components/Button/button'
 
 const StartPage = () => {
@@ -14,8 +14,8 @@ const StartPage = () => {
         </div>
         <div className="startPage_title-naming">
           <h2>Poker</h2>
-          {/*                     <img src={line} alt="line" />
-           */}{' '}
+{/*         <img src={line} alt="line" />
+ */}
           <h2>Planning</h2>
         </div>
       </div>
@@ -24,7 +24,7 @@ const StartPage = () => {
           <h3>Start your planning:</h3>
         </span>
         <div className = "startPage_newGame-fieldCreate">
-            <label htmlFor="Start new game">Start new game</label>
+            <label htmlFor="Start new game">Start new game:</label>
             <Button text={'Start new game'} styleButton={'primary'} />
         </div>
       </div>
@@ -33,7 +33,7 @@ const StartPage = () => {
         <div className = "startPage_connect-fieldCreate">
             <label htmlFor="connect">Connect to lobby by URL:</label>
             <div className = "startPage_connect-fieldCreate_inputbtn">
-                <input type="text"  />
+                <input className="inputElem" type="text"  />
                 <Button text={'Connect'} styleButton={'primary'} />
             </div>
         </div>

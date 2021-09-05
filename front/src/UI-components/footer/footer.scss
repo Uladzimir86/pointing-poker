@@ -1,7 +1,7 @@
 .footer {
   position: relative;
   height: 70px;
-  background-color:  #2B3A67;
+  background-color: #2b3a67;
   padding: 5px 10px;
   box-sizing: border-box;
   &__git-title {
@@ -13,7 +13,7 @@
   }
   &__git-link {
     display: block;
-    color: #66999B;
+    color: #66999b;
     font-style: italic;
     margin-right: 5px;
   }
@@ -24,7 +24,7 @@
     right: 10px;
     font-family: 'Open Sans', sans-serif;
     height: 30px;
-    background-image: url('./rss.svg');
+    background-image: url('../../assets/icons/rss.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left center;

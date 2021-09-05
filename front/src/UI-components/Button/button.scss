@@ -8,11 +8,12 @@ $color-additional: #ffffff;
   border: 1px solid #496a81;
   box-sizing: border-box;
   border-radius: 0px 3px 3px 0px;
-  padding: 2px 60px;
   font-size: 24px;
   line-height: 30px;
   cursor: pointer;
   transition: transform 0.3 ease;
+  height: 47px;
+  width: 241px;
 }
 
 .btn_primary {
@@ -30,5 +31,5 @@ $color-additional: #ffffff;
 
 .btn_primary:hover,
 .btn_add:hover {
-  transform: scale(1.1);
+  transform: translateY(-3px);
 }

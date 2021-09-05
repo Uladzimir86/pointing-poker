@@ -1,19 +1,19 @@
 import './button.scss'
 import React from 'react'
 
-type propsButton = {
+type PropsButton = {
   text: string
   type?: 'submit' | 'reset' | 'button'
   styleButton: 'primary' | 'add'
   onClick?: () => void
 }
 
-export const Button: React.FC<propsButton> = ({
+export const Button: React.FC<PropsButton> = ({
   text,
   onClick,
   type,
   styleButton,
-}: propsButton) => {
+}) => {
   return (
     <button className={`btn_${styleButton}`} onClick={onClick} type={type}>
       {text}

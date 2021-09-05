@@ -1,11 +1,15 @@
-import { SyntheticEvent, useState } from 'react'
+import { FC } from 'react'
 import './switcher.scss'
 
-const Switcher = () => {
-  const [switcherOn, setSwitcherOn] = useState(true)
+interface SwitcherInterface {
+  switcherOn: boolean
+  setSwitcherOn: (switcherState: boolean) => void
+}
 
-  const handleSwitcher = (event: SyntheticEvent) => {
-    setSwitcherOn(!switcherOn)
+const Switcher: FC<SwitcherInterface> = ({ switcherOn, setSwitcherOn }) => {
+  const handleSwitcher = () => {
+    switcherOn = !switcherOn
+    setSwitcherOn(switcherOn)
   }
   return (
     <input
