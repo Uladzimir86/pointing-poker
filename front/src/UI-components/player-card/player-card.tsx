@@ -1,32 +1,43 @@
-import React from 'react';
-import './player-card.scss';
+import React from 'react'
+import './player-card.scss'
 
-interface Player {
-  photo?: string,
-  name?: string,
-  position?: string,
-  btnDelPlayer?: boolean,
-  above?: boolean,
+interface IPlayerCard {
+  photo?: string
+  name?: string
+  position?: string
+  btnDelPlayer?: boolean
+  above?: boolean
 }
-const PlayerCard = ({photo = 'PH', name = 'Name', position = 'Position', btnDelPlayer = false, above = false}: Player) => {
+const PlayerCard: React.FC<IPlayerCard> = ({
+  photo = 'PH',
+  name = 'Name',
+  position = 'Position',
+  btnDelPlayer = false,
+  above = false,
+}) => {
   const deletePlayerCard = () => {
-    console.log('deletePlayerCard');
+    console.log('deletePlayerCard')
   }
   return (
     <div className="player-card">
       <div className="player-card__photo-container">
-        <div className="player-card__photo">
-          {photo}
-        </div> 
+        <div className="player-card__photo">{photo}</div>
       </div>
       <div className="player-card__text-container">
-        <div className="player-card__name-above" hidden={above}>It's you</div>
+        <div className="player-card__name-above" hidden={above}>
+          It's you
+        </div>
         <div className="player-card__name">{name}</div>
         <div className="player-card__position">{position}</div>
       </div>
-      <button type="button" className="player-card__button" onClick={deletePlayerCard} hidden={btnDelPlayer}></button>
+      <button
+        type="button"
+        className="player-card__button"
+        onClick={deletePlayerCard}
+        hidden={btnDelPlayer}
+      ></button>
     </div>
   )
 }
 
-export default PlayerCard;
+export default PlayerCard

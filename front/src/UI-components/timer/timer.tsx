@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import './timer.scss'
 
-type propsTimer = {
-  counter: number
+type PropsTimer = {
+  minutes?: number
+  seconds?: number
   isActive: boolean
 }
 
-export const TimerElement: React.FC<propsTimer> = ({
-  counter = 140,
+export const TimerElement: React.FC<PropsTimer> = ({
   isActive = false,
-}: propsTimer) => {
+  minutes = 0,
+  seconds = 0,
+}) => {
   const [time, setTime] = useState({
-    minutes: '2',
-    seconds: '20',
-    counter: counter,
+    minutes,
+    seconds,
+    counter: minutes * 60 + seconds,
   })
-  const [startTimer, setStartTimer] = useState<boolean>(isActive)
+  const [startTimer, setStartTimer] = useState(isActive)
 
   useEffect(() => {
-    let interval: any
+    let interval: NodeJS.Timeout
 
     if (startTimer) {
       interval = setInterval(() => {
-        const secondsCounter = String(time.counter % 60)
-        const minutesCounter = String(Math.floor(time.counter / 60))
-        console.log(minutesCounter, secondsCounter, 'time')
+        const secondsCounter = time.counter % 60
+        const minutesCounter = Math.floor(time.counter / 60)
         if (time.counter === 0) {
           setStartTimer(false)
         }

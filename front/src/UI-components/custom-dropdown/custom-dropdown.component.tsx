@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import './custom-dropdown.styles.scss'
-import triangleIcon from './images/triangle-icon.png'
+import triangleIcon from '../../assets/icons/triangle-icon.png'
 
 const CustomDropdown: FC = () => {
   const [selectedOption, setSelectedOption] = useState('Low')

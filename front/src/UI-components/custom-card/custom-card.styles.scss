@@ -4,6 +4,20 @@
   font-weight: bold;
 }
 
+@mixin icons {
+  position: absolute;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  top: 17%;
+
+  width: 500px;
+  height: 500px;
+
+  transform: scale(0.5);
+}
+
 .custom-card {
   display: flex;
   flex-direction: column;
@@ -79,46 +93,16 @@
 }
 
 .check-mark {
-  position: absolute;
-
-  background-image: url('./images/checkmark.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  top: 17%;
-
-  width: 500px;
-  height: 500px;
-
-  transform: scale(0.5);
+  @include icons();
+  background-image: url('../../assets/icons/checkmark.png');
 }
 
 .coffee {
-  position: absolute;
-
-  background-image: url('./images/coffee.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  top: 17%;
-
-  width: 500px;
-  height: 500px;
-
-  transform: scale(0.5);
+  @include icons();
+  background-image: url('../../assets/icons/coffee.png');
 }
 
 .add-card {
-  position: absolute;
-
-  background-image: url('./images/add-card.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  top: 17%;
-
-  width: 500px;
-  height: 500px;
-
-  transform: scale(0.5);
+  @include icons();
+  background-image: url('../../assets/icons/add-card.png');
 }
