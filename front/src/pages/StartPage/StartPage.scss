@@ -1,0 +1,59 @@
+h2 {
+  font-family: Roboto, sans-serif;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 82px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h3 {
+  color: #66999b;
+}
+
+.wrapper_startPage {
+  margin: 0 22rem;
+}
+
+.content_startPage {
+  width: 100%;
+
+  padding: 13.2rem 22rem 23rem 2.8rem;
+}
+
+.startPage {
+  &_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-cards {
+      padding: 2.7rem;
+    }
+    &-naming {
+      position: relative;
+      flex-direction: column;
+    }
+    &-naming > img {
+      z-index: 9;
+    }
+    &-naming > :last-child {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  &__newGame {
+    &-fieldCreate {
+    }
+  }
+  &__connect {
+    &-fieldCreate {
+      display: flex;
+      flex-direction: column;
+
+    &_inputbtn {
+
+    }
+    }
+  }
+}
