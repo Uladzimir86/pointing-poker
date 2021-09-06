@@ -1,5 +1,6 @@
 import './issues.scss';
 import CustomIssue, { CustomIssueInterface } from '../../UI-components/custom-issue/custom-issue.component';
+import { IndexKind } from 'typescript';
 
 interface IIssues {
   arrOfIssues: CustomIssueInterface[],
@@ -13,10 +14,11 @@ const Issues: React.FC<IIssues> = ({arrOfIssues}) => {
     closeButton,
     currentCard,
     priority,
-    number,}) => {
+    number,}, index: number) => {
  
     return (
       <CustomIssue
+      key={index}
       deleteButton={deleteButton}
       editButton={editButton}
       createButton={createButton}
@@ -27,6 +29,7 @@ const Issues: React.FC<IIssues> = ({arrOfIssues}) => {
       />
     )
   })
+  
   return (
     <div className="issues">
       <span className="title">Issues</span>

@@ -5,9 +5,10 @@ interface IMembers {
   arrOfMembers: IPlayerCard[],
 }
 const Members: React.FC<IMembers> = ({arrOfMembers}) => {
-  const members = arrOfMembers.map((item: IPlayerCard) => {
+  const members = arrOfMembers.map((item: IPlayerCard, index: number) => {
     return (
       <PlayerCard 
+        key={index}
         photo={item.photo}
         name={item.name}
         position={item.position}
