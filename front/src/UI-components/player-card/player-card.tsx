@@ -1,7 +1,7 @@
-import React from 'react'
-import './player-card.scss'
+import React from 'react';
+import './player-card.scss';
 
-interface IPlayerCard {
+export interface IPlayerCard {
   photo?: string
   name?: string
   position?: string
