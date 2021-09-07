@@ -1,11 +1,5 @@
-import GameSettings from './components/game-settings/game-settings.component'
-
 function App() {
-  return (
-    <div className="App">
-      <GameSettings />
-    </div>
-  )
+  return <div className="App"></div>
 }
 
 export default App
