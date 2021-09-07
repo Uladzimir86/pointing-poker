@@ -1,6 +1,5 @@
 import './issues.scss';
 import CustomIssue, { CustomIssueInterface } from '../../UI-components/custom-issue/custom-issue.component';
-import { IndexKind } from 'typescript';
 
 interface IIssues {
   arrOfIssues: CustomIssueInterface[],
