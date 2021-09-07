@@ -1,0 +1,17 @@
+.issues {
+  min-height: 100px;
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.title {
+  display: block;
+  text-align: center;
+  font-family: Ruda;
+  font-weight: 700;
+  line-height: 125%;
+  font-size: 24px;
+}
