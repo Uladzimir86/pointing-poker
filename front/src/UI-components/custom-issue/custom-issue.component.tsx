@@ -13,6 +13,7 @@ export interface CustomIssueInterface {
   currentCard?: boolean
   priority?: 'low' | 'medium' | 'high'
   number?: string
+  link: string
 }
 
 const CustomIssue: FC<CustomIssueInterface> = ({

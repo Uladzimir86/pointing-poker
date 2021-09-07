@@ -28,6 +28,76 @@ const GameSettings: FC = () => {
     }
   }
 
+  const smartShortTypeSetter = (text: string) => {
+    if (text.length >= 0 && text.length <= 3) {
+      setShortScoreType(text)
+    }
+  }
+
+  const inputsForInputMaker = [
+    {
+      type: 'switcher',
+      label: 'Scram master as a player:',
+      constant: scramMasterAsPlayer,
+      setter: setScramMasterAsPlayer,
+    },
+    {
+      type: 'switcher',
+      label: 'Changing card in round end:',
+      constant: changingCardInRoundEnd,
+      setter: setChangingCardInRoundEnd,
+    },
+    {
+      type: 'switcher',
+      label: 'Is timer needed:',
+      constant: isTimerNeeded,
+      setter: setIsTimerNeeded,
+    },
+    {
+      type: 'text',
+      label: 'Score type:',
+      constant: scoreType,
+      setter: setScoreType,
+    },
+    {
+      type: 'text',
+      label: 'Score type (Short):',
+      constant: shortScoreType,
+      setter: smartShortTypeSetter,
+    },
+  ]
+
+  const inputMaker = (
+    type: string,
+    label: string,
+    constant: any,
+    setter: any,
+    index: number
+  ) => {
+    return (
+      <div className="setting">
+        <span>{label}</span>
+
+        {type === 'switcher' ? (
+          <Switcher key={index} switcherOn={constant} setSwitcherOn={setter} />
+        ) : (
+          <input
+            key={index}
+            onChange={(event) => setter(event.target.value)}
+            required
+            type="text"
+            className="inputElem"
+          />
+        )}
+      </div>
+    )
+  }
+
+  const minifiedInputs = inputsForInputMaker.map(
+    ({ type, label, constant, setter }, index) =>
+      inputMaker(type, label, constant, setter, index)
+  )
+
   useEffect(() => {
     const formInfo = {
       scramMasterAsPlayer,
@@ -41,57 +111,24 @@ const GameSettings: FC = () => {
     }
 
     console.log(formInfo)
-  })
+  }, [
+    scramMasterAsPlayer,
+    changingCardInRoundEnd,
+    isTimerNeeded,
+    scoreType,
+    shortScoreType,
+    timerMinutes,
+    timerSeconds,
+    cardStorage,
+  ])
 
   return (
     <div className="game-settings-wrapper">
-      <form className="game-settings">
+      <div className="game-settings">
         <div className="main-text">
           <h2>Game settings: </h2>
         </div>
-        <div className="setting">
-          <span>Scram master as player: </span>
-          <Switcher
-            switcherOn={scramMasterAsPlayer}
-            setSwitcherOn={setScramMasterAsPlayer}
-          />
-        </div>
-        <div className="setting">
-          <span>Changing card in round end: </span>
-          <Switcher
-            switcherOn={changingCardInRoundEnd}
-            setSwitcherOn={setChangingCardInRoundEnd}
-          />
-        </div>
-        <div className="setting">
-          <span>Is timer needed: </span>
-          <Switcher
-            switcherOn={isTimerNeeded}
-            setSwitcherOn={setIsTimerNeeded}
-          />
-        </div>
-
-        <div className="setting">
-          <span>Score type:</span>
-          <input
-            onChange={(event) => setScoreType(event.target.value)}
-            required
-            type="text"
-            className="inputElem"
-          />
-        </div>
-        <div className="setting">
-          <span>Score type (Short):</span>
-          <input
-            onChange={(event) => setShortScoreType(event.target.value)}
-            required
-            type="text"
-            className="inputElem"
-            minLength={1}
-            maxLength={3}
-          />
-        </div>
-
+        {minifiedInputs}
         <div className="setting">
           <span>Round time: </span>
           <div className="timer-container">
@@ -123,7 +160,7 @@ const GameSettings: FC = () => {
         <div className="setting">
           <span>Add card values:</span>
         </div>
-      </form>
+      </div>
 
       <div className="cards-container">
         <CustomCard
@@ -133,6 +170,7 @@ const GameSettings: FC = () => {
         />
         {cardStorage.map((card) => (
           <CustomCard
+            key={card}
             centerValue={shortScoreType}
             values={String(card)}
             setCardStorage={setCardStorage}

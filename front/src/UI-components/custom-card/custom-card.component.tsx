@@ -8,6 +8,7 @@ interface CustomCardPropsInterface {
   addCard?: boolean
   setCardStorage: React.Dispatch<SetStateAction<number[]>>
   cardStorage: number[]
+  inGameSelected?: boolean
 }
 
 const CustomCard: FC<CustomCardPropsInterface> = ({
@@ -17,12 +18,15 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
   addCard,
   setCardStorage,
   cardStorage,
+  inGameSelected,
 }) => {
   const [selected, setSelected] = useState(false)
 
   const handleClick = () => {
-    if (!addCard) {
-      setSelected((prev) => !prev)
+    if (inGameSelected) {
+      if (!addCard) {
+        setSelected((prev) => !prev)
+      }
     }
   }
 
