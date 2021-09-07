@@ -5,87 +5,53 @@
 }
 
 @mixin icons {
-  position: absolute;
-
   background-repeat: no-repeat;
   background-size: cover;
 
-  top: 17%;
+  top: 18%;
 
-  width: 500px;
-  height: 500px;
+  width: 50px;
+  height: 50px;
 
-  transform: scale(0.5);
+  align-self: center;
 }
 
 .custom-card {
+  @include font-template();
+  position: relative;
+
+  font-size: 2rem;
+
   display: flex;
   flex-direction: column;
-  position: relative;
-  background: #ffffff;
-  border: 3px solid #eeeeee;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 67px;
+  justify-content: space-between;
 
-  width: 496px;
-  height: 806px;
+  border: 1px solid black;
 
-  user-select: none;
+  border-radius: 12%;
+
+  width: 100px;
+  height: 160px;
+  margin: 10px;
 }
 .upper-value {
-  position: absolute;
-  left: 14.11%;
-  right: 31.05%;
-  top: 0.12%;
-  bottom: 87.23%;
-
   @include font-template();
-
-  font-size: 64px;
-  line-height: 81px;
-  display: flex;
-  align-items: center;
-
-  color: #000000;
+  align-self: flex-start;
+  padding: 7px;
 }
 
 .lower-value {
-  position: absolute;
-  left: 87%;
-  right: 30%;
-  top: 80%;
-  bottom: -10%;
-
   @include font-template();
-
-  font-size: 64px;
-  line-height: 81px;
-  display: flex;
-  align-items: center;
-
-  color: #000000;
-
-  transform: rotate(179.72deg);
+  align-self: flex-end;
+  transform: rotate(180deg);
+  padding: 7px;
 }
 
 .center-value {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
   @include font-template();
-
-  font-size: 288px;
-  line-height: 365px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-
-  color: #000000;
+  text-transform: uppercase;
+  align-self: center;
+  font-size: 3rem;
 }
 
 .selected-card {
@@ -94,6 +60,8 @@
 
 .check-mark {
   @include icons();
+  position: absolute;
+  top: 32%;
   background-image: url('../../assets/icons/checkmark.png');
 }
 

@@ -35,25 +35,25 @@ const CustomIssue: FC<CustomIssueInterface> = ({
 
       <div className="buttons">
         {editButton && (
-          <div >
-            <img src={editIcon} alt="Edit" className="edit-button "/>
+          <div>
+            <img src={editIcon} alt="Edit" className="edit-button " />
           </div>
         )}
 
         {deleteButton && (
-          <div >
-            <img src={deleteIcon} alt="Delete" className="delete-button "/>
+          <div>
+            <img src={deleteIcon} alt="Delete" className="delete-button " />
           </div>
         )}
 
         {createButton && (
-          <div >
-            <img src={createIcon} alt="Create" className="create-button "/>
+          <div>
+            <img src={createIcon} alt="Create" className="create-button " />
           </div>
         )}
         {closeButton && (
-          <div >
-            <img src={closeIcon} alt="Close" className="close-button "/>
+          <div>
+            <img src={closeIcon} alt="Close" className="close-button " />
           </div>
         )}
       </div>
