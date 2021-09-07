@@ -1,7 +1,7 @@
-import React from 'react'
-import './player-card.scss'
+import React from 'react';
+import './player-card.scss';
 
-interface IPlayerCard {
+export interface IPlayerCard {
   photo?: string
   name?: string
   position?: string
@@ -12,7 +12,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   photo = 'PH',
   name = 'Name',
   position = 'Position',
-  btnDelPlayer = false,
+  btnDelPlayer = true,
   above = false,
 }) => {
   const deletePlayerCard = () => {
@@ -24,7 +24,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
         <div className="player-card__photo">{photo}</div>
       </div>
       <div className="player-card__text-container">
-        <div className="player-card__name-above" hidden={above}>
+        <div className="player-card__name-above" hidden={!above}>
           It's you
         </div>
         <div className="player-card__name">{name}</div>
@@ -34,7 +34,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
         type="button"
         className="player-card__button"
         onClick={deletePlayerCard}
-        hidden={btnDelPlayer}
+        hidden={!btnDelPlayer}
       ></button>
     </div>
   )
