@@ -13,10 +13,10 @@ const StartPage: React.FC = () => {
     console.log('open', activeModal)
   }
 
-  const onCloseModal = () => {
-    setActiveModal(false)
-    console.log('close')
-  }
+  // const onCloseModal = () => {
+  //   setActiveModal(false)
+  //   console.log('close')
+  // }
 
   useEffect(() => {
     if (activeModal) {
