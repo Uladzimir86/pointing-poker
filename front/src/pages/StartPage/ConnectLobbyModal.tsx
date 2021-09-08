@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
-import './ConnectLobby.scss';
-import photo_member from "../../assets/icons/checkmark.png"
+import './ConnectLobby.scss'
+import photo_member from '../../assets/icons/checkmark.png'
 
 export interface IMember {
   firstName: string
@@ -12,7 +12,7 @@ export interface IMember {
   image?: string
 }
 
-export const ConnectLobby: React.FC = () => {
+export const ConnectLobbyModal: React.FC = () => {
   const { register, handleSubmit } = useForm()
   const [result, setResult] = useState('')
   const onSubmit = (data: IMember) => setResult(JSON.stringify(data))
@@ -40,27 +40,23 @@ export const ConnectLobby: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <label htmlFor="">First name:</label>
-          <input
-            className="inputElem"
-            {...register('firstName')}
-          />
+          <input className="inputElem" {...register('firstName')} />
           <label htmlFor="">Last name:</label>
-          <input
-            className="inputElem"
-            {...register('lastName')}
-          />
+          <input className="inputElem" {...register('lastName')} />
           <label htmlFor="">Job position:</label>
-          <input
-            className="inputElem"
-            {...register('position')}
-          />
+          <input className="inputElem" {...register('position')} />
           <div className="connectLobby__register-form_image">
             <label>Image:</label>
-            <div  className = "connectLobby__register-form_image-choose">
-              <div id= "output_text">Choose file</div>
+            <div className="connectLobby__register-form_image-choose">
+              <div id="output_text">Choose file</div>
               <Button text={'Choose'} styleButton={'primary'} />
             </div>
-            <img src={photo_member} alt="photo_member" width='83px' height='83px'/>
+            <img
+              src={photo_member}
+              alt="photo_member"
+              width="83px"
+              height="83px"
+            />
           </div>
           <div className="connectLobby__register-form_buttons">
             <Button text={'Confirm'} styleButton={'primary'} type="submit" />

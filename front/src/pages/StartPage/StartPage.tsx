@@ -3,7 +3,7 @@ import './StartPage.scss'
 import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
 import { ModalWindow } from './modalWindow'
-import { ConnectLobby } from './ConnectLobby'
+import { CreateIssueModal } from '../../UI-components/modalWindows/CreateIssueModal'
 
 const StartPage: React.FC = () => {
   const [activeModal, setActiveModal] = useState(false)
@@ -64,7 +64,10 @@ const StartPage: React.FC = () => {
         </div>
       </div>
       <ModalWindow setActiveModal={setActiveModal} activeModal={activeModal}>
-        <ConnectLobby />
+        <CreateIssueModal
+          setActiveModal={setActiveModal}
+          activeModal={activeModal}
+        />
       </ModalWindow>
     </div>
   )

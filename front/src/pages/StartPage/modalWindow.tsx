@@ -12,7 +12,6 @@ export const ModalWindow: React.FC<PropsModalStartPage> = ({
   setActiveModal,
   children,
 }) => {
-  console.log(activeModal)
   return (
     <div
       className={activeModal ? 'modal active' : 'modal'}
