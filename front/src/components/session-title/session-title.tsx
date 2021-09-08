@@ -31,7 +31,7 @@ const SessionTitle: FC<ISTitle> = ({photo, name, position}) => {
 
   return (
     <div className="session-title">
-      <div className="header">
+      <div className="session-title__header">
         {warning && <span className="header__warning">Enter a new title...</span>}
         {!wrightTitle && <input type="text" className="header__input" value={sessionTitle} onChange={changeTitleText}/>}
         {!wrightTitle && <button type="button" className="header__button header__button_ok" disabled={warning} onClick={() => setWrightTitle(true)}>OK</button>}
