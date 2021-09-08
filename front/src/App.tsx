@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router'
-import GameSettings from './components/game-settings/game-settings.component'
+import LobbyPage from './pages/LobbyPage/lobby-page'
+import StartPage from './pages/StartPage/StartPage'
 import Footer from './UI-components/footer/footer'
 import Header from './UI-components/header/header'
 
@@ -9,10 +10,10 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <h1> Ya main stranica</h1>
+          <StartPage />
         </Route>
         <Route exact path="/lobby">
-          <GameSettings />
+          <LobbyPage />
         </Route>
       </Switch>
       <Footer />

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './StartPage.scss'
 import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
-import { ModalWindow } from './modalWindow'
-import { ConnectLobby } from './ConnectLobby'
+import { ModalWindow } from '../../components/modal-window/modalWindow'
+import { ConnectLobby } from '../../components/connect-lobby/ConnectLobby'
 
 const StartPage: React.FC = () => {
   const [activeModal, setActiveModal] = useState(false)

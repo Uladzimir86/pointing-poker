@@ -11,7 +11,7 @@ export interface CustomIssueInterface {
   createButton?: boolean
   closeButton?: boolean
   currentCard?: boolean
-  priority?: 'low' | 'medium' | 'high'
+  priority?: string
   number?: string
 }
 
