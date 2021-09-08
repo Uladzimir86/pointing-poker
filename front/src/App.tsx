@@ -1,16 +1,7 @@
-import React from "react"
-import StartPage from "./pages/StartPage/StartPage"
-import Footer from "./UI-components/footer/footer"
-import Header from "./UI-components/header/header"
+import React from 'react'
 
 function App() {
-  return (
-    <div className="App">
-      <Header/>
-      <StartPage/>
-      <Footer/>
-    </div>
-  )
+  return <div className="App"></div>
 }
 
 export default App
