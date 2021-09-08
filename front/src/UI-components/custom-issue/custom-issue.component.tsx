@@ -5,7 +5,7 @@ import deleteIcon from '../../assets/icons/delete-card-icon.png'
 import closeIcon from '../../assets/icons/close-card-icon.png'
 import createIcon from '../../assets/icons/create-card-icon.png'
 
-interface CustomIssueInterface {
+export interface CustomIssueInterface {
   deleteButton?: boolean
   editButton?: boolean
   createButton?: boolean
@@ -35,25 +35,25 @@ const CustomIssue: FC<CustomIssueInterface> = ({
 
       <div className="buttons">
         {editButton && (
-          <div className="edit-button ">
-            <img src={editIcon} alt="Edit" />
+          <div>
+            <img src={editIcon} alt="Edit" className="edit-button " />
           </div>
         )}
 
         {deleteButton && (
-          <div className="delete-button ">
-            <img src={deleteIcon} alt="Delete" />
+          <div>
+            <img src={deleteIcon} alt="Delete" className="delete-button " />
           </div>
         )}
 
         {createButton && (
-          <div className="create-button ">
-            <img src={createIcon} alt="Create" />
+          <div>
+            <img src={createIcon} alt="Create" className="create-button " />
           </div>
         )}
         {closeButton && (
-          <div className="close-button ">
-            <img src={closeIcon} alt="Close" />
+          <div>
+            <img src={closeIcon} alt="Close" className="close-button " />
           </div>
         )}
       </div>
