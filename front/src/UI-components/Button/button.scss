@@ -11,14 +11,8 @@ $color-additional: #ffffff;
   font-size: 24px;
   line-height: 125%;
   cursor: pointer;
-<<<<<<< HEAD
-  transition: transform 0.3 ease;
-  height: 47px;
-  width: 241px;
-=======
   transition: transform 0.3s ease;
   height: 50px;
->>>>>>> 34a5c1bec3e2d740b2df8c3b47588769c8e5aa9a
 }
 
 .btn_primary {
@@ -36,9 +30,6 @@ $color-additional: #ffffff;
 
 .btn_primary:hover,
 .btn_add:hover {
-<<<<<<< HEAD
   transform: translateY(-3px);
-=======
   transform: scale(1.05);
->>>>>>> 34a5c1bec3e2d740b2df8c3b47588769c8e5aa9a
 }

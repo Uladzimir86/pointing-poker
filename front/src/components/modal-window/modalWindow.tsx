@@ -1,6 +1,6 @@
 import React from 'react'
 import './modalWindow.scss'
-import './StartPage.scss'
+import '../../pages/StartPage/StartPage'
 
 type PropsModalStartPage = {
   setActiveModal: Function
