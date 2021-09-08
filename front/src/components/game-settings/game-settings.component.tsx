@@ -126,6 +126,7 @@ const GameSettings: FC = () => {
     timerMinutes,
     timerSeconds,
     cardStorage,
+    dispatch,
   ])
 
   return (
