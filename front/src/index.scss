@@ -1,5 +1,5 @@
-:root{
-    font-size: 10px;
+:root {
+  font-size: 10px;
 }
 
 .inputElem {
@@ -10,10 +10,19 @@
   font-size: 24px;
   line-height: 28px;
   align-items: center;
-  padding: 1rem;
   width: 32.5rem;
-  background: #FFFFFF;
+  height: 47px;
+  background: #ffffff;
   box-sizing: border-box;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.5);
   border-radius: 0px 0px 0px 10px;
+}
+label {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
 }
