@@ -18,7 +18,7 @@ const Switcher: FC<SwitcherInterface> = ({ switcherOn, setSwitcherOn }) => {
       type="range"
       min="0"
       max="1"
-      onClick={handleSwitcher}
+      onChange={handleSwitcher}
     />
   )
 }
