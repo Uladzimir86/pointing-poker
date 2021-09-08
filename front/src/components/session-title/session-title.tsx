@@ -31,13 +31,13 @@ const SessionTitle: FC<ISTitle> = ({photo, name, position}) => {
 
   return (
     <div className="session-title">
-      <div className="session-title__header">
-        {warning && <span className="header__warning">Enter a new title...</span>}
-        {!wrightTitle && <input type="text" className="header__input" value={sessionTitle} onChange={changeTitleText}/>}
-        {!wrightTitle && <button type="button" className="header__button header__button_ok" disabled={warning} onClick={() => setWrightTitle(true)}>OK</button>}
-        {wrightTitle && <span className="header__text">{sessionTitle}</span>}
-        {wrightTitle && <button type="button" className="header__button" onClick={() => setWrightTitle(false)}>
-                        <img src={img} alt="icon" className="header__icon"></img>
+      <div className="headder">
+        {warning && <span className="headder__warning">Enter a new title...</span>}
+        {!wrightTitle && <input type="text" className="headder__input" value={sessionTitle} onChange={changeTitleText}/>}
+        {!wrightTitle && <button type="button" className="headder__button headder__button_ok" disabled={warning} onClick={() => setWrightTitle(true)}>OK</button>}
+        {wrightTitle && <span className="headder__text">{sessionTitle}</span>}
+        {wrightTitle && <button type="button" className="headder__button" onClick={() => setWrightTitle(false)}>
+                        <img src={img} alt="icon" className="headder__icon"></img>
                       </button>}
       </div>
       <div className="scram-master">

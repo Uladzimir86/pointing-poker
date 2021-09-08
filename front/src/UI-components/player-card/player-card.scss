@@ -33,9 +33,12 @@
     padding-top: 10px;
   }
   &__name {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 300;
     overflow: hidden;
+    max-width: 170px;
+    max-height: 35px;
+    white-space: nowrap;
   }
   &__name-above {
     position: absolute;

@@ -131,10 +131,11 @@ const GameSettings: FC = () => {
 
   return (
     <div className="game-settings-wrapper">
+      <div className="title">Game settings: </div>
       <div className="game-settings">
-        <div className="main-text">
-          <h2>Game settings: </h2>
-        </div>
+
+          
+
         {minifiedInputs}
         <div className="setting">
           <span>Round time: </span>
