@@ -3,9 +3,13 @@ import GameSettings from '../../components/game-settings/game-settings.component
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
 import SessionTitle from '../../components/session-title/session-title'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 import './lobby-page.styles.scss'
 
 const LobbyPage: FC = () => {
+  const state = useTypedSelector((state) => state.settings)
+  console.log(state, '<------ Current State')
+
   const arrOfMembers = [
     {
       photo: 'JM',

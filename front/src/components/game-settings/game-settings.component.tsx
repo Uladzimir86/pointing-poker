@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import './game-settings.styles.scss'
 import Switcher from '../../UI-components/switcher/switcher'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
+import { useDispatch } from 'react-redux'
 
 const GameSettings: FC = () => {
   const [scramMasterAsPlayer, setScramMasterAsPlayer] = useState(false)
@@ -15,6 +16,8 @@ const GameSettings: FC = () => {
   const [timerSeconds, setTimerSeconds] = useState(30)
 
   const [cardStorage, setCardStorage] = useState([1, 3, 5, 7, 9])
+
+  const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {
     if (seconds >= 0 && seconds <= 60) {
@@ -110,7 +113,10 @@ const GameSettings: FC = () => {
       cardStorage,
     }
 
-    console.log(formInfo)
+    dispatch({
+      type: 'UPDATE_SETTINGS',
+      payload: formInfo,
+    })
   }, [
     scramMasterAsPlayer,
     changingCardInRoundEnd,
@@ -120,6 +126,7 @@ const GameSettings: FC = () => {
     timerMinutes,
     timerSeconds,
     cardStorage,
+    dispatch,
   ])
 
   return (
@@ -168,9 +175,9 @@ const GameSettings: FC = () => {
           cardStorage={cardStorage}
           coffee
         />
-        {cardStorage.map((card) => (
+        {cardStorage.map((card, index) => (
           <CustomCard
-            key={card}
+            key={index}
             centerValue={shortScoreType}
             values={String(card)}
             setCardStorage={setCardStorage}
