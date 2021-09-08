@@ -78,14 +78,13 @@ const GameSettings: FC = () => {
     index: number
   ) => {
     return (
-      <div className="setting">
+      <div className="setting" key={index}>
         <span>{label}</span>
 
         {type === 'switcher' ? (
-          <Switcher key={index} switcherOn={constant} setSwitcherOn={setter} />
+          <Switcher switcherOn={constant} setSwitcherOn={setter} />
         ) : (
           <input
-            key={index}
             onChange={(event) => setter(event.target.value)}
             required
             type="text"
