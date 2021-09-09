@@ -182,6 +182,7 @@ const GameSettings: FC = () => {
             key={index}
             centerValue={shortScoreType}
             values={String(card)}
+            id={index}
             // setCardStorage={setCardStorage}
             // cardStorage={cardStorage}
           />
