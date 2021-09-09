@@ -6,18 +6,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import {SettingsState} from '../../types/reducers/game-settings'
 
 const GameSettings: FC = () => {
+
   const [scramMasterAsPlayer, setScramMasterAsPlayer] = useState(false)
   const [changingCardInRoundEnd, setChangingCardInRoundEnd] = useState(false)
   const [isTimerNeeded, setIsTimerNeeded] = useState(false)
-
   const [scoreType, setScoreType] = useState('')
   const [shortScoreType, setShortScoreType] = useState('')
-
   const [timerMinutes, setTimerMinutes] = useState(2)
   const [timerSeconds, setTimerSeconds] = useState(30)
 
   const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
-  console.log(cardStorage)
   const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {
@@ -134,8 +132,6 @@ const GameSettings: FC = () => {
       <div className="title">Game settings: </div>
       <div className="game-settings">
 
-          
-
         {minifiedInputs}
         <div className="setting">
           <span>Round time: </span>
@@ -172,8 +168,6 @@ const GameSettings: FC = () => {
 
       <div className="cards-container">
         <CustomCard
-          // setCardStorage={setCardStorage}
-          // cardStorage={cardStorage}
           coffee
           isBtns={true}
         />
@@ -183,13 +177,9 @@ const GameSettings: FC = () => {
             centerValue={shortScoreType}
             values={String(card)}
             id={index}
-            // setCardStorage={setCardStorage}
-            // cardStorage={cardStorage}
           />
         ))}
         <CustomCard
-          // setCardStorage={setCardStorage}
-          // cardStorage={cardStorage}
           addCard
           isBtns
         />
