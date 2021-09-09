@@ -1,6 +1,6 @@
 import React from 'react'
 import './modalWindow.scss'
-import './StartPage.scss'
+import '../../pages/StartPage/StartPage.scss'
 
 type PropsModalStartPage = {
   setActiveModal: Function
@@ -9,9 +9,9 @@ type PropsModalStartPage = {
 
 export const ModalWindow: React.FC<PropsModalStartPage> = ({
   activeModal,
-  setActiveModal,
-  children,
+  setActiveModal, children
 }) => {
+  
   return (
     <div
       className={activeModal ? 'modal active' : 'modal'}

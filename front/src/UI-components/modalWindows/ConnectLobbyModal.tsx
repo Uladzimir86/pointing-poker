@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
@@ -11,12 +11,24 @@ export interface IMember {
   position: string
   image?: string
 }
+type PropsModal = {
+  setActiveModal: Function
+}
 
-export const ConnectLobbyModal: React.FC = () => {
-  const { register, handleSubmit } = useForm()
-  const [result, setResult] = useState('')
-  const onSubmit = (data: IMember) => setResult(JSON.stringify(data))
+export const ConnectLobbyModal: React.FC<PropsModal> = ({ setActiveModal }) => {
+  const { register, handleSubmit } = useForm<IMember>()
+  const [result, setResult] = useState<IMember>()
+  const onSubmit : SubmitHandler<IMember> = data =>  {
+    setActiveModal(false)
+    setResult(data)
+  }
+
+  const onCloseModal =()=>{
+    setActiveModal(false)
+  }
+
   useEffect(() => {
+    //TO DO fetch to server
     console.log(result)
   }, [result])
 
@@ -26,12 +38,12 @@ export const ConnectLobbyModal: React.FC = () => {
         <h3>Connect to lobby</h3>
         <div className="connectLobby__title-right">
           <label htmlFor="connectObserver">connect as observer</label>
-          <Switcher
+          {   <Switcher
             switcherOn={false}
             setSwitcherOn={function (switcherState: boolean): void {
               throw new Error('Function not implemented.')
             }}
-          />
+          />}
         </div>
       </div>
       <div className="connectLobby__register">
@@ -60,7 +72,7 @@ export const ConnectLobbyModal: React.FC = () => {
           </div>
           <div className="connectLobby__register-form_buttons">
             <Button text={'Confirm'} styleButton={'primary'} type="submit" />
-            <Button text={'Cancel'} styleButton={'add'} />
+            <Button text={'Cancel'} styleButton={'add'}  onClick={onCloseModal}/>
           </div>
         </form>
       </div>
