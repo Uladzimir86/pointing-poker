@@ -1,5 +1,6 @@
 export enum SettingsActionTypes {
   UPDATE_SETTINGS = 'UPDATE_SETTINGS',
+  UPDATE_CARDSTORAGE = 'UPDATE_CARDSTORAGE',
 }
 
 export interface SettingsState {

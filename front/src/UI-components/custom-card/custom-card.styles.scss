@@ -33,6 +33,14 @@
   width: 100px;
   height: 160px;
   margin: 10px;
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__btns-container {
+    display: flex;
+  }
 }
 .upper-value {
   @include font-template();
@@ -73,4 +81,12 @@
 .add-card {
   @include icons();
   background-image: url('../../assets/icons/add-card.png');
+  cursor: pointer;
+}
+.edit-button.edit-button_custom-card,
+.delete-button.delete-button_custom-card {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  padding-right: 3px;
 }

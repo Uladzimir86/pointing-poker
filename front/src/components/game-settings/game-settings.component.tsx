@@ -2,7 +2,8 @@ import React, { FC, useEffect, useState } from 'react'
 import './game-settings.styles.scss'
 import Switcher from '../../UI-components/switcher/switcher'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import {SettingsState} from '../../types/reducers/game-settings'
 
 const GameSettings: FC = () => {
   const [scramMasterAsPlayer, setScramMasterAsPlayer] = useState(false)
@@ -15,8 +16,8 @@ const GameSettings: FC = () => {
   const [timerMinutes, setTimerMinutes] = useState(2)
   const [timerSeconds, setTimerSeconds] = useState(30)
 
-  const [cardStorage, setCardStorage] = useState([1, 3, 5, 7, 9])
-
+  const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
+  console.log(cardStorage)
   const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {
@@ -171,23 +172,25 @@ const GameSettings: FC = () => {
 
       <div className="cards-container">
         <CustomCard
-          setCardStorage={setCardStorage}
-          cardStorage={cardStorage}
+          // setCardStorage={setCardStorage}
+          // cardStorage={cardStorage}
           coffee
+          isBtns={true}
         />
         {cardStorage.map((card, index) => (
           <CustomCard
             key={index}
             centerValue={shortScoreType}
             values={String(card)}
-            setCardStorage={setCardStorage}
-            cardStorage={cardStorage}
+            // setCardStorage={setCardStorage}
+            // cardStorage={cardStorage}
           />
         ))}
         <CustomCard
-          setCardStorage={setCardStorage}
-          cardStorage={cardStorage}
+          // setCardStorage={setCardStorage}
+          // cardStorage={cardStorage}
           addCard
+          isBtns
         />
       </div>
     </div>
