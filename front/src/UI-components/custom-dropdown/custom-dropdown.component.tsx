@@ -2,8 +2,15 @@ import { FC, useState } from 'react'
 import './custom-dropdown.styles.scss'
 import triangleIcon from '../../assets/icons/triangle-icon.png'
 
-const CustomDropdown: FC = () => {
-  const [selectedOption, setSelectedOption] = useState('Low')
+type PropsDropDown = {
+  selectedOption: string
+  setSelectedOption: Function
+}
+
+export const CustomDropdown: FC<PropsDropDown> = ({
+  selectedOption,
+  setSelectedOption,
+}) => {
   const [visible, setVisible] = useState(false)
 
   return (

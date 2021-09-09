@@ -2,26 +2,22 @@ import React, { useEffect, useState } from 'react'
 import './StartPage.scss'
 import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
-import { ModalWindow } from '../../components/modal-window/modalWindow'
-import { ConnectLobby } from '../../components/connect-lobby/ConnectLobby'
+import { ModalWindow } from '../../UI-components/modalWindows/modalWindow'
+import { ConnectLobbyModal } from '../../UI-components/modalWindows/ConnectLobbyModal'
 
 const StartPage: React.FC = () => {
   const [activeModal, setActiveModal] = useState(false)
 
-  const onOpenModal = () => {
+  useEffect(() => {}, [activeModal])
+
+  const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     setActiveModal(true)
-    console.log('open', activeModal)
   }
 
-  // const onCloseModal = () => {
-  //   setActiveModal(false)
-  //   console.log('close')
-  // }
-
-  useEffect(() => {
-    if (activeModal) {
-    }
-  }, [activeModal])
+  const onCloseModal = () => {
+    setActiveModal(false)
+  }
 
   return (
     <div className="wrapper_startPage">
@@ -44,7 +40,10 @@ const StartPage: React.FC = () => {
             <Button
               text={'Start new game'}
               styleButton={'primary'}
-              onClick={onOpenModal}
+              onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                event.preventDefault()
+                setActiveModal(true)
+              }}
             />
           </div>
         </div>
@@ -64,7 +63,7 @@ const StartPage: React.FC = () => {
         </div>
       </div>
       <ModalWindow setActiveModal={setActiveModal} activeModal={activeModal}>
-        <ConnectLobby />
+        {<ConnectLobbyModal setActiveModal={setActiveModal} />}
       </ModalWindow>
     </div>
   )
