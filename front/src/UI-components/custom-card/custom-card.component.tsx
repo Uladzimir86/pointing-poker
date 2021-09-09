@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, SetStateAction, useState } from 'react'
 import './custom-card.styles.scss'
 
 interface CustomCardPropsInterface {
@@ -6,6 +6,9 @@ interface CustomCardPropsInterface {
   centerValue?: string
   coffee?: boolean
   addCard?: boolean
+  setCardStorage: React.Dispatch<SetStateAction<number[]>>
+  cardStorage: number[]
+  inGameSelected?: boolean
 }
 
 const CustomCard: FC<CustomCardPropsInterface> = ({
@@ -13,12 +16,24 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
   centerValue,
   coffee,
   addCard,
+  setCardStorage,
+  cardStorage,
+  inGameSelected,
 }) => {
   const [selected, setSelected] = useState(false)
 
   const handleClick = () => {
-    if (!addCard) {
-      setSelected((prev) => !prev)
+    if (inGameSelected) {
+      if (!addCard) {
+        setSelected((prev) => !prev)
+      }
+    }
+  }
+
+  const handleAddCard = () => {
+    const nextCard = Number(cardStorage[cardStorage.length - 1]) + 1
+    if (addCard) {
+      setCardStorage([...cardStorage, nextCard])
     }
   }
 
@@ -32,6 +47,7 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
       <div className="upper-value">{topAndBottomValues}</div>
 
       <div
+        onClick={handleAddCard}
         className={`${
           coffee ? 'coffee' : addCard ? 'add-card' : 'center-value'
         }`}

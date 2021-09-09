@@ -9,11 +9,10 @@ $color-additional: #ffffff;
   box-sizing: border-box;
   border-radius: 0px 3px 3px 0px;
   font-size: 24px;
-  line-height: 30px;
+  line-height: 125%;
   cursor: pointer;
-  transition: transform 0.3 ease;
-  height: 47px;
-  width: 241px;
+  transition: transform 0.3s ease;
+  height: 50px;
 }
 
 .btn_primary {
@@ -32,4 +31,5 @@ $color-additional: #ffffff;
 .btn_primary:hover,
 .btn_add:hover {
   transform: translateY(-3px);
+  transform: scale(1.05);
 }
