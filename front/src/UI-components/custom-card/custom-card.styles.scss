@@ -33,6 +33,14 @@
   width: 100px;
   height: 160px;
   margin: 10px;
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__btns-container {
+    display: flex;
+  }
 }
 .upper-value {
   @include font-template();
@@ -73,4 +81,35 @@
 .add-card {
   @include icons();
   background-image: url('../../assets/icons/add-card.png');
+  cursor: pointer;
+}
+.edit-button.edit-button_custom-card,
+.delete-button.delete-button_custom-card {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  padding-right: 3px;
+}
+.edit-button.edit-button_custom-card-ok {
+  background-color: #ffffff;
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 15px;
+  margin-right: 5px;
+  padding: 0;
+  text-align: center;
+  line-height: 125%;
+  color: rgb(255, 81, 0);
+  font-weight: 500;
+}
+.upper-value_input{
+  border: none;
+  border-bottom: 2px solid gray;
+  width: 45px;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 0;
+  padding-left: 3px;
+  font-family: Ruda;
+  outline: none;
 }

@@ -5,7 +5,7 @@ import {
 } from '../../../types/reducers/game-settings'
 
 const initialState: SettingsState = {
-  cardStorage: [1, 3, 5, 7, 9],
+  cardStorage: [1, 2, 3, 5, 8, 13, 20, 40],
   changingCardInRoundEnd: false,
   isTimerNeeded: false,
   scoreType: '',
@@ -22,6 +22,8 @@ export const gameSettingsReducer = (
   switch (action.type) {
     case SettingsActionTypes.UPDATE_SETTINGS:
       return { ...action.payload }
+    case SettingsActionTypes.UPDATE_CARDSTORAGE:
+      return { ...state, cardStorage: action.payload }
 
     default:
       return state

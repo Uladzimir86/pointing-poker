@@ -8,7 +8,7 @@ import './lobby-page.styles.scss'
 
 const LobbyPage: FC = () => {
   const state = useTypedSelector((state) => state.settings)
-  console.log(state, '<------ Current State')
+  //console.log(state, '<------ Current State')
 
   const arrOfMembers = [
     {

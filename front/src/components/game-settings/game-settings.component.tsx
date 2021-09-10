@@ -2,21 +2,20 @@ import React, { FC, useEffect, useState } from 'react'
 import './game-settings.styles.scss'
 import Switcher from '../../UI-components/switcher/switcher'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import {SettingsState} from '../../types/reducers/game-settings'
 
 const GameSettings: FC = () => {
+
   const [scramMasterAsPlayer, setScramMasterAsPlayer] = useState(false)
   const [changingCardInRoundEnd, setChangingCardInRoundEnd] = useState(false)
   const [isTimerNeeded, setIsTimerNeeded] = useState(false)
-
   const [scoreType, setScoreType] = useState('')
   const [shortScoreType, setShortScoreType] = useState('')
-
   const [timerMinutes, setTimerMinutes] = useState(2)
   const [timerSeconds, setTimerSeconds] = useState(30)
 
-  const [cardStorage, setCardStorage] = useState([1, 3, 5, 7, 9])
-
+  const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
   const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {
@@ -133,8 +132,6 @@ const GameSettings: FC = () => {
       <div className="title">Game settings: </div>
       <div className="game-settings">
 
-          
-
         {minifiedInputs}
         <div className="setting">
           <span>Round time: </span>
@@ -171,23 +168,20 @@ const GameSettings: FC = () => {
 
       <div className="cards-container">
         <CustomCard
-          setCardStorage={setCardStorage}
-          cardStorage={cardStorage}
           coffee
+          isBtns={true}
         />
         {cardStorage.map((card, index) => (
           <CustomCard
             key={index}
             centerValue={shortScoreType}
             values={String(card)}
-            setCardStorage={setCardStorage}
-            cardStorage={cardStorage}
+            id={index}
           />
         ))}
         <CustomCard
-          setCardStorage={setCardStorage}
-          cardStorage={cardStorage}
           addCard
+          isBtns
         />
       </div>
     </div>
