@@ -1,7 +1,6 @@
 import './issues.scss'
-import CustomIssue, {
-  CustomIssueInterface,
-} from '../../UI-components/custom-issue/custom-issue.component'
+import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
+import { CustomIssueInterface } from '../../common/interfaces'
 
 interface IIssues {
   arrOfIssues: CustomIssueInterface[]
@@ -32,6 +31,8 @@ const Issues: React.FC<IIssues> = ({ arrOfIssues }) => {
           priority={priority}
           number={number}
         />
+        
+        
       )
     }
   )
@@ -39,7 +40,13 @@ const Issues: React.FC<IIssues> = ({ arrOfIssues }) => {
   return (
     <div className="issues">
       <span className="title">Issues</span>
-      <div className="issues__container">{issues}</div>
+      <div className= "issues__container">
+      <div className="issues__container">{issues }</div>
+      <div className="issue__createNewIssue">
+        <CustomIssue createButton />
+      </div>
+      </div>
+      
     </div>
   )
 }

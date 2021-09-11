@@ -4,6 +4,8 @@ import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
 import photo_member from '../../assets/icons/checkmark.png'
+import { useDispatch } from 'react-redux'
+import { toggleModalWindow } from '../../store/actions'
 
 export interface IMember {
   firstName: string
@@ -11,20 +13,20 @@ export interface IMember {
   position: string
   image?: string
 }
-type PropsModal = {
-  setActiveModal: Function
-}
 
-export const ConnectLobbyModal: React.FC<PropsModal> = ({ setActiveModal }) => {
+
+export const ConnectLobbyModal: React.FC = () => {
+  const dispatch = useDispatch()
+
   const { register, handleSubmit } = useForm<IMember>()
   const [result, setResult] = useState<IMember>()
   const onSubmit : SubmitHandler<IMember> = data =>  {
-    setActiveModal(false)
+    onCloseModal()
     setResult(data)
   }
 
   const onCloseModal =()=>{
-    setActiveModal(false)
+    dispatch(toggleModalWindow(false))
   }
 
   useEffect(() => {

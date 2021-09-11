@@ -1,9 +1,11 @@
-import { FC } from 'react'
+import { FC} from 'react'
 import GameSettings from '../../components/game-settings/game-settings.component'
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
 import SessionTitle from '../../components/session-title/session-title'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { CreateIssueModal } from '../../UI-components/modalWindows/CreateIssueModal'
+import { ModalWindow } from '../../UI-components/modalWindows/modalWindow'
 import './lobby-page.styles.scss'
 
 const LobbyPage: FC = () => {
@@ -48,12 +50,17 @@ const LobbyPage: FC = () => {
     },
   ]
 
+  
+
   return (
     <div className="lobby-page">
       <SessionTitle />
       <Members arrOfMembers={arrOfMembers} />
       <Issues arrOfIssues={arrOfIssues} />
       <GameSettings />
+      <ModalWindow >
+        <CreateIssueModal/>
+      </ModalWindow>
     </div>
   )
 }

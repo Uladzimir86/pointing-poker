@@ -4,16 +4,10 @@ import editIcon from '../../assets/icons/edit-card-icon.png'
 import deleteIcon from '../../assets/icons/delete-card-icon.png'
 import closeIcon from '../../assets/icons/close-card-icon.png'
 import createIcon from '../../assets/icons/create-card-icon.png'
-
-export interface CustomIssueInterface {
-  deleteButton?: boolean
-  editButton?: boolean
-  createButton?: boolean
-  closeButton?: boolean
-  currentCard?: boolean
-  priority?: string
-  number?: string
-}
+import { CustomIssueInterface } from '../../common/interfaces'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleModalWindow } from '../../store/actions'
+import { IStateGlobal } from '../../store/globalReducers'
 
 const CustomIssue: FC<CustomIssueInterface> = ({
   deleteButton,
@@ -24,6 +18,16 @@ const CustomIssue: FC<CustomIssueInterface> = ({
   priority,
   number,
 }) => {
+  const dispatch = useDispatch()
+
+  const handlerCreateIssue = () => {
+    dispatch(toggleModalWindow(true))
+  }
+
+  const statusModalWindow: boolean = useSelector(
+    (state: IStateGlobal) => state.modalWindow
+  )
+
   return (
     <div className={`custom-issue ${currentCard ? 'current-card' : ''}`}>
       <div className="content-text">
@@ -47,7 +51,7 @@ const CustomIssue: FC<CustomIssueInterface> = ({
         )}
 
         {createButton && (
-          <div>
+          <div onClick={handlerCreateIssue}>
             <img src={createIcon} alt="Create" className="create-button " />
           </div>
         )}

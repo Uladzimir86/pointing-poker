@@ -3,31 +3,26 @@ import { Button } from '../Button/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import '../custom-dropdown/custom-dropdown.styles.scss'
 import './CreateIssueModal.scss'
+import { IIssueForm } from '../../common/interfaces'
+import { toggleModalWindow } from '../../store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { IStateGlobal } from '../../store/globalReducers'
 
-export interface IIssueForm {
-  title: string
-  link: string
-  priority: 'Low' | 'Medium' | 'High'
-}
+export const CreateIssueModal: React.FC = () => {
+  const dispatch = useDispatch()
+  const statusModalWindow: boolean = useSelector(
+    (state: IStateGlobal) => state.modalWindow
+  )
 
-type PropsModal = {
-  setActiveModal: Function
-  activeModal: boolean
-}
-
-export const CreateIssueModal: React.FC<PropsModal> = ({
-  setActiveModal,
-  activeModal,
-}) => {
   const { register, handleSubmit } = useForm<IIssueForm>()
   const [result, setResult] = useState<IIssueForm>()
   const onSubmit: SubmitHandler<IIssueForm> = (data) => {
-    setActiveModal(false)
+    onCloseModal()
     setResult(data)
   }
 
   const onCloseModal = () => {
-    setActiveModal(false)
+    dispatch(toggleModalWindow(false))
   }
 
   useEffect(() => {
