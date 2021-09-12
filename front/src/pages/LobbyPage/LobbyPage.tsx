@@ -1,16 +1,22 @@
-import { FC} from 'react'
+import { FC } from 'react'
+import { useSelector } from 'react-redux'
+import { ModalType } from '../../common/interfaces'
 import GameSettings from '../../components/game-settings/game-settings.component'
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
 import SessionTitle from '../../components/session-title/session-title'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { CreateIssueModal } from '../../UI-components/modalWindows/CreateIssueModal'
-import { ModalWindow } from '../../UI-components/modalWindows/modalWindow'
-import './lobby-page.styles.scss'
+import { IStateGlobal } from '../../store/globalReducers'
+import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
+import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
+import { ModalWindow } from '../../components/modalWindows/modalWindow'
+import './LobbyPage.scss'
 
 const LobbyPage: FC = () => {
   const state = useTypedSelector((state) => state.settings)
-  //console.log(state, '<------ Current State')
+  const typeModalWindow = useSelector(
+    (state: IStateGlobal) => state.typeModalWindow
+  )
 
   const arrOfMembers = [
     {
@@ -29,37 +35,18 @@ const LobbyPage: FC = () => {
     },
   ]
 
-  const arrOfIssues = [
-    {
-      deleteButton: true,
-      editButton: true,
-      createButton: false,
-      closeButton: false,
-      currentCard: true,
-      priority: 'medium',
-      number: '14',
-    },
-    {
-      deleteButton: true,
-      editButton: true,
-      createButton: false,
-      closeButton: false,
-      currentCard: false,
-      priority: 'high',
-      number: '06',
-    },
-  ]
-
-  
-
   return (
     <div className="lobby-page">
       <SessionTitle />
       <Members arrOfMembers={arrOfMembers} />
-      <Issues arrOfIssues={arrOfIssues} />
+      <Issues />
       <GameSettings />
-      <ModalWindow >
-        <CreateIssueModal/>
+      <ModalWindow>
+        {typeModalWindow === ModalType.createIssueModalWindow ? (
+          <CreateIssueModal />
+        ) : (
+          <KickPlayerModal />
+        )}
       </ModalWindow>
     </div>
   )

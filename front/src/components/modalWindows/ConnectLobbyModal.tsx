@@ -14,23 +14,26 @@ export interface IMember {
   image?: string
 }
 
-
 export const ConnectLobbyModal: React.FC = () => {
   const dispatch = useDispatch()
 
-  const { register, handleSubmit } = useForm<IMember>()
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<IMember>()
   const [result, setResult] = useState<IMember>()
-  const onSubmit : SubmitHandler<IMember> = data =>  {
+  const onSubmit: SubmitHandler<IMember> = (data) => {
     onCloseModal()
     setResult(data)
   }
-
-  const onCloseModal =()=>{
+  const onCloseModal = () => {
     dispatch(toggleModalWindow(false))
   }
 
   useEffect(() => {
-    //TO DO fetch to server
+    //TODO fetch to server
     console.log(result)
   }, [result])
 
@@ -40,12 +43,14 @@ export const ConnectLobbyModal: React.FC = () => {
         <h3>Connect to lobby</h3>
         <div className="connectLobby__title-right">
           <label htmlFor="connectObserver">connect as observer</label>
-          {   <Switcher
-            switcherOn={false}
-            setSwitcherOn={function (switcherState: boolean): void {
-              throw new Error('Function not implemented.')
-            }}
-          />}
+          {
+            <Switcher
+              switcherOn={false}
+              setSwitcherOn={function (switcherState: boolean): void {
+                throw new Error('Function not implemented.')
+              }}
+            />
+          }
         </div>
       </div>
       <div className="connectLobby__register">
@@ -54,11 +59,38 @@ export const ConnectLobbyModal: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <label htmlFor="">First name:</label>
-          <input className="inputElem" {...register('firstName')} />
+          <input
+            className="inputElem"
+            {...register('firstName', {
+              required: true,
+              pattern: {
+                value: /(^[A-Za-z-]+$)/,
+                message: 'invalid First Name',
+              },
+            })}
+          />
           <label htmlFor="">Last name:</label>
-          <input className="inputElem" {...register('lastName')} />
+          <input
+            className="inputElem"
+            {...register('lastName', {
+              required: true,
+              pattern: {
+                value: /(^[A-Za-z-]+$)/,
+                message: 'invalid Last Name',
+              },
+            })}
+          />
           <label htmlFor="">Job position:</label>
-          <input className="inputElem" {...register('position')} />
+          <input
+            className="inputElem"
+            {...register('position', {
+              required: true,
+              pattern: {
+                value: /(^[A-Za-z-]+$)/,
+                message: 'invalid Job Position',
+              },
+            })}
+          />
           <div className="connectLobby__register-form_image">
             <label>Image:</label>
             <div className="connectLobby__register-form_image-choose">
@@ -74,7 +106,11 @@ export const ConnectLobbyModal: React.FC = () => {
           </div>
           <div className="connectLobby__register-form_buttons">
             <Button text={'Confirm'} styleButton={'primary'} type="submit" />
-            <Button text={'Cancel'} styleButton={'add'}  onClick={onCloseModal}/>
+            <Button
+              text={'Cancel'}
+              styleButton={'add'}
+              onClick={onCloseModal}
+            />
           </div>
         </form>
       </div>

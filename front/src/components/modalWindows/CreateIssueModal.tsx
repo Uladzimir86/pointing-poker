@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from '../Button/button'
+import { Button } from '../../UI-components/Button/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import '../custom-dropdown/custom-dropdown.styles.scss'
+import '../../UI-components/custom-dropdown/custom-dropdown.styles.scss'
 import './CreateIssueModal.scss'
-import { IIssueForm } from '../../common/interfaces'
-import { toggleModalWindow } from '../../store/actions'
-import { useDispatch, useSelector } from 'react-redux'
-import { IStateGlobal } from '../../store/globalReducers'
+import { addNewIssue, toggleModalWindow } from '../../store/actions'
+import { useDispatch } from 'react-redux'
+import { CustomIssueInterface } from '../../common/interfaces'
 
 export const CreateIssueModal: React.FC = () => {
   const dispatch = useDispatch()
-  const statusModalWindow: boolean = useSelector(
-    (state: IStateGlobal) => state.modalWindow
-  )
 
-  const { register, handleSubmit } = useForm<IIssueForm>()
-  const [result, setResult] = useState<IIssueForm>()
-  const onSubmit: SubmitHandler<IIssueForm> = (data) => {
-    onCloseModal()
+  const { register, handleSubmit } = useForm<CustomIssueInterface>()
+  const [result, setResult] = useState<CustomIssueInterface>()
+  const onSubmit: SubmitHandler<CustomIssueInterface> = (data) => {
     setResult(data)
+    dispatch(addNewIssue(data))
+    onCloseModal()
   }
 
   const onCloseModal = () => {
@@ -27,7 +24,6 @@ export const CreateIssueModal: React.FC = () => {
 
   useEffect(() => {
     //TO DO fetch to server
-    console.log(result)
   }, [result])
 
   return (

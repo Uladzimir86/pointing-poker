@@ -1,52 +1,29 @@
 import './issues.scss'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
-import { CustomIssueInterface } from '../../common/interfaces'
+import { CustomIssueInterface, IStore } from '../../common/interfaces'
+import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
+import { useSelector } from 'react-redux'
 
-interface IIssues {
-  arrOfIssues: CustomIssueInterface[]
-}
-
-const Issues: React.FC<IIssues> = ({ arrOfIssues }) => {
-  const issues = arrOfIssues.map(
-    (
-      {
-        deleteButton,
-        editButton,
-        createButton,
-        closeButton,
-        currentCard,
-        priority,
-        number,
-      },
-      index: number
-    ) => {
-      return (
-        <CustomIssue
-          key={index}
-          deleteButton={deleteButton}
-          editButton={editButton}
-          createButton={createButton}
-          closeButton={closeButton}
-          currentCard={currentCard}
-          priority={priority}
-          number={number}
-        />
-        
-        
-      )
-    }
+const Issues: React.FC = () => {
+  const arrOfIssues: CustomIssueInterface[] = useSelector(
+    (state: IStore) => state.issues.issueCard
   )
+
+  const issues = arrOfIssues.map(({ title, link, priority }) => {
+    return (
+      <CustomIssue key={title} priority={priority} title={title} link={link} />
+    )
+  })
 
   return (
     <div className="issues">
       <span className="title">Issues</span>
-      <div className= "issues__container">
-      <div className="issues__container">{issues }</div>
-      <div className="issue__createNewIssue">
-        <CustomIssue createButton />
+      <div className="issues__container">
+        <div className="issues__container">
+          {issues}
+          <CreateIssueCard />
+        </div>
       </div>
-      </div>
-      
     </div>
   )
 }

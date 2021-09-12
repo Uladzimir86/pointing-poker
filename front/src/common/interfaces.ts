@@ -1,16 +1,23 @@
-export interface IIssueForm {
-    title: string
-    link: string
-    priority: 'Low' | 'Medium' | 'High'
-}
+import { SettingsState } from './../types/reducers/game-settings'
 
 export interface CustomIssueInterface {
-    deleteButton?: boolean
-    editButton?: boolean
-    createButton?: boolean
-    closeButton?: boolean
-    currentCard?: boolean
-    priority?: string
-    number?: string
-  }
-  
+  link: string
+  title: string
+  priority: 'Low' | 'Medium' | 'High'
+}
+
+export interface IIssues {
+  issueCard: CustomIssueInterface[]
+}
+
+export enum ModalType {
+  kickModalWindow = 'kickModalWindow',
+  createIssueModalWindow = 'createIssueModalWindow',
+}
+
+export interface IStore {
+  settings: SettingsState
+  modalWindow: boolean
+  issues: IIssues
+  typeModalWindow:ModalType
+}
