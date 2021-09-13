@@ -1,18 +1,16 @@
 import React from 'react'
-import { Button } from '../Button/button'
+import { Button } from '../../UI-components/Button/button'
 import './KickPlayerModal.scss'
 
 type PropsKickPlayer = {
   name?: string
-  setActiveModal: Function
-
+  
 }
 
-export const KickPlayerModal: React.FC<PropsKickPlayer> = ({ name, setActiveModal }) => {
+export const KickPlayerModal: React.FC<PropsKickPlayer> = ({ name}) => {
   const handlerDelete = () => {
-    //TO DO delete player
+    //TODO fetch delete player
     console.log('delete player')
-    setActiveModal(false)
   }
 
   return (

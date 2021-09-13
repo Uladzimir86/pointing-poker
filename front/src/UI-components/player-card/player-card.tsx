@@ -1,4 +1,7 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { ModalType } from '../../common/interfaces';
+import { setTypeModalWindow, toggleModalWindow } from '../../store/actions';
 import './player-card.scss'
 
 export interface IPlayerCard {
@@ -15,9 +18,19 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   btnDelPlayer = true,
   above = false,
 }) => {
+  const dispatch = useDispatch();
+
   const deletePlayerCard = () => {
+    dispatch(toggleModalWindow(true))
+    dispatch(setTypeModalWindow(ModalType.kickModalWindow))
+
     console.log('deletePlayerCard')
+
   }
+
+
+
+
   return (
     <div className="player-card">
       <div className="player-card__photo-container">
