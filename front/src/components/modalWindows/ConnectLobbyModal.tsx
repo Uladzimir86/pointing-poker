@@ -20,7 +20,6 @@ export const ConnectLobbyModal: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<IMember>()
   const [result, setResult] = useState<IMember>()
@@ -59,38 +58,54 @@ export const ConnectLobbyModal: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <label htmlFor="">First name:</label>
-          <input
-            className="inputElem"
-            {...register('firstName', {
-              required: true,
-              pattern: {
-                value: /(^[A-Za-z-]+$)/,
-                message: 'invalid First Name',
-              },
-            })}
-          />
+          <div className="connectLobby__register-form_block">
+            <input
+              className="inputElem"
+              {...register('firstName', {
+                required: true,
+                pattern: {
+                  value: /(^[A-Za-z-]+$)/,
+                  message: 'First name must contain only letters',
+                },
+              })}
+            />
+            {errors.firstName && (
+              <p className="error_validate">{errors.firstName.message}</p>
+            )}
+          </div>
           <label htmlFor="">Last name:</label>
-          <input
-            className="inputElem"
-            {...register('lastName', {
-              required: true,
-              pattern: {
-                value: /(^[A-Za-z-]+$)/,
-                message: 'invalid Last Name',
-              },
-            })}
-          />
+          <div className="connectLobby__register-form_block">
+            <input
+              className="inputElem"
+              {...register('lastName', {
+                required: true,
+                pattern: {
+                  value: /(^[A-Za-z-]+$)/,
+                  message: 'Last name must contain only letters',
+                },
+              })}
+            />
+            {errors.lastName && (
+              <p className="error_validate">{errors.lastName.message}</p>
+            )}
+          </div>
           <label htmlFor="">Job position:</label>
-          <input
-            className="inputElem"
-            {...register('position', {
-              required: true,
-              pattern: {
-                value: /(^[A-Za-z-]+$)/,
-                message: 'invalid Job Position',
-              },
-            })}
-          />
+          <div className="connectLobby__register-form_block">
+            <input
+              className="inputElem"
+              {...register('position', {
+                required: true,
+                pattern: {
+                  value: /(^[A-Za-z-]+$)/,
+                  message: 'Invalid Job Position',
+                },
+              })}
+            />
+            {errors.position && (
+              <p className="error_validate">{errors.position.message}</p>
+            )}
+          </div>
+
           <div className="connectLobby__register-form_image">
             <label>Image:</label>
             <div className="connectLobby__register-form_image-choose">
