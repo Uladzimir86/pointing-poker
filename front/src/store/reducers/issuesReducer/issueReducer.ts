@@ -1,4 +1,4 @@
-import { ActionIssues, DELETE_ISSUE } from './../../actions'
+import { ActionIssues, DELETE_ISSUE, EDIT_ISSUE } from './../../actions'
 import { CREATE_NEW_ISSUE } from '../../actions'
 import { CustomIssueInterface, IIssues } from './../../../common/interfaces'
 
@@ -15,8 +15,15 @@ export const arrOfIssues: CustomIssueInterface[] = [
   },
 ]
 
+export const initialEditIssueCard :CustomIssueInterface={
+  link: '',
+  title: '',
+  priority: 'Low'
+}
+
 const initialStateIssues: IIssues = {
   issueCard: arrOfIssues,
+  editIssueCard : initialEditIssueCard,
 }
 
 export const ChangeIssuesReducer = (
@@ -33,6 +40,12 @@ export const ChangeIssuesReducer = (
         issueCard: state.issueCard.filter(
           (item) => item.title !== action.payload
         ),
+      }
+    }
+    case EDIT_ISSUE: {
+      return {
+        ...state,
+        editIssueCard: action.payload
       }
     }
     default:

@@ -1,3 +1,14 @@
+@mixin font-size24 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+
 .container_createIssue {
   display: flex;
   justify-content: center;
@@ -38,4 +49,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error_validate {
+  color: #ffc482;
+  margin: 0;
+  @include font-size24;
+ 
 }

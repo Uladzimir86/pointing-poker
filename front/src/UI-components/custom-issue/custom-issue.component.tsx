@@ -1,11 +1,12 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import './custom-issue.styles.scss'
 import editIcon from '../../assets/icons/edit-card-icon.png'
 import deleteIcon from '../../assets/icons/delete-card-icon.png'
 import closeIcon from '../../assets/icons/close-card-icon.png'
 import { CustomIssueInterface } from '../../common/interfaces'
 import { useDispatch } from 'react-redux'
-import { deleteIssue, toggleModalWindow } from '../../store/actions'
+import { deleteIssue, editIssue, toggleModalWindow } from '../../store/actions'
+
 
 const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
   const currentCard = false
@@ -13,9 +14,12 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
   const closeButton = false
   const deleteButton = true
   const dispatch = useDispatch()
-
+  const [issueCard , setIssueCard] = useState<CustomIssueInterface>({link:link,title:title,priority:priority})
+ 
   const handlerEditIssue = () => {
+    dispatch(editIssue(issueCard))
     dispatch(toggleModalWindow(true))
+    
   }
 
   const handlerDeleteIssue = () => {

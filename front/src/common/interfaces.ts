@@ -8,6 +8,7 @@ export interface CustomIssueInterface {
 
 export interface IIssues {
   issueCard: CustomIssueInterface[]
+  editIssueCard: CustomIssueInterface
 }
 
 export enum ModalType {
