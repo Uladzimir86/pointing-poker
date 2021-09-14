@@ -25,6 +25,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   const deletePlayerCard = () => {
     ws?.send(JSON.stringify({type: 'DEL_PLAYER', id}));
   }
+
   return (
     <div className="player-card">
       <div className="player-card__photo-container">

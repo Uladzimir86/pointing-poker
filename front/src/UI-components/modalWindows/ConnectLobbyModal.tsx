@@ -67,6 +67,20 @@ export const ConnectLobbyModal: React.FC<PropsModal> = ({ setActiveModal }) => {
       // }
       alert('Connection to session closed. Reason: ' + event.reason);
   };
+  wsConnection.onerror = function(error: Event) {
+    const err = error as ErrorEvent;
+    alert("Error: " + err.message);
+  };
+
+
+// async function resp(){
+//       await fetch('http://localhost:4000/issues')
+//       .then((res) => res.json())
+//       .then((res) => setArrOfIssues([...res, ...arrOfIssues]));
+//     }
+  // useEffect(() => {
+  //   resp();
+  // },[]);
 }
 
   return (

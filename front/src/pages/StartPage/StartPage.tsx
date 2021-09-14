@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react'
 import './StartPage.scss'
 import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
-import { ModalWindow } from '../../UI-components/modalWindows/modalWindow'
-import { ConnectLobbyModal } from '../../UI-components/modalWindows/ConnectLobbyModal'
+import { ModalWindow } from '../../components/modalWindows/modalWindow'
+import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
+import { toggleModalWindow } from '../../store/actions'
+import { useDispatch } from 'react-redux'
 
 const StartPage: React.FC = () => {
-  const [activeModal, setActiveModal] = useState(false)
-
-  // useEffect(() => {}, [activeModal])
+  const dispatch = useDispatch()
 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    setActiveModal(true)
-  }
+    dispatch(toggleModalWindow(true))
 
-  const onCloseModal = () => {
-    setActiveModal(false)
   }
 
   return (
@@ -42,7 +38,8 @@ const StartPage: React.FC = () => {
               styleButton={'primary'}
               onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault()
-                setActiveModal(true)
+                onOpenModal(event)
+
               }}
             />
           </div>
@@ -62,8 +59,8 @@ const StartPage: React.FC = () => {
           </div>
         </div>
       </div>
-      <ModalWindow setActiveModal={setActiveModal} activeModal={activeModal}>
-        {<ConnectLobbyModal setActiveModal={setActiveModal} />}
+      <ModalWindow >
+        {<ConnectLobbyModal />}
       </ModalWindow>
     </div>
   )

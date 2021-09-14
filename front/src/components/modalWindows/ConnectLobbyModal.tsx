@@ -1,0 +1,134 @@
+import React, { useEffect, useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { Button } from '../../UI-components/Button/button'
+import Switcher from '../../UI-components/switcher/switcher'
+import './ConnectLobby.scss'
+import photo_member from '../../assets/icons/checkmark.png'
+import { useDispatch } from 'react-redux'
+import { toggleModalWindow } from '../../store/actions'
+
+export interface IMember {
+  firstName: string
+  lastName: string
+  position: string
+  image?: string
+}
+
+export const ConnectLobbyModal: React.FC = () => {
+  const dispatch = useDispatch()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IMember>()
+  const [result, setResult] = useState<IMember>()
+  const onSubmit: SubmitHandler<IMember> = (data) => {
+    onCloseModal()
+    setResult(data)
+  }
+  const onCloseModal = () => {
+    dispatch(toggleModalWindow(false))
+  }
+
+  useEffect(() => {
+    //TODO fetch to server
+    console.log(result)
+  }, [result])
+
+  return (
+    <div className="container_ConnectLobby">
+      <div className="connectLobby__title">
+        <h3>Connect to lobby</h3>
+        <div className="connectLobby__title-right">
+          <label htmlFor="connectObserver">connect as observer</label>
+          {
+            <Switcher
+              switcherOn={false}
+              setSwitcherOn={function (switcherState: boolean): void {
+                throw new Error('Function not implemented.')
+              }}
+            />
+          }
+        </div>
+      </div>
+      <div className="connectLobby__register">
+        <form
+          className="connectLobby__register-form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <label htmlFor="">First name:</label>
+          <div className="connectLobby__register-form_block">
+            <input
+              className="inputElem"
+              {...register('firstName', {
+                required: true,
+                pattern: {
+                  value: /(^[A-Za-z-]+$)/,
+                  message: 'First name must contain only letters',
+                },
+              })}
+            />
+            {errors.firstName && (
+              <p className="error_validate">{errors.firstName.message}</p>
+            )}
+          </div>
+          <label htmlFor="">Last name:</label>
+          <div className="connectLobby__register-form_block">
+            <input
+              className="inputElem"
+              {...register('lastName', {
+                required: true,
+                pattern: {
+                  value: /(^[A-Za-z-]+$)/,
+                  message: 'Last name must contain only letters',
+                },
+              })}
+            />
+            {errors.lastName && (
+              <p className="error_validate">{errors.lastName.message}</p>
+            )}
+          </div>
+          <label htmlFor="">Job position:</label>
+          <div className="connectLobby__register-form_block">
+            <input
+              className="inputElem"
+              {...register('position', {
+                required: true,
+                pattern: {
+                  value: /(^[A-Za-z-]+$)/,
+                  message: 'Invalid Job Position',
+                },
+              })}
+            />
+            {errors.position && (
+              <p className="error_validate">{errors.position.message}</p>
+            )}
+          </div>
+
+          <div className="connectLobby__register-form_image">
+            <label>Image:</label>
+            <div className="connectLobby__register-form_image-choose">
+              <div id="output_text">Choose file</div>
+              <Button text={'Choose'} styleButton={'primary'} />
+            </div>
+            <img
+              src={photo_member}
+              alt="photo_member"
+              width="83px"
+              height="83px"
+            />
+          </div>
+          <div className="connectLobby__register-form_buttons">
+            <Button text={'Confirm'} styleButton={'primary'} type="submit" />
+            <Button
+              text={'Cancel'}
+              styleButton={'add'}
+              onClick={onCloseModal}
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
