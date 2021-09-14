@@ -8,7 +8,7 @@ import { ConnectLobbyModal } from '../../UI-components/modalWindows/ConnectLobby
 const StartPage: React.FC = () => {
   const [activeModal, setActiveModal] = useState(false)
 
-  useEffect(() => {}, [activeModal])
+  // useEffect(() => {}, [activeModal])
 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()

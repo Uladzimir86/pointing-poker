@@ -29,8 +29,23 @@ export const ConnectLobbyModal: React.FC<PropsModal> = ({ setActiveModal }) => {
 
   useEffect(() => {
     //TO DO fetch to server
-    console.log(result)
+    //if (result) resp(result)
+    //console.log(result)
   }, [result])
+
+  async function resp(player: IMember){
+        await fetch('http://localhost:4000/player',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(player)
+        })
+        .then((res) => console.log(res.json()))
+        //.then((res)=>console.log(res))
+        // .then((re) => setArrOfIssues([...re, ...arrOfIssues]));
+      }
+     // receive issue
 
   return (
     <div className="container_ConnectLobby">

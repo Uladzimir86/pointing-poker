@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState  } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
 import photo_member from '../../assets/icons/checkmark.png'
+import {IPlayerCard} from '../../UI-components/player-card/player-card'
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
 export interface IMember {
   firstName: string
@@ -17,20 +20,54 @@ type PropsModal = {
 
 export const ConnectLobbyModal: React.FC<PropsModal> = ({ setActiveModal }) => {
   const { register, handleSubmit } = useForm<IMember>()
-  const [result, setResult] = useState<IMember>()
+  const history = useHistory();
+  const [isConnection, setIsConnection] = useState(false)
+
   const onSubmit : SubmitHandler<IMember> = data =>  {
-    setActiveModal(false)
-    setResult(data)
+    sendForm(data)
   }
 
   const onCloseModal =()=>{
     setActiveModal(false)
   }
 
-  useEffect(() => {
-    //TO DO fetch to server
-    console.log(result)
-  }, [result])
+  const dispatch = useDispatch()
+
+  const sendForm = (memberForm: IMember )=>{
+
+  const player: IPlayerCard = {
+    name: memberForm.firstName + memberForm.lastName,
+    position: memberForm.position,
+    photo: memberForm.image,
+    id: Date.now()
+  }
+  setIsConnection(true);
+
+  const wsConnection = new WebSocket("ws://localhost:4000");
+  wsConnection.onopen = function() {
+    dispatch({type: 'WS', ws: wsConnection})
+    wsConnection?.send(JSON.stringify({type: 'PUT_PLAYER', player }));
+  };
+
+  wsConnection.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    if (data.type === 'SET_PLAYERS') {
+      dispatch({type: 'SET_PLAYERS', payload: data.players})
+      setIsConnection(false)
+      setActiveModal(false)
+      history.push('/lobby')
+    }
+  };
+  wsConnection.onclose = function(event) {
+    setIsConnection(false);
+      // if (event.wasClean) {
+      //   alert('Соединение закрыто чисто');
+      // } else {
+      //   alert('Обрыв соединения'); // например, "убит" процесс сервера
+      // }
+      alert('Connection to session closed. Reason: ' + event.reason);
+  };
+}
 
   return (
     <div className="container_ConnectLobby">
@@ -72,6 +109,7 @@ export const ConnectLobbyModal: React.FC<PropsModal> = ({ setActiveModal }) => {
           </div>
           <div className="connectLobby__register-form_buttons">
             <Button text={'Confirm'} styleButton={'primary'} type="submit" />
+            {isConnection && <span>Connection...</span>}
             <Button text={'Cancel'} styleButton={'add'}  onClick={onCloseModal}/>
           </div>
         </form>
