@@ -3,6 +3,8 @@ import './session-title.scss';
 import img from '../../assets/icons/edit-card-icon.png';
 import PlayerCard from '../../UI-components/player-card/player-card';
 import {Button} from '../../UI-components/Button/button';
+import { useSelector } from 'react-redux';
+import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser';
 
 interface ISTitle {
   photo?: string
@@ -14,6 +16,7 @@ const SessionTitle: FC<ISTitle> = ({photo, name, position}) => {
   const [sessionTitle, setSessionTitle] = useState('Please, enter  a new session name...')
   const [wrightTitle, setWrightTitle] = useState(true);
   const [warning, setWarning] = useState(false);
+  const muster = useSelector(({set}:{set:IPlayer}) => set.playerCards[0])
 
   useEffect(() => {
     if (/\w/.test(sessionTitle) || /[А-Яа-я]/.test(sessionTitle)) {
@@ -43,9 +46,9 @@ const SessionTitle: FC<ISTitle> = ({photo, name, position}) => {
       <div className="scram-master">
         <span className="scram-master__text">Scrum master:</span>
         <PlayerCard 
-          photo={photo} 
-          name={name} 
-          position={position} 
+          photo={muster.photo} 
+          name={muster.name} 
+          position={muster.position} 
           btnDelPlayer={false}
           above={true}
         />

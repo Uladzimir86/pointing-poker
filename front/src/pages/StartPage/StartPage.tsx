@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from 'react'
 import './StartPage.scss'
 import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
 import { toggleModalWindow } from '../../store/actions'
-import { useDispatch, useSelector } from 'react-redux'
-import { IStateGlobal } from '../../store/globalReducers'
+import { useDispatch } from 'react-redux'
 
 const StartPage: React.FC = () => {
   const dispatch = useDispatch()
-  const statusModalWindow : boolean  = useSelector((state: IStateGlobal) => state.modalWindow);
-
 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     dispatch(toggleModalWindow(true))
 
-  }
-
-  const onCloseModal = () => {
-    dispatch(toggleModalWindow(false))
   }
 
   return (

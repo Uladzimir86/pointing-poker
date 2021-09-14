@@ -1,8 +1,7 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { ModalType } from '../../common/interfaces';
-import { setTypeModalWindow, toggleModalWindow } from '../../store/actions';
+import { useSelector } from 'react-redux'
 import './player-card.scss'
+import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser'
 
 export interface IPlayerCard {
   photo?: string
@@ -10,26 +9,22 @@ export interface IPlayerCard {
   position?: string
   btnDelPlayer?: boolean
   above?: boolean
+  id?: number
 }
 const PlayerCard: React.FC<IPlayerCard> = ({
-  photo = 'PH',
-  name = 'Name',
-  position = 'Position',
+  photo,
+  name,
+  position,
   btnDelPlayer = true,
   above = false,
+  id
 }) => {
-  const dispatch = useDispatch();
+
+  const ws = useSelector(({set}:{set:IPlayer}) => set.ws)
 
   const deletePlayerCard = () => {
-    dispatch(toggleModalWindow(true))
-    dispatch(setTypeModalWindow(ModalType.kickModalWindow))
-
-    console.log('deletePlayerCard')
-
+    ws?.send(JSON.stringify({type: 'DEL_PLAYER', id}));
   }
-
-
-
 
   return (
     <div className="player-card">
