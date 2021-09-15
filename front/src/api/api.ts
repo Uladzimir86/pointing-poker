@@ -1,6 +1,7 @@
 import { IPlayerForm, IPlayerCard} from '../common/interfaces'
+import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
-import { toggleModalWindow } from '../store/actions'
+
 
 export const setSession = (idSession?: string): AppThunk => {
   console.log('idSession-', idSession)
@@ -29,7 +30,7 @@ export const setSession = (idSession?: string): AppThunk => {
       wsConnection.onclose = function(event) {
         if(event.wasClean){
           console.log(event.reason)
-          if (event.reason !== 'New connection...' && getState().modalWindow) dispatch(toggleModalWindow(false))
+          if (event.reason !== 'New connection...' && getState().globalSettings.modalWindow) dispatch(toggleModalWindow(false))
           alert('Connection to session closed. Reason: ' + event.reason);
         }
       };

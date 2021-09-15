@@ -6,10 +6,10 @@ import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
 import photo_member from '../../assets/icons/checkmark.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleModalWindow } from '../../store/actions'
 import { IPlayerForm } from '../../common/interfaces'
 import {sendPlayerForm} from '../../api/api'
 import {RootState} from '../../store/index'
+import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 
 export const ConnectLobbyModal: React.FC = () => {
   const dispatch = useDispatch();

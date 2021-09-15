@@ -5,7 +5,9 @@ import deleteIcon from '../../assets/icons/delete-card-icon.png'
 import closeIcon from '../../assets/icons/close-card-icon.png'
 import { CustomIssueInterface } from '../../common/interfaces'
 import { useDispatch } from 'react-redux'
-import { deleteIssue, editIssue, toggleModalWindow } from '../../store/actions'
+import { deleteIssue, editIssue } from '../../store/reducers/issuesReducer/actionsIssue'
+import { isEditIssue, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
+import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
 
 
 const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
@@ -18,13 +20,17 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
  
   const handlerEditIssue = () => {
     dispatch(editIssue(issueCard))
+    dispatch(isEditIssue(true))
     dispatch(toggleModalWindow(true))
     
   }
 
   const handlerDeleteIssue = () => {
     dispatch(deleteIssue(title))
+    dispatch(editIssue(initialEditIssueCard))
   }
+
+  
 
   return (
     <div className={`custom-issue ${currentCard ? 'current-card' : ''}`}>

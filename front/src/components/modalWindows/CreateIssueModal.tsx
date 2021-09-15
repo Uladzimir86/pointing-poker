@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { Button } from '../../UI-components/Button/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import '../../UI-components/custom-dropdown/custom-dropdown.styles.scss'
@@ -7,44 +7,44 @@ import {
   addNewIssue,
   deleteIssue,
   editIssue,
-  toggleModalWindow,
-} from '../../store/actions'
+} from '../../store/reducers/issuesReducer/actionsIssue'
 import { useDispatch, useSelector } from 'react-redux'
 import { CustomIssueInterface, IStore } from '../../common/interfaces'
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
+import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 
 export const CreateIssueModal: React.FC = () => {
   const dispatch = useDispatch()
 
-  const { register, handleSubmit,formState: { errors } } = useForm<CustomIssueInterface>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CustomIssueInterface>()
+
   const [result, setResult] = useState<CustomIssueInterface>()
-  const onSubmit: SubmitHandler<CustomIssueInterface> = (data) => {
-    setResult(data)
-    dispatch(addNewIssue(data))
-    dispatch(editIssue(initialEditIssueCard))
-
-    onCloseModal()
-  }
-
+  const isEditIssue: boolean = useSelector(
+    (state: IStore) => state.globalSettings.isEditIssue
+  )
   const editIssueCard: CustomIssueInterface = useSelector(
     (state: IStore) => state.issues.editIssueCard
   )
-  const arrOfIssues: CustomIssueInterface[] = useSelector(
-    (state: IStore) => state.issues.issueCard
-  )
+  const onSubmit: SubmitHandler<CustomIssueInterface> = (data) => {
+    setResult(data)
+    if (isEditIssue) {
+      dispatch(deleteIssue(editIssueCard.title))
+      dispatch(addNewIssue(data))
+    } else {
+      dispatch(addNewIssue(data))
+    }
+    onCloseModal()
+  }
+  useEffect(() => {}, [isEditIssue])
+
   const onCloseModal = () => {
     dispatch(toggleModalWindow(false))
     dispatch(editIssue(initialEditIssueCard))
   }
-
-  const updateModalWindow = (editIssueCard: CustomIssueInterface) => {
-    dispatch(deleteIssue(editIssueCard.title))
-  }
-
-  useEffect(() => {
-    updateModalWindow(editIssueCard)
-    console.log(editIssueCard)
-  }, [editIssueCard])
 
   return (
     <div className="container_createIssue">
@@ -55,28 +55,37 @@ export const CreateIssueModal: React.FC = () => {
         <div className="createIssue__form_inputs">
           <label htmlFor="">Title:</label>
           <div className="createIssue__form_inputs_block">
-          <input
-            defaultValue={editIssueCard.title}
-            className="inputElem"
-            {...register('title', {
-              required: true,
-              pattern: {
-                value: /\w\s/,
-                message: 'This title is exist',
-              },
-            })}
-          />
-          {errors.title && (
-              <p className="error_validate" >{errors.title.message}</p>
+            <input
+              value={editIssueCard.title}
+              className="inputElem"
+              {...register('title', {
+                required: true,
+                pattern: {
+                  value: /\w/,
+                  message: 'This title is exist',
+                },
+              })}
+            />
+            {errors.title && (
+              <p className="error_validate">{errors.title.message}</p>
             )}
           </div>
-          
+
           <label htmlFor="">Link:</label>
           <input
             defaultValue={editIssueCard.link}
             className="inputElem"
-            {...register('link')}
+            {...register('link', {
+              required: true,
+              pattern: {
+                value: /\w/,
+                message: 'Invalid link',
+              },
+            })}
           />
+          {errors.link && (
+            <p className="error_validate">{errors.link.message}</p>
+          )}
           <label htmlFor="">Priority:</label>
           <div className="container_drop-down">
             <select className="drop-down" {...register('priority')}>
@@ -97,7 +106,12 @@ export const CreateIssueModal: React.FC = () => {
 
         <div className="createIssue__form_buttons">
           <Button text={'Yes'} styleButton={'primary'} type="submit" />
-          <Button text={'No'} styleButton={'add'} onClick={onCloseModal} />
+          <Button
+            text={'No'}
+            styleButton={'add'}
+            type="button"
+            onClick={onCloseModal}
+          />
         </div>
       </form>
     </div>
