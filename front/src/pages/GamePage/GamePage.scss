@@ -1,0 +1,120 @@
+.wrapper_game {
+  display: flex;
+  flex-direction: column;
+  width: 98vw;
+  margin: 0 auto;
+}
+.game {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.game_field {
+  flex: 2;
+  padding: 0 6.3rem;
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 5px 10px;
+    margin-top: 20px;
+    &-text {
+      text-align: center;
+      font-family: Ruda;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 125%;
+      word-break: break-all;
+      max-height: 1.2em;
+      overflow: hidden;
+    }
+  }
+  &__scram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    &_title {
+      font-family: Ruda;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 15px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #00000099;
+    }
+    &_main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  &__playArea {
+      padding-top: 6.3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    &_issues {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      &-title{
+        font-family: Ruda;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: center;
+       
+      }
+    }
+    &_timer {
+      flex: 1;
+        align-items: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      & > .btn_primary {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    &_nextIssue {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+.score_field {
+  flex: 1;
+  background-color: aqua;
+}
+
+.statistics{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    &-title{
+        font-family: Ruda;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        
+    }
+    &-cards{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
