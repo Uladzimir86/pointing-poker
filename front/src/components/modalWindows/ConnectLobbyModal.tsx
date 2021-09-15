@@ -5,7 +5,7 @@ import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
 import photo_member from '../../assets/icons/checkmark.png'
 import { useDispatch } from 'react-redux'
-import { toggleModalWindow } from '../../store/actions'
+import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 
 export interface IMember {
   firstName: string

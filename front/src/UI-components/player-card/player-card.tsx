@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { ModalType } from '../../common/interfaces';
-import { setTypeModalWindow, toggleModalWindow } from '../../store/actions';
+import { setTypeModalWindow, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions';
 import './player-card.scss'
 
 export interface IPlayerCard {
