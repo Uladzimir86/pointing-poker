@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import {
-  IStateGlobal,
   IStore,
   ModalType,
   TypeUser,
@@ -10,34 +9,19 @@ import GameSettings from '../../components/game-settings/game-settings.component
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
 import SessionTitle from '../../components/session-title/session-title'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
+import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser'
 import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
 import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import './LobbyPage.scss'
 
 const LobbyPage: FC = () => {
-  const state = useTypedSelector((state) => state.settings)
   const typeModalWindow = useSelector(
     (state: IStore) => state.globalSettings.typeModalWindow
   )
-  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
-  const arrOfMembers = [
-    {
-      photo: 'JM',
-      name: 'Jorge Masvidal',
-      position: 'Vodonos',
-      btnDelPlayer: true,
-      above: true,
-    },
-    {
-      photo: 'DP',
-      name: 'Dendi Pudge',
-      position: 'Midlaner',
-      btnDelPlayer: false,
-      above: false,
-    },
-  ]
+const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+
+  const arrOfMembers = useSelector(({set}:{set:IPlayer}) => set.playerCards)
 
   return (
     <div className="lobby-page">
