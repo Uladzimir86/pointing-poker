@@ -15,7 +15,7 @@ const GameSettings: FC = () => {
   const [timerMinutes, setTimerMinutes] = useState(2)
   const [timerSeconds, setTimerSeconds] = useState(30)
 
-  const cardStorage: number[] = useSelector((state: RootState) => state.settings.cardStorage)
+  const cardStorage: number[] = useSelector((state: RootState) => state.settings.cardStorage.slice())
   const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {

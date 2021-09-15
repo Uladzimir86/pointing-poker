@@ -5,9 +5,12 @@ import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
 import { toggleModalWindow } from '../../store/actions'
 import { useDispatch } from 'react-redux'
-import setWS from '../../api/api'
+import {setSession} from '../../api/api'
+import { useState } from 'react'
 
 const StartPage: React.FC = () => {
+
+  const [idSession, setIdSession] = useState('');
   const dispatch = useDispatch()
 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,8 +43,7 @@ const StartPage: React.FC = () => {
               onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault()
                 onOpenModal(event)
-                dispatch(setWS)
-
+                dispatch(setSession())
               }}
             />
           </div>
@@ -51,11 +53,16 @@ const StartPage: React.FC = () => {
           <div className="startPage_connect-fieldCreate">
             <label htmlFor="connect">Connect to lobby by URL:</label>
             <div className="startPage_connect-fieldCreate_inputbtn">
-              <input className="inputElem" type="text" />
+              <input className="inputElem" type="text" value={idSession} onChange={(e) => setIdSession(e.target.value)}/>
               <Button
                 text={'Connect'}
                 styleButton={'primary'}
-                onClick={onOpenModal}
+                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                  if(idSession) {
+                    dispatch(setSession(idSession))
+                    onOpenModal(event)
+                  } else setIdSession('enter ID for session')
+                }}
               />
             </div>
           </div>

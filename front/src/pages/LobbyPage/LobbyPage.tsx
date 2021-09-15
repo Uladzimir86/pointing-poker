@@ -5,7 +5,6 @@ import GameSettings from '../../components/game-settings/game-settings.component
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
 import SessionTitle from '../../components/session-title/session-title'
-import { IStateGlobal } from '../../store/globalReducers'
 import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
 import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'

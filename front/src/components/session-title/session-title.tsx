@@ -13,9 +13,11 @@ interface ISTitle {
 }
 const SessionTitle: FC<ISTitle> = ({photo, name, position}) => {
 
-  const [sessionTitle, setSessionTitle] = useState('Please, enter  a new session name...')
+  const [sessionTitle, setSessionTitle] = useState('Session #1')
   const [wrightTitle, setWrightTitle] = useState(true);
   const [warning, setWarning] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
 
   useEffect(() => {
@@ -56,8 +58,13 @@ const SessionTitle: FC<ISTitle> = ({photo, name, position}) => {
       <div className="link-lobby">
         <span className="link-lobby__text">Link to lobby:</span>
         <div className="link-lobby__input">
-          <input type="text" className="inputElem" />
-          <Button text="Copy" type="button" styleButton="primary" onClick={() => console.log('btn Copy')}/>
+          <input type="text" className="inputElem" value={master.id} disabled/>
+          <Button text="Copy" type="button" styleButton="primary" onClick={() => {
+            navigator.clipboard.writeText(master.id)
+            setIsCopied(true)
+            setTimeout(() => setIsCopied(false), 1000)
+            }}/>
+            {isCopied && <span className="link-lobby__copy-confirm">ID copied...</span>}
         </div>
       </div>
       <div className="session-title__buttons">
