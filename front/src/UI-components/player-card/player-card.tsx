@@ -1,16 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import './player-card.scss'
-import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser'
+import {IPlayerCard, IPlayer} from '../../common/interfaces'
+import {RootState} from '../../store/index'
 
-export interface IPlayerCard {
-  photo?: string
-  name?: string
-  position?: string
-  btnDelPlayer?: boolean
-  above?: boolean
-  id?: number
-}
 const PlayerCard: React.FC<IPlayerCard> = ({
   photo,
   name,
@@ -20,7 +13,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   id
 }) => {
 
-  const ws = useSelector(({set}:{set:IPlayer}) => set.ws)
+  const ws = useSelector((state: RootState) => state.playerCards.ws)
 
   const deletePlayerCard = () => {
     ws?.send(JSON.stringify({type: 'DEL_PLAYER', id}));

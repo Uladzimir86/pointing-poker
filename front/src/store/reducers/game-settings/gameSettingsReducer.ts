@@ -21,7 +21,7 @@ export const gameSettingsReducer = (
 ): SettingsState => {
   switch (action.type) {
     case SettingsActionTypes.UPDATE_SETTINGS:
-      return { ...action.payload }
+      return { ...state, ...action.payload }
     case SettingsActionTypes.UPDATE_CARDSTORAGE:
       return { ...state, cardStorage: action.payload }
 

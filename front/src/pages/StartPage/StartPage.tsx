@@ -5,6 +5,7 @@ import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
 import { toggleModalWindow } from '../../store/actions'
 import { useDispatch } from 'react-redux'
+import setWS from '../../api/api'
 
 const StartPage: React.FC = () => {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ const StartPage: React.FC = () => {
               onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault()
                 onOpenModal(event)
+                dispatch(setWS)
 
               }}
             />

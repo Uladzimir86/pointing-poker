@@ -1,8 +1,6 @@
-import {IPlayerCard } from '../../../UI-components/player-card/player-card'
+import {IPlayerCard, IPlayer } from '../../../common/interfaces'
 
-export interface IPlayer {
-  playerCards: IPlayerCard[], ws: WebSocket | null
-}
+
 const initialState: {playerCards: IPlayerCard[], ws: WebSocket | null}  = 
   {
     playerCards: [

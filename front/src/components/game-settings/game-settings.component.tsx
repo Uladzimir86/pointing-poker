@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import './game-settings.styles.scss'
 import Switcher from '../../UI-components/switcher/switcher'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
 import { useDispatch, useSelector } from 'react-redux'
-import {SettingsState} from '../../types/reducers/game-settings'
+import {RootState} from '../../store/index'
 
 const GameSettings: FC = () => {
 
@@ -15,7 +15,7 @@ const GameSettings: FC = () => {
   const [timerMinutes, setTimerMinutes] = useState(2)
   const [timerSeconds, setTimerSeconds] = useState(30)
 
-  const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
+  const cardStorage: number[] = useSelector((state: RootState) => state.settings.cardStorage)
   const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {
@@ -108,7 +108,6 @@ const GameSettings: FC = () => {
       shortScoreType,
       timerMinutes,
       timerSeconds,
-      cardStorage,
     }
 
     dispatch({
@@ -123,7 +122,6 @@ const GameSettings: FC = () => {
     shortScoreType,
     timerMinutes,
     timerSeconds,
-    cardStorage,
     dispatch,
   ])
 

@@ -1,6 +1,7 @@
 import './members.scss';
-import PlayerCard, { IPlayerCard } from '../../UI-components/player-card/player-card';
+import PlayerCard from '../../UI-components/player-card/player-card';
 import { ReactElement } from 'react';
+import { IPlayerCard } from '../../common/interfaces'
 
 interface IMembers {
   arrOfMembers?: IPlayerCard[],
