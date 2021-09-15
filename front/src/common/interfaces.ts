@@ -16,9 +16,22 @@ export enum ModalType {
   createIssueModalWindow = 'createIssueModalWindow',
 }
 
-export interface IStore {
-  settings: SettingsState
-  modalWindow: boolean
-  issues: IIssues
-  typeModalWindow:ModalType
+export enum TypeUser {
+  master = 'master',
+  member = 'member',
+  observer = 'observer',
 }
+export interface IStateGlobal {
+  modalWindow:boolean,  
+  typeModalWindow : ModalType,
+  typeUser : TypeUser,
+  isEditIssue:boolean
+}
+
+
+export interface IStore {
+  globalSettings: IStateGlobal
+  settings: SettingsState
+  issues: IIssues
+}
+

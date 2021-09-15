@@ -2,13 +2,13 @@ import React from 'react'
 import './modalWindow.scss'
 import '../../pages/StartPage/StartPage.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleModalWindow } from '../../store/actions'
-import { IStateGlobal } from '../../store/globalReducers'
+import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
+import { IStateGlobal, IStore } from '../../common/interfaces'
 
 export const ModalWindow: React.FC = ({ children }) => {
   const dispatch = useDispatch()
   const statusModalWindow: boolean = useSelector(
-    (state: IStateGlobal) => state.modalWindow
+    (state: IStore) => state.globalSettings.modalWindow
   )
 
   return (
