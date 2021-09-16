@@ -13,6 +13,7 @@ const initialState: SettingsState = {
   shortScoreType: '',
   timerMinutes: 2,
   timerSeconds: 30,
+  title: 'Session #1'
 }
 
 export const gameSettingsReducer = (
@@ -24,6 +25,9 @@ export const gameSettingsReducer = (
       return { ...state, ...action.payload }
     case SettingsActionTypes.UPDATE_CARDSTORAGE:
       return { ...state, cardStorage: action.payload }
+    case 'SET_TITLE':
+      console.log('action.payload')
+      return { ...state, title: action.payload }
 
     default:
       return state

@@ -1,19 +1,19 @@
+import { disconnect } from 'process'
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
 import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
 export const setSession = (idSession?: string): AppThunk => {
-
   return (dispatch, getState) => {
-    const changePage = () => {
-
-    }
+    const changePage = () => {}
 
     if (getState().playerCards.ws)
       getState().playerCards.ws.close(1000, 'New connection...')
     const wsConnection = new WebSocket('ws://localhost:4000')
 
     wsConnection.onopen = () => {
+      if (getState().location !== '/') dispatch({ type: 'SET_LOCATION', payload: '/' })
+      dispatch(toggleModalWindow(true))
       console.log('onOpen')
       if (idSession) {
         wsConnection.send(
@@ -36,19 +36,17 @@ export const setSession = (idSession?: string): AppThunk => {
 
       wsConnection.onclose = function (event) {
         if (event.wasClean) {
-           if (
-            event.reason !== 'New connection...' &&
-            getState().globalSettings.modalWindow
-          )
-            dispatch(toggleModalWindow(false))
           alert('Connection to session closed. Reason: ' + event.reason)
-          dispatch({type: 'SET_LOCATION', payload: '/'})
-        }
+          dispatch({ type: 'SET_LOCATION', payload: '/' })
+        } else {
+            alert('Connection to session closed. Reason: Server disconnect...')
+            dispatch({ type: 'SET_LOCATION', payload: '/' })
+          }
       }
     }
     wsConnection.onerror = function (error: Event) {
       alert('Error: no connection...')
-      dispatch({type: 'SET_LOCATION', payload: '/'})
+      dispatch({ type: 'SET_LOCATION', payload: '/' })
     }
   }
 }
@@ -87,3 +85,8 @@ export const closeSession =
         JSON.stringify({ type: 'CLOSE_SESSION', id })
       )
   }
+export const startGame: AppThunk = (dispatch, getState) => {
+  const settings = getState().settings;
+  const issues = getState().issues;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'START_GAME', issues, settings }))
+}

@@ -19,7 +19,6 @@ export const ConnectLobbyModal: React.FC = () => {
   useEffect(() => {
       setIsConnection(false)
       onCloseModal()
-      console.log('modal')
     }, [location])
 
   const {

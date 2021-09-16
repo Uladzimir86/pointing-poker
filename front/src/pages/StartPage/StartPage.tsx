@@ -14,7 +14,7 @@ const StartPage: React.FC = () => {
   const [idSession, setIdSession] = useState('');
   const [placeholder, setPlaceholder] = useState('');
   const dispatch = useDispatch()
-
+ 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     dispatch(toggleModalWindow(true))

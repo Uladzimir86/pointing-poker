@@ -16,6 +16,7 @@ export interface SettingsState {
   shortScoreType: string
   timerMinutes: number
   timerSeconds: number
+  title: string
 }
 
 export interface UpdateSettingsAction {

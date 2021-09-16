@@ -6,7 +6,7 @@ import {Button} from '../../UI-components/Button/button';
 import { useDispatch, useSelector } from 'react-redux';
 import {RootState} from '../../store/index'
 import { IStore, TypeUser } from '../../common/interfaces';
-import { closeSession } from '../../api/api';
+import { closeSession, startGame } from '../../api/api';
 
 interface ISTitle {
   photo?: string
@@ -14,28 +14,28 @@ interface ISTitle {
   position?: string
 }
 const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
-  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
-
-  const [sessionTitle, setSessionTitle] = useState('Session #1')
+  
   const [wrightTitle, setWrightTitle] = useState(true);
   const [warning, setWarning] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
-  const id = useSelector((state: RootState) => state.playerCards.id)
 
+  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+  const id = useSelector((state: RootState) => state.playerCards.id)
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
+  const sessionTitle = useSelector((state: RootState) => state.settings.title)
   const dispatch = useDispatch();
+  
   useEffect(() => {
     if (/\w/.test(sessionTitle) || /[А-Яа-я]/.test(sessionTitle)) {
       setWarning(false)
     } else {
       setWarning(true)
-      setSessionTitle('')
     }
   }, [sessionTitle])
 
   const changeTitleText = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement
-    setSessionTitle(input.value)
+    dispatch({type: 'SET_TITLE', payload: input.value})
   }
 
   return (
@@ -102,10 +102,10 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
               text="Start Game"
               type="button"
               styleButton="primary"
-              onClick={() => console.log('btn Start Game')}
+              onClick={() => dispatch(startGame)}
             />
             <Button
-              text="Cancel Game"
+              text="Cancel Game" 
               type="button"
               styleButton="add"
               onClick={() => dispatch(closeSession(id))}
@@ -113,7 +113,9 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
           </>
         )}
         {typeUser === TypeUser.member && (
-          <Button  text="Exit" type="button" styleButton="add" onClick={() => console.log('Exit')}/>
+          <div className="session-title__button-exit">
+            <Button  text="Exit" type="button" styleButton="add" onClick={() => dispatch(closeSession(id))}/>
+          </div>
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router'
 import { useHistory } from 'react-router-dom'
@@ -19,7 +19,7 @@ function App() {
   }, [location])
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <Switch>
         <Route exact path="/">
