@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useHistory } from 'react-router-dom'
 import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
@@ -13,22 +12,15 @@ import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActi
 
 export const ConnectLobbyModal: React.FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   
   const [isConnection, setIsConnection] = useState(false);
   const location = useSelector((state: RootState) => state.location)
-  
-  useEffect(() => {
-    if(history.location.pathname === '/') dispatch({type: 'SET_LOCATION', payload: history.location.pathname});
-  }, [])
 
   useEffect(() => {
-    if (location === '/lobby') {
       setIsConnection(false)
       onCloseModal()
-      history.push(location)
-    }
-  }, [location])
+      console.log('modal')
+    }, [location])
 
   const {
     register,
@@ -142,7 +134,7 @@ export const ConnectLobbyModal: React.FC = () => {
               disabled={isConnection}
             />
           </div>
-          {isConnection && <span>Connection...</span>}
+          {isConnection && <span className="connection">Connection...</span>}
         </form>
       </div>
     </div>

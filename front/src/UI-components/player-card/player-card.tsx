@@ -1,8 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import './player-card.scss'
-import {IPlayerCard, IPlayer} from '../../common/interfaces'
+import {IPlayerCard} from '../../common/interfaces'
 import {RootState} from '../../store/index'
+import { deletePlayerCard } from '../../api/api'
 
 const PlayerCard: React.FC<IPlayerCard> = ({
   photo,
@@ -14,10 +15,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
 }) => {
 
   const ws = useSelector((state: RootState) => state.playerCards.ws)
-
-  const deletePlayerCard = () => {
-    ws?.send(JSON.stringify({type: 'DEL_PLAYER', id}));
-  }
+  const dispatch = useDispatch();
 
   return (
     <div className="player-card">
@@ -34,7 +32,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
       <button
         type="button"
         className="player-card__button"
-        onClick={deletePlayerCard}
+        onClick={() => dispatch(deletePlayerCard(id))}
         hidden={!btnDelPlayer}
       ></button>
     </div>

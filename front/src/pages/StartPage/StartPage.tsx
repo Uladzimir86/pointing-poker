@@ -4,14 +4,15 @@ import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setTypeUser, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
-import { IStore, TypeUser } from '../../common/interfaces'
+import { TypeUser } from '../../common/interfaces'
 import { setSession } from '../../api/api'
 
 const StartPage: React.FC = () => {
 
   const [idSession, setIdSession] = useState('');
+  const [placeholder, setPlaceholder] = useState('');
   const dispatch = useDispatch()
 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -60,7 +61,14 @@ const StartPage: React.FC = () => {
           <div className="startPage_connect-fieldCreate">
             <label htmlFor="connect">Connect to lobby by URL:</label>
             <div className="startPage_connect-fieldCreate_inputbtn">
-              <input className="inputElem" type="text" value={idSession} onChange={(e) => setIdSession(e.target.value)}/>
+              <input 
+                className="inputElem" 
+                type="text" 
+                value={idSession} 
+                placeholder={placeholder}
+                onChange={(e) => setIdSession(e.target.value)}
+                onFocus={() => setPlaceholder('')}
+              />
               <Button
                 text={'Connect'}
                 styleButton={'primary'}
@@ -68,7 +76,7 @@ const StartPage: React.FC = () => {
                   if(idSession) {
                     dispatch(setSession(idSession))
                     onOpenModal(event)
-                  } else setIdSession('enter ID for session')
+                  } else setPlaceholder('enter ID for session')
                 }}
               />
             </div>

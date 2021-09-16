@@ -3,9 +3,10 @@ import './session-title.scss';
 import img from '../../assets/icons/edit-card-icon.png';
 import PlayerCard from '../../UI-components/player-card/player-card';
 import {Button} from '../../UI-components/Button/button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {RootState} from '../../store/index'
 import { IStore, TypeUser } from '../../common/interfaces';
+import { closeSession } from '../../api/api';
 
 interface ISTitle {
   photo?: string
@@ -19,9 +20,10 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
   const [wrightTitle, setWrightTitle] = useState(true);
   const [warning, setWarning] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const id = useSelector((state: RootState) => state.playerCards.id)
 
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (/\w/.test(sessionTitle) || /[А-Яа-я]/.test(sessionTitle)) {
       setWarning(false)
@@ -72,13 +74,13 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
         )}
       </div>
       <div className="scram-master">
-        <span className="scram-master__text">Scrum master:</span>
+        <span className="scram-master__text">Scram master:</span>
         <PlayerCard 
           photo={master.photo} 
           name={master.name} 
           position={master.position} 
           btnDelPlayer={false}
-          above={true}
+          above={id === master.id}
         />
       </div>
       <div className="link-lobby">
@@ -106,7 +108,7 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
               text="Cancel Game"
               type="button"
               styleButton="add"
-              onClick={() => console.log('btn Cancel Game')}
+              onClick={() => dispatch(closeSession(id))}
             />
           </>
         )}
