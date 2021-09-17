@@ -18,7 +18,7 @@ export const TimerElement: React.FC<PropsTimer> = ({
     counter: minutes * 60 + seconds,
   })
   const [startTimer, setStartTimer] = useState(isActive)
-
+  
   useEffect(() => {
     let interval: NodeJS.Timeout
 
@@ -40,7 +40,7 @@ export const TimerElement: React.FC<PropsTimer> = ({
   }, [startTimer, time.counter])
 
   return (
-    <div className="container_timer">
+    <div  className="container_timer">
       <div className="timer_minutes">
         <span className="timer_minutes-title">minutes</span>
         <div className="timer_minutes-counter">{time.minutes}</div>
