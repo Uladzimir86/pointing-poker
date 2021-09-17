@@ -1,0 +1,89 @@
+import { IPlayerForm, IPlayerCard } from '../common/interfaces'
+import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
+import { AppThunk } from '../types/reducers/game-settings'
+
+export const setSession = (idSession?: string): AppThunk => {
+  return (dispatch, getState) => {
+    
+    const closedConnection = (mes: string) => {
+      dispatch({ type: 'SHOW_ALERT', payload: mes})
+      dispatch({ type: 'SET_LOCATION', payload: '/' })
+    }
+
+    if (getState().playerCards.ws)
+      getState().playerCards.ws.close(1000, 'New connection...')
+    const wsConnection = new WebSocket('ws://localhost:4000')
+
+    wsConnection.onopen = () => {
+      // if (getState().location !== '/') dispatch({ type: 'SET_LOCATION', payload: '/' })
+      dispatch(toggleModalWindow(true))
+      if (idSession) {
+        wsConnection.send(
+          JSON.stringify({ type: 'CHECK_ID_SESSION', idSession })
+        )
+      } else
+        wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession }))
+
+      dispatch({ type: 'WS', ws: wsConnection })
+      wsConnection.onmessage = function (event) {
+        const data = JSON.parse(event.data)
+        switch (data.type) {
+          case 'SET_PLAYERS':
+            dispatch({ type: 'SET_PLAYERS', payload: data.players })
+            break
+          case 'SET_LOCATION':
+            dispatch({ type: 'SET_LOCATION', payload: data.location })
+        }
+      }
+
+      wsConnection.onclose = function (event) {
+        if (event.wasClean) closedConnection('Connection to session closed. Reason: ' + event.reason)
+        else closedConnection('Connection to session closed. Reason: Server disconnect...')
+      }
+    }
+    wsConnection.onerror = function (err: Event) {
+      const error = err as ErrorEvent
+      closedConnection('Error: no connection...'+ error.message)
+    }
+  }
+}
+
+export const sendPlayerForm = (playerForm: IPlayerForm): AppThunk => {
+  return (dispatch, getState) => {
+    const player: IPlayerCard = {
+      name: playerForm.firstName + ' ' + playerForm.lastName,
+      position: playerForm.position,
+      photo: playerForm.image,
+      id: Date.now(),
+    }
+    dispatch({ type: 'SET_PLAYER_ID', id: player.id })
+    getState().playerCards.ws?.send(
+      JSON.stringify({ type: 'PUT_PLAYER', player })
+    )
+    getState().playerCards.ws?.send(
+      JSON.stringify({ type: 'SET_LOCATION', location: '/lobby' })
+    )
+  }
+}
+
+export const deletePlayerCard =
+  (id: number | undefined): AppThunk =>
+  (dispatch, getState) => {
+    if (id)
+      getState().playerCards.ws?.send(
+        JSON.stringify({ type: 'DEL_PLAYER', id })
+      )
+  }
+export const closeSession =
+  (id: number | undefined): AppThunk =>
+  (dispatch, getState) => {
+    if (id)
+      getState().playerCards.ws?.send(
+        JSON.stringify({ type: 'CLOSE_SESSION', id })
+      )
+  }
+export const startGame: AppThunk = (dispatch, getState) => {
+  const settings = getState().settings;
+  const issues = getState().issues;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'START_GAME', issues, settings }))
+}

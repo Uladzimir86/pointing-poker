@@ -30,6 +30,7 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
   const [inputValue, setInputValue] = useState(values);
   const dispatch = useDispatch();
   const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
+  const [cards, setCards] = useState(cardStorage);
   const handleClick = () => {
     if (inGameSelected) {
       if (!addCard) {

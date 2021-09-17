@@ -1,16 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import './player-card.scss'
-import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser'
+import {IPlayerCard} from '../../common/interfaces'
+import {RootState} from '../../store/index'
+import { deletePlayerCard } from '../../api/api'
 
-export interface IPlayerCard {
-  photo?: string
-  name?: string
-  position?: string
-  btnDelPlayer?: boolean
-  above?: boolean
-  id?: number
-}
 const PlayerCard: React.FC<IPlayerCard> = ({
   photo,
   name,
@@ -20,11 +14,8 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   id
 }) => {
 
-  const ws = useSelector(({set}:{set:IPlayer}) => set.ws)
-
-  const deletePlayerCard = () => {
-    ws?.send(JSON.stringify({type: 'DEL_PLAYER', id}));
-  }
+  const ws = useSelector((state: RootState) => state.playerCards.ws)
+  const dispatch = useDispatch();
 
   return (
     <div className="player-card">
@@ -41,7 +32,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
       <button
         type="button"
         className="player-card__button"
-        onClick={deletePlayerCard}
+        onClick={() => dispatch(deletePlayerCard(id))}
         hidden={!btnDelPlayer}
       ></button>
     </div>

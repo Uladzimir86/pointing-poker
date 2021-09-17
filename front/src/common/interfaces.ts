@@ -35,3 +35,22 @@ export interface IStore {
   issues: IIssues
 }
 
+export interface IPlayerForm {
+  firstName: string
+  lastName: string
+  position: string
+  image?: string
+}
+
+export interface IPlayerCard {
+  photo?: string
+  name?: string
+  position?: string
+  btnDelPlayer?: boolean
+  above?: boolean
+  id?: number
+}
+
+export interface IPlayer {
+  playerCards: IPlayerCard[], ws: WebSocket | null
+}

@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './StartPage.scss'
 import cardsLogo from '../../assets/icons/cards_startPage.svg'
 import { Button } from '../../UI-components/Button/button'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setTypeUser, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
-import { IStateGlobal, IStore, TypeUser } from '../../common/interfaces'
+import { TypeUser } from '../../common/interfaces'
+import { setSession } from '../../api/api'
 
 const StartPage: React.FC = () => {
+
+  const [idSession, setIdSession] = useState('');
+  const [placeholder, setPlaceholder] = useState('');
   const dispatch = useDispatch()
-  const statusModalWindow: boolean = useSelector(
-    (state: IStore) => state.globalSettings.modalWindow
-  )
+ 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     dispatch(toggleModalWindow(true))
@@ -49,6 +51,7 @@ const StartPage: React.FC = () => {
               onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault()
                 onOpenModal(event)
+                dispatch(setSession())
               }}
             />
           </div>
@@ -58,11 +61,23 @@ const StartPage: React.FC = () => {
           <div className="startPage_connect-fieldCreate">
             <label htmlFor="connect">Connect to lobby by URL:</label>
             <div className="startPage_connect-fieldCreate_inputbtn">
-              <input className="inputElem" type="text" />
+              <input 
+                className="inputElem" 
+                type="text" 
+                value={idSession} 
+                placeholder={placeholder}
+                onChange={(e) => setIdSession(e.target.value)}
+                onFocus={() => setPlaceholder('')}
+              />
               <Button
                 text={'Connect'}
                 styleButton={'primary'}
-                onClick={onOpenModal}
+                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                  if(idSession) {
+                    dispatch(setSession(idSession))
+                    onOpenModal(event)
+                  } else setPlaceholder('enter ID for session')
+                }}
               />
             </div>
           </div>
