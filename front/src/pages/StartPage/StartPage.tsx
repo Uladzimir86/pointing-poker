@@ -6,12 +6,8 @@ import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
 import { useDispatch } from 'react-redux'
 import { setTypeUser, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
-<<<<<<< HEAD
-import {  IStore, TypeUser } from '../../common/interfaces'
-=======
 import { TypeUser } from '../../common/interfaces'
 import { setSession } from '../../api/api'
->>>>>>> 491ae08ef4c711c48b0b328e7df753c22212651c
 
 const StartPage: React.FC = () => {
 

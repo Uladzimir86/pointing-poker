@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { IPlayer, IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
+import { RootState } from '../../store/reducers'
 import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { Button } from '../../UI-components/Button/button'
@@ -16,7 +17,7 @@ export const GamePage: React.FC = () => {
   const timeRound = 2
   const [isActive, setIsActive] = useState<boolean>(false)
 
-  const muster = useSelector(({ set }: { set: IPlayer }) => set.playerCards[0])
+  const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
   const cardStorage: number[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
@@ -47,9 +48,9 @@ export const GamePage: React.FC = () => {
             <div className="game_field__scram_title">Scrum master:</div>
             <div className="game_field__scram_main">
               <PlayerCard
-                photo={muster.photo}
-                name={muster.name}
-                position={muster.position}
+                photo={master.photo}
+                name={master.name}
+                position={master.position}
                 btnDelPlayer={false}
                 above={true}
               />

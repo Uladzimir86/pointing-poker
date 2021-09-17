@@ -126,6 +126,7 @@ export const ConnectLobbyModal: React.FC = () => {
               type="submit" 
               disabled={isConnection}
             />
+            {isConnection && <span className="connection">Connection...</span>}
             <Button
               text={'Cancel'}
               styleButton={'add'}
@@ -133,7 +134,6 @@ export const ConnectLobbyModal: React.FC = () => {
               disabled={isConnection}
             />
           </div>
-          {isConnection && <span className="connection">Connection...</span>}
         </form>
       </div>
     </div>

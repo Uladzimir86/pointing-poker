@@ -1,6 +1,7 @@
 .lobby-page {
   display: flex;
   flex-direction: column;
-  width: 98vw;
+  min-width: 500px;
+  width: 1000px;
   margin: 0 auto;
 }

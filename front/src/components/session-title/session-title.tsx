@@ -83,18 +83,20 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
           above={id === master.id}
         />
       </div>
-      <div className="link-lobby">
-        <span className="link-lobby__text">Link to lobby:</span>
-        <div className="link-lobby__input">
-          <input type="text" className="inputElem" value={master.id} disabled/>
-          <Button text="Copy" type="button" styleButton="primary" onClick={() => {
-            navigator.clipboard.writeText(master.id)
-            setIsCopied(true)
-            setTimeout(() => setIsCopied(false), 1000)
-            }}/>
-            {isCopied && <span className="link-lobby__copy-confirm">ID copied...</span>}
+      {typeUser === TypeUser.master && (
+        <div className="link-lobby">
+          <span className="link-lobby__text">Link to lobby:</span>
+          <div className="link-lobby__input">
+            <input type="text" className="inputElem" value={master.id} disabled/>
+            <Button text="Copy" type="button" styleButton="primary" onClick={() => {
+              navigator.clipboard.writeText(master.id)
+              setIsCopied(true)
+              setTimeout(() => setIsCopied(false), 1000)
+              }}/>
+              {isCopied && <span className="link-lobby__copy-confirm">ID copied...</span>}
+          </div>
         </div>
-      </div>
+      )}
       <div className="session-title__buttons">
         {typeUser === TypeUser.master && (
           <>
