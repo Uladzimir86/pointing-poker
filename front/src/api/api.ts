@@ -1,20 +1,22 @@
-import { disconnect } from 'process'
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
 import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
 export const setSession = (idSession?: string): AppThunk => {
   return (dispatch, getState) => {
-    const changePage = () => {}
+    
+    const closedConnection = (mes: string) => {
+      dispatch({ type: 'SHOW_ALERT', payload: mes})
+      dispatch({ type: 'SET_LOCATION', payload: '/' })
+    }
 
     if (getState().playerCards.ws)
       getState().playerCards.ws.close(1000, 'New connection...')
     const wsConnection = new WebSocket('ws://localhost:4000')
 
     wsConnection.onopen = () => {
-      if (getState().location !== '/') dispatch({ type: 'SET_LOCATION', payload: '/' })
+      // if (getState().location !== '/') dispatch({ type: 'SET_LOCATION', payload: '/' })
       dispatch(toggleModalWindow(true))
-      console.log('onOpen')
       if (idSession) {
         wsConnection.send(
           JSON.stringify({ type: 'CHECK_ID_SESSION', idSession })
@@ -35,18 +37,13 @@ export const setSession = (idSession?: string): AppThunk => {
       }
 
       wsConnection.onclose = function (event) {
-        if (event.wasClean) {
-          alert('Connection to session closed. Reason: ' + event.reason)
-          dispatch({ type: 'SET_LOCATION', payload: '/' })
-        } else {
-            alert('Connection to session closed. Reason: Server disconnect...')
-            dispatch({ type: 'SET_LOCATION', payload: '/' })
-          }
+        if (event.wasClean) closedConnection('Connection to session closed. Reason: ' + event.reason)
+        else closedConnection('Connection to session closed. Reason: Server disconnect...')
       }
     }
-    wsConnection.onerror = function (error: Event) {
-      alert('Error: no connection...')
-      dispatch({ type: 'SET_LOCATION', payload: '/' })
+    wsConnection.onerror = function (err: Event) {
+      const error = err as ErrorEvent
+      closedConnection('Error: no connection...'+ error.message)
     }
   }
 }

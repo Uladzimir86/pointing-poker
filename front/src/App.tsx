@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router'
 import { useHistory } from 'react-router-dom'
 import LobbyPage from './pages/LobbyPage/LobbyPage'
@@ -13,6 +13,8 @@ function App() {
 
   const history = useHistory();
   const location = useSelector((state: RootState) => state.location)
+  const alert = useSelector((state: RootState) => state.alert)
+  const dispatch = useDispatch();
 
   useEffect(() => {
       history.push(location)
@@ -21,6 +23,12 @@ function App() {
   return (
     <div className="app">
       <Header />
+      {alert && (
+        <div className="alert">
+          <span>{alert}</span>
+          <button type="button" className="alert__btn" onClick={() => dispatch({type: 'HIDE_ALERT'})}/>
+        </div>
+      )}
       <Switch>
         <Route exact path="/">
           <StartPage />

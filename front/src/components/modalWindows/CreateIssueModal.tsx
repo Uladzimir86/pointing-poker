@@ -56,7 +56,7 @@ export const CreateIssueModal: React.FC = () => {
           <label htmlFor="">Title:</label>
           <div className="createIssue__form_inputs_block">
             <input
-              value={editIssueCard.title}
+              defaultValue={editIssueCard.title}
               className="inputElem"
               {...register('title', {
                 required: true,
