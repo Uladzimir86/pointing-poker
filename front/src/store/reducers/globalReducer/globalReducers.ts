@@ -20,7 +20,7 @@ type globalActionsType =
 const initialStateGlobal: IStateGlobal = {
   modalWindow: false,
   typeModalWindow: ModalType.createIssueModalWindow,
-  typeUser: TypeUser.master,
+  typeUser: TypeUser.member,
   isEditIssue : false
 }
 

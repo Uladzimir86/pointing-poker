@@ -3,7 +3,7 @@ import { CREATE_NEW_ISSUE } from './actionsIssue'
 import { CustomIssueInterface, IIssues } from './../../../common/interfaces'
 
 export const arrOfIssues: CustomIssueInterface[] = [
-/*   {
+  {
     title: 'issue 14',
     link: 'https://react-hook-form.com/api/useform',
     priority: 'Medium',
@@ -12,7 +12,7 @@ export const arrOfIssues: CustomIssueInterface[] = [
     title: 'issue 06',
     link: 'https://react-hook-form.com/api/useform',
     priority: 'High',
-  }, */
+  },
 ]
 
 export const initialEditIssueCard :CustomIssueInterface={

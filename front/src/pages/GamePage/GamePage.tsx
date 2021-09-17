@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
 import { IPlayer } from '../../store/reducers/player-cards-reduser/player-cards-reduser'
@@ -9,17 +10,30 @@ import CustomCard from '../../UI-components/custom-card/custom-card.component'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
 import PlayerCard from '../../UI-components/player-card/player-card'
 import { TimerElement } from '../../UI-components/timer/timer'
+import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 
 export const GamePage: React.FC = () => {
+  const timeRound = 2
+  const [isActive, setIsActive] = useState<boolean>(false)
+
   const muster = useSelector(({ set }: { set: IPlayer }) => set.playerCards[0])
-  const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
+  const cardStorage: number[] = useSelector(
+    ({ settings }: { settings: SettingsState }) => settings.cardStorage
+  )
 
   const issue = arrOfIssues.map(({ title, link, priority }) => {
     return (
       <CustomIssue key={title} priority={priority} title={title} link={link} />
     )
   })
+
+  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+
+
+  const onStartTimer = () => {
+    setIsActive(true)
+  }
 
   return (
     <div className="wrapper_game">
@@ -40,7 +54,11 @@ export const GamePage: React.FC = () => {
                 btnDelPlayer={false}
                 above={true}
               />
-              <Button text={'Stop Game'} styleButton={'add'} />
+              <Button
+                text={'Stop Game'}
+                styleButton={'add'}
+                onClick={onShiftTimer(0)}
+              />
             </div>
           </div>
           <div className="game_field__playArea">
@@ -51,33 +69,56 @@ export const GamePage: React.FC = () => {
                 <CustomIssue link={''} title={''} priority={'Low'} />
               </div>
             </div>
-            <div className="game_field__playArea_timer">
-              <TimerElement isActive={false} />
-              <Button text={'Run Round'} styleButton={'primary'} />
+            <div id="timer" className="game_field__playArea_timer">
+              <TimerElement minutes={timeRound} isActive={isActive} />
+              <Button
+                text={'Run Round'}
+                styleButton={'primary'}
+                onClick={onStartTimer}
+              />
             </div>
 
             <div className="game_field__playArea_nextIssue">
-              <Button text={'Next Issue'} styleButton={'primary'} />
+              <Button
+                text={'Next Issue'}
+                styleButton={'primary'}
+                onClick={onShiftTimer(issue.length)}
+              />
             </div>
-
-          
           </div>
-
-          <div className="statistics">
-              <div className="statistics-title">Statistics:</div>
-              <div className="statistics-cards">
+          {typeUser===TypeUser.master&&    <div className="statistics">
+            <div className="statistics_title">Statistics:</div>
+            <div className="statistics_cards">
+              <div className="statistics_cards-card">
                 {cardStorage.map((card, index) => (
                   <CustomCard
                     key={index}
-                    centerValue={"SP"}
+                    centerValue={'SP'}
                     values={String(card)}
                     id={index}
                   />
                 ))}
               </div>
+              <div className="statistics_cards-percent">44%</div>
             </div>
+          </div>}
+          {typeUser===TypeUser.member&&    <div className="statistics">
+            <div className="statistics_title"></div>
+            <div className="statistics_cards">
+              <div className="statistics_cards-card">
+                {cardStorage.map((card, index) => (
+                  <CustomCard
+                    inGameSelected
+                  />
+                ))
+                }
+                <CustomCard inGameSelected coffee/>
+              </div>
+              <div className="statistics_cards-percent">44%</div>
+            </div>
+          </div>}        
         </div>
-        <ScoreComponent/>
+        <ScoreComponent />
       </div>
     </div>
   )

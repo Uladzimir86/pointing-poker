@@ -1,13 +1,15 @@
 .wrapper_game {
   display: flex;
   flex-direction: column;
-  width: 98vw;
+  height: 88vh;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 .game {
   display: flex;
   justify-content: center;
   flex-direction: row;
+  height: 100%;
 }
 .game_field {
   flex: 2;
@@ -53,17 +55,19 @@
     }
   }
   &__playArea {
-      padding-top: 6.3rem;
+    margin-top: 2rem;
+
+    padding-top: 6.3rem;
     display: flex;
-    justify-content: center;
     flex-direction: row;
-    align-items: center;
+
     &_issues {
       flex: 1;
       display: flex;
       justify-content: center;
       flex-direction: column;
-      &-title{
+
+      &-title {
         font-family: Ruda;
         font-size: 24px;
         font-style: normal;
@@ -71,16 +75,23 @@
         line-height: 30px;
         letter-spacing: 0em;
         text-align: center;
-       
+      }
+      &-list>.custom_issue{
+        height: 78px;
       }
     }
     &_timer {
+
       flex: 1;
-        align-items: center;
       display: flex;
-      justify-content: center;
       flex-direction: column;
+      &>.container_timer{
+        margin-top: 2rem;
+
+      }
       & > .btn_primary {
+        margin-top: 1rem;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -100,21 +111,64 @@
   background-color: aqua;
 }
 
-.statistics{
-    padding-top: 2rem;
+.statistics {
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  &_title {
+    padding: 3rem 0;
+    font-family: Ruda;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+  }
+  &_cards {
     display: flex;
-    flex-direction: column;
-    &-title{
-        font-family: Ruda;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 30px;
-        letter-spacing: 0em;
-        
+    flex-wrap: wrap;
+    justify-content: center;
+    &-card {
+      display: flex;
+      flex-direction: row;
     }
-    &-cards{
-        display: flex;
-        flex-wrap: wrap;
+    &-percent {
     }
+  }
+}
+
+.score {
+  flex: 1;
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 2rem 1.5rem 2rem 3.6rem;
+  &_titles {
+    display: flex;
+    justify-content: space-around;
+    padding-right: 3rem;
+    align-items: center;
+  }
+  &_players {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    &__points {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      margin: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      font-family: Ruda;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 30px;
+      letter-spacing: 0em;
+      text-align: center;
+    }
+    &__member {
+    }
+  }
 }
