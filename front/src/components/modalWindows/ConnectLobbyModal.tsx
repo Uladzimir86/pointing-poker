@@ -4,37 +4,37 @@ import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
 import photo_member from '../../assets/icons/checkmark.png'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { IPlayerForm } from '../../common/interfaces'
+import {sendPlayerForm} from '../../api/api'
+import {RootState} from '../../store/index'
 import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 
-export interface IMember {
-  firstName: string
-  lastName: string
-  position: string
-  image?: string
-}
-
 export const ConnectLobbyModal: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
+  const [isConnection, setIsConnection] = useState(false);
+  const location = useSelector((state: RootState) => state.location)
+
+  useEffect(() => {
+      setIsConnection(false)
+      onCloseModal()
+    }, [location])
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IMember>()
-  const [result, setResult] = useState<IMember>()
-  const onSubmit: SubmitHandler<IMember> = (data) => {
-    onCloseModal()
-    setResult(data)
+  } = useForm<IPlayerForm>()
+
+  const onSubmit: SubmitHandler<IPlayerForm> = (data) => {
+    setIsConnection(true)
+    dispatch(sendPlayerForm(data))
   }
+
   const onCloseModal = () => {
     dispatch(toggleModalWindow(false))
   }
-
-  useEffect(() => {
-    //TODO fetch to server
-    console.log(result)
-  }, [result])
 
   return (
     <div className="container_ConnectLobby">
@@ -120,13 +120,20 @@ export const ConnectLobbyModal: React.FC = () => {
             />
           </div>
           <div className="connectLobby__register-form_buttons">
-            <Button text={'Confirm'} styleButton={'primary'} type="submit" />
+            <Button 
+              text={'Confirm'} 
+              styleButton={'primary'} 
+              type="submit" 
+              disabled={isConnection}
+            />
             <Button
               text={'Cancel'}
               styleButton={'add'}
               onClick={onCloseModal}
+              disabled={isConnection}
             />
           </div>
+          {isConnection && <span className="connection">Connection...</span>}
         </form>
       </div>
     </div>

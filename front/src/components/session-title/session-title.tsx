@@ -3,9 +3,10 @@ import './session-title.scss';
 import img from '../../assets/icons/edit-card-icon.png';
 import PlayerCard from '../../UI-components/player-card/player-card';
 import {Button} from '../../UI-components/Button/button';
-import { useSelector } from 'react-redux';
-import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser';
+import { useDispatch, useSelector } from 'react-redux';
+import {RootState} from '../../store/index'
 import { IStore, TypeUser } from '../../common/interfaces';
+import { closeSession, startGame } from '../../api/api';
 
 interface ISTitle {
   photo?: string
@@ -13,25 +14,28 @@ interface ISTitle {
   position?: string
 }
 const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
-  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
-
-  const [sessionTitle, setSessionTitle] = useState('Please, enter  a new session name...')
+  
   const [wrightTitle, setWrightTitle] = useState(true);
   const [warning, setWarning] = useState(false);
-  const muster = useSelector(({set}:{set:IPlayer}) => set.playerCards[0])
+  const [isCopied, setIsCopied] = useState(false);
 
+  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+  const id = useSelector((state: RootState) => state.playerCards.id)
+  const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
+  const sessionTitle = useSelector((state: RootState) => state.settings.title)
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     if (/\w/.test(sessionTitle) || /[А-Яа-я]/.test(sessionTitle)) {
       setWarning(false)
     } else {
       setWarning(true)
-      setSessionTitle('')
     }
   }, [sessionTitle])
 
   const changeTitleText = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement
-    setSessionTitle(input.value)
+    dispatch({type: 'SET_TITLE', payload: input.value})
   }
 
   return (
@@ -70,25 +74,25 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
         )}
       </div>
       <div className="scram-master">
-        <span className="scram-master__text">Scrum master:</span>
+        <span className="scram-master__text">Scram master:</span>
         <PlayerCard 
-          photo={muster.photo} 
-          name={muster.name} 
-          position={muster.position} 
+          photo={master.photo} 
+          name={master.name} 
+          position={master.position} 
           btnDelPlayer={false}
-          above={true}
+          above={id === master.id}
         />
       </div>
       <div className="link-lobby">
         <span className="link-lobby__text">Link to lobby:</span>
         <div className="link-lobby__input">
-          <input type="text" className="inputElem" />
-          <Button
-            text="Copy"
-            type="button"
-            styleButton="primary"
-            onClick={() => console.log('btn Copy')}
-          />
+          <input type="text" className="inputElem" value={master.id} disabled/>
+          <Button text="Copy" type="button" styleButton="primary" onClick={() => {
+            navigator.clipboard.writeText(master.id)
+            setIsCopied(true)
+            setTimeout(() => setIsCopied(false), 1000)
+            }}/>
+            {isCopied && <span className="link-lobby__copy-confirm">ID copied...</span>}
         </div>
       </div>
       <div className="session-title__buttons">
@@ -98,18 +102,20 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
               text="Start Game"
               type="button"
               styleButton="primary"
-              onClick={() => console.log('btn Start Game')}
+              onClick={() => dispatch(startGame)}
             />
             <Button
-              text="Cancel Game"
+              text="Cancel Game" 
               type="button"
               styleButton="add"
-              onClick={() => console.log('btn Cancel Game')}
+              onClick={() => dispatch(closeSession(id))}
             />
           </>
         )}
         {typeUser === TypeUser.member && (
-          <Button  text="Exit" type="button" styleButton="add" onClick={() => console.log('Exit')}/>
+          <div className="session-title__button-exit">
+            <Button  text="Exit" type="button" styleButton="add" onClick={() => dispatch(closeSession(id))}/>
+          </div>
         )}
       </div>
     </div>

@@ -9,11 +9,11 @@ import GameSettings from '../../components/game-settings/game-settings.component
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
 import SessionTitle from '../../components/session-title/session-title'
-import {IPlayer} from '../../store/reducers/player-cards-reduser/player-cards-reduser'
 import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
 import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import './LobbyPage.scss'
+import { RootState } from '../../store/reducers'
 
 const LobbyPage: FC = () => {
   const typeModalWindow = useSelector(
@@ -21,7 +21,7 @@ const LobbyPage: FC = () => {
   )
 const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
-  const arrOfMembers = useSelector(({set}:{set:IPlayer}) => set.playerCards)
+  const arrOfMembers = useSelector((state: RootState) => state.playerCards.playerCards)
 
   return (
     <div className="lobby-page">

@@ -1,11 +1,15 @@
 import './members.scss';
-import PlayerCard, { IPlayerCard } from '../../UI-components/player-card/player-card';
+import PlayerCard from '../../UI-components/player-card/player-card';
 import { ReactElement } from 'react';
+import { IPlayerCard } from '../../common/interfaces'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers';
 
 interface IMembers {
   arrOfMembers?: IPlayerCard[],
 }
 const Members: React.FC<IMembers> = ({arrOfMembers}) => {
+  const id = useSelector((state: RootState) => state.playerCards.id)
   let members: (ReactElement | undefined)[] = [];
   if (arrOfMembers?.length) members = arrOfMembers.map((item: IPlayerCard, index: number) => {
     if (index ) {
@@ -15,8 +19,8 @@ const Members: React.FC<IMembers> = ({arrOfMembers}) => {
           photo={item.photo}
           name={item.name}
           position={item.position}
-          btnDelPlayer={item.btnDelPlayer}
-          above={item.above}
+          btnDelPlayer={item.id !== id}
+          above={item.id === id}
           id={item.id}/>
       )
     }
