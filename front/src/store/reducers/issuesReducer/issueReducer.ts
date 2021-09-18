@@ -42,6 +42,12 @@ export const ChangeIssuesReducer = (
         ),
       }
     }
+    case 'SET_ISSUES': {
+      return {
+        ...state,
+        issueCard: action.payload,
+      }
+    }
     case EDIT_ISSUE: {
       return {
         ...state,

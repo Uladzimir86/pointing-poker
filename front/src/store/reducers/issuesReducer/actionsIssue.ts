@@ -4,6 +4,7 @@ import { CustomIssueInterface } from '../../../common/interfaces'
 export const CREATE_ISSUE = 'CREATE_ISSUE'
 export const EDIT_ISSUE = 'EDIT_ISSUE'
 export const DELETE_ISSUE = 'DELETE_ISSUE'
+export const SET_ISSUES = 'SET_ISSUES'
 
 export const CHANGE_NEW_ISSUE = 'CHANGE_NEW_ISSUE'
 export const CREATE_NEW_ISSUE = 'CREATE_NEW_ISSUE'
@@ -27,11 +28,16 @@ export type ActionEditIssue = {
   type: typeof EDIT_ISSUE
   payload: CustomIssueInterface
 }
+export type ActionSetIssues = {
+  type: typeof SET_ISSUES
+  payload: CustomIssueInterface[]
+}
 export type ActionIssues =
   | ActionChangeIssuesField
   | ActionCreateIssuesField
   | ActionDeleteIssue
   | ActionEditIssue
+  | ActionSetIssues
   
 //Actions
 
@@ -48,4 +54,9 @@ export const deleteIssue = (issueForm: string): ActionIssues => ({
 export const editIssue = (issueForm: CustomIssueInterface): ActionIssues => ({
   type: EDIT_ISSUE,
   payload: issueForm,
+})
+
+export const setIssues = (issueForm: CustomIssueInterface[]): ActionIssues => ({
+  type: SET_ISSUES,
+  payload: issueForm
 })

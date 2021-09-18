@@ -15,7 +15,7 @@ export const setSession = (idSession?: string): AppThunk => {
     const wsConnection = new WebSocket('ws://localhost:4000')
 
     wsConnection.onopen = () => {
-      // if (getState().location !== '/') dispatch({ type: 'SET_LOCATION', payload: '/' })
+
       dispatch(toggleModalWindow(true))
       if (idSession) {
         wsConnection.send(
@@ -36,8 +36,8 @@ export const setSession = (idSession?: string): AppThunk => {
             dispatch({ type: 'SET_LOCATION', payload: data.location })
             break
           case 'SET_SETTINGS':
-            console.log('set-settings-', data)
-            //dispatch({ type: 'SET_LOCATION', payload: data.location })
+            dispatch({ type: 'SET_SETTINGS', payload: data.settings })
+            dispatch({ type: 'SET_ISSUES', payload: data.issues })
             break
         }
       }
