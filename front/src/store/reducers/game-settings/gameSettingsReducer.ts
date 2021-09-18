@@ -26,7 +26,6 @@ export const gameSettingsReducer = (
     case SettingsActionTypes.UPDATE_CARDSTORAGE:
       return { ...state, cardStorage: action.payload }
     case 'SET_TITLE':
-      console.log('action.payload')
       return { ...state, title: action.payload }
 
     default:

@@ -25,6 +25,7 @@ export const setSession = (idSession?: string): AppThunk => {
         wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession }))
 
       dispatch({ type: 'WS', ws: wsConnection })
+
       wsConnection.onmessage = function (event) {
         const data = JSON.parse(event.data)
         switch (data.type) {
@@ -33,6 +34,11 @@ export const setSession = (idSession?: string): AppThunk => {
             break
           case 'SET_LOCATION':
             dispatch({ type: 'SET_LOCATION', payload: data.location })
+            break
+          case 'SET_SETTINGS':
+            console.log('set-settings-', data)
+            //dispatch({ type: 'SET_LOCATION', payload: data.location })
+            break
         }
       }
 
@@ -84,6 +90,6 @@ export const closeSession =
   }
 export const startGame: AppThunk = (dispatch, getState) => {
   const settings = getState().settings;
-  const issues = getState().issues;
+  const issues = getState().issues.issueCard;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'START_GAME', issues, settings }))
 }
