@@ -3,7 +3,7 @@ export function onShiftTimer(lengthIssues: number) {
   let counterTranslate = 0
   let startPositionTimer = 0
   const shiftTimeronDown = 84
-
+  
   return function shiftingTimer() {
     let timer = document.getElementById('timer')!
     if (lengthIssues === 0) {

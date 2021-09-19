@@ -6,7 +6,7 @@ type PropsButton = {
   type?: 'submit' | 'reset' | 'button'
   styleButton: 'primary' | 'add'
   disabled?: boolean
-  onClick?: (event:React.MouseEvent<HTMLButtonElement>)=>void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>)=> void
 }
 
 export const Button: React.FC<PropsButton> = ({
