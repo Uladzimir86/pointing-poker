@@ -80,6 +80,7 @@ export const deletePlayerCard =
         JSON.stringify({ type: 'DEL_PLAYER', id })
       )
   }
+
 export const closeSession =
   (id: number | undefined): AppThunk =>
   (dispatch, getState) => {
@@ -87,9 +88,23 @@ export const closeSession =
       getState().playerCards.ws?.send(
         JSON.stringify({ type: 'CLOSE_SESSION', id })
       )
-  }
+}
+
 export const startGame: AppThunk = (dispatch, getState) => {
   const settings = getState().settings;
   const issues = getState().issues.issueCard;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'START_GAME', issues, settings }))
 }
+
+// export const setRoundStart = (): AppThunk => (dispatch, getState) => {
+//   // const issue = getState().issues;  !!!need flag
+//   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_START', issue }))
+// }
+// export const setRoundResult = (): AppThunk => (dispatch, getState) => {
+//   const playerId = getState().playerCards.id;
+//   // const issue = getState().issues;  !!!need flag
+//   // const card = getState().  !!!need flag
+//   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, issue, card }))
+// }
+
+
