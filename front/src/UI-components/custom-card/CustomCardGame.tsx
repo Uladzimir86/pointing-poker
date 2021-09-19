@@ -10,7 +10,7 @@ interface CustomCardPropsInterface {
   centerValue?: string
   coffee?: boolean
   isBtns?: boolean
-  id?: number 
+  id: number
   inGameSelected?: boolean
 }
 
@@ -22,41 +22,49 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
   inGameSelected,
 }) => {
   const dispatch = useDispatch()
-  let elementCardStorage : number = 1;
-  const selectedCard : ISelectedCard = useSelector((state:IStore)=> state.game.selectedCardVote)
-  const topAndBottomValues = coffee ? 'Coffee' : elementCardStorage
+  let topAndBottomValues: number | 'Coffee' = 0
+  const selectedCard: ISelectedCard = useSelector(
+    (state: IStore) => state.game.selectedCardVote
+  )
   const cardStorage: number[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
-  const shortScoreType : string = useSelector((state :IStore)=> state.settings.shortScoreType)
-  if(id!==undefined){
-    elementCardStorage = cardStorage[id]
+  if (id !== undefined) {
+    let elementCardStorage = cardStorage[id]
+    topAndBottomValues = coffee ? 'Coffee' : elementCardStorage
   }
+  const shortScoreType: string = useSelector(
+    (state: IStore) => state.settings.shortScoreType
+  )
   const handleClick = () => {
     console.log(id)
-    if(id!==undefined){
-      dispatch(setSelectedCard({isSelected: !selectedCard.isSelected , idCard: id}))
+    if (id !== undefined) {
+      dispatch(
+        setSelectedCard({ isSelected: !selectedCard.isSelected, idCard: id })
+      )
     }
   }
   return (
     <div
-      className={`custom-card ${(selectedCard.idCard===id /* && selectedCard.isSelected */)? 'selected-card' : ''}`}
+      className={`custom-card ${
+        selectedCard.idCard === id /* && selectedCard.isSelected */
+          ? 'selected-card'
+          : ''
+      }`}
       id={'custom-card-' + id}
       onClick={handleClick}
     >
       <div className="custom-card__head">
-        <div className="upper-value">
-          {topAndBottomValues}
-        </div>
+        <div className="upper-value">{topAndBottomValues}</div>
         {!isBtns && <div className="custom-card__btns-container"></div>}
       </div>
       <div className={`${coffee ? 'coffee' : 'center-value'}`}>
-        {shortScoreType!==''? shortScoreType: coffee? "":'PP'}
+        {shortScoreType !== '' ? shortScoreType : coffee ? '' : 'PP'}
       </div>
-      <div className="lower-value" >
-        {topAndBottomValues}
-      </div>
-      {(selectedCard.idCard===id /* && selectedCard.isSelected */) ? <div className="check-mark"></div> : null}
+      <div className="lower-value">{topAndBottomValues}</div>
+      {selectedCard.idCard === id /* && selectedCard.isSelected */ ? (
+        <div className="check-mark"></div>
+      ) : null}
     </div>
   )
 }

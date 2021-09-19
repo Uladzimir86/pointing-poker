@@ -19,10 +19,12 @@ import {
 } from '../../store/reducers/globalReducer/globalActions'
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
 
-const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
+
+const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link}) => {
+  
   const currentCard = false
   const editButton = true
-  const closeButton = false
+  let closeButton = false
   const deleteButton = true
   const dispatch = useDispatch()
   const [issueCard, setIssueCard] = useState<CustomIssueInterface>({
@@ -31,7 +33,9 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
     priority: priority,
   })
   const currentLocation: string = useSelector((state: IStore) => state.location)
-  console.log(currentLocation)
+  if(currentLocation===locationPath.startPage){
+    closeButton=true
+  }
   const handlerEditIssue = () => {
     dispatch(editIssue(issueCard))
     dispatch(isEditIssue(true))
@@ -56,11 +60,11 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
       </div>
         {currentLocation === locationPath.startPage && (
           <div className="buttons">
-            {closeButton && (
-              <button>
-                <img src={closeIcon} alt="Close" className="close-button " />
-              </button>
-            )}
+            {closeButton?
+            <button className="closeBtnIssue" onClick={handlerDeleteIssue} >
+                <img src={closeIcon} alt="Close" className="close-button "/>
+            </button>
+            : null}
           </div>
         )}
       {currentLocation === locationPath.lobbyPage && (

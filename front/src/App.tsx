@@ -32,9 +32,8 @@ function App() {
       )}
       <Switch>
         <Route exact path="/">
-{/*           <StartPage />
- */}        
- <GamePage/>
+          <StartPage />
+
  </Route>
         <Route exact path="/lobby">
           <LobbyPage />

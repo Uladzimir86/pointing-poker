@@ -72,3 +72,14 @@ export interface ISelectedCard {
 export interface IStateGame{
   selectedCardVote : ISelectedCard
 }
+
+export interface ITimer{
+  start: boolean
+  stop: boolean
+  restart: boolean
+}
+
+export interface ICurrentIssue{
+ id: number
+
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { IPlayer, IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
@@ -21,13 +21,12 @@ const idCoffee : number = 98
 export const GamePage: React.FC = () => {
   const timeRound = 2
   const [isActive, setIsActive] = useState<boolean>(false)
-
+  const [stopTimer, onStopTimer] = useState<boolean>(true)
   const master = useSelector((set: IStore) => set.playerCards.playerCards[0])
   const cardStorage: number[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
-
-
+  const titleGame : string = useSelector((state:IStore)=> state.settings.title)
   const issue = arrOfIssues.map(({ title, link, priority }) => {
     return (
       <CustomIssue key={title} priority={priority} title={title} link={link} />
@@ -36,19 +35,13 @@ export const GamePage: React.FC = () => {
 
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
-
-  const onStartTimer = () => {
-    console.log('start')
-    setIsActive(true)
-  }
-
   return (
     <div className="wrapper_game">
       <div className="game">
         <div className="game_field">
           <div className="game_field__title">
             <div className="game_field__title-text">
-              Spring 23 planning (issues 13, 533, 5623, 3252, 6623, ...)
+                {titleGame}
             </div>
           </div>
           <div className="game_field__scram">
@@ -77,11 +70,11 @@ export const GamePage: React.FC = () => {
               </div>
             </div>
             <div id="timer" className="game_field__playArea_timer">
-              <TimerElement minutes={timeRound} isActive={isActive} />
+              <TimerElement minutes={timeRound} isActive={isActive} setIsActive={setIsActive}  stopTimer={stopTimer}/>
               <Button
                 text={'Run Round'}
                 styleButton={'primary'}
-                onClick={onStartTimer}
+                onClick={()=>setIsActive(true)}
               />
             </div>
 
@@ -109,7 +102,8 @@ export const GamePage: React.FC = () => {
               <div className="statistics_cards-percent">44%</div>
             </div>
           </div>}
-          {typeUser===TypeUser.member&&    <div className="statistics">
+          {typeUser===TypeUser.member&&   
+           <div className="statistics">
             <div className="statistics_title"></div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
@@ -124,7 +118,6 @@ export const GamePage: React.FC = () => {
             </div>
           </div>}
           <ResultVoiting/>
-        
         </div>
         <ScoreComponent />
       </div>

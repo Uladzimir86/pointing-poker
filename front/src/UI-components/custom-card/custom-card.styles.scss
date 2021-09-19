@@ -29,8 +29,8 @@
   height: 160px;
   margin: 10px;
   cursor: pointer;
-  perspective: 25rem ;
- 
+  perspective: 25rem;
+
   &__head {
     display: flex;
     justify-content: space-between;
@@ -40,9 +40,18 @@
     display: flex;
   }
 }
-.custom-card:hover{
-  transform: translate3d(0.2rem , 1rem, 1rem);
-  box-shadow:  1rem .5rem  2rem  grey;
+.custom-card:hover {
+  animation: roll 0.5s ease-in-out forwards;
+  box-shadow: 1rem 0.5rem 2rem grey;
+}
+
+@keyframes roll {
+  from {
+    transform: translate3d(0rem, 0rem, 0rem);
+  }
+  to {
+    transform: translate3d(0.2rem, 2rem, 1rem);
+  }
 }
 
 .upper-value {
@@ -115,4 +124,22 @@
   padding-left: 3px;
   font-family: Ruda;
   outline: none;
+}
+
+.closeBtnIssue {
+  background: transparent;
+  border: none;
+}
+
+.closeBtnIssue:hover {
+  animation: roll 1s ease-out;
+}
+
+@keyframes roll {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3);
+  }
 }
