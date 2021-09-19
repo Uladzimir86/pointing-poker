@@ -1,11 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router'
-<<<<<<< HEAD
 import { GamePage } from './pages/GamePage/GamePage'
-=======
 import { useHistory } from 'react-router-dom'
->>>>>>> 491ae08ef4c711c48b0b328e7df753c22212651c
 import LobbyPage from './pages/LobbyPage/LobbyPage'
 import StartPage from './pages/StartPage/StartPage'
 import { RootState } from './store'
@@ -35,8 +32,10 @@ function App() {
       )}
       <Switch>
         <Route exact path="/">
-          <StartPage />
-        </Route>
+{/*           <StartPage />
+ */}        
+ <GamePage/>
+ </Route>
         <Route exact path="/lobby">
           <LobbyPage />
         </Route>

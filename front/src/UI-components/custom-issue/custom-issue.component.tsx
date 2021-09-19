@@ -3,12 +3,21 @@ import './custom-issue.styles.scss'
 import editIcon from '../../assets/icons/edit-card-icon.png'
 import deleteIcon from '../../assets/icons/delete-card-icon.png'
 import closeIcon from '../../assets/icons/close-card-icon.png'
-import { CustomIssueInterface } from '../../common/interfaces'
-import { useDispatch } from 'react-redux'
-import { deleteIssue, editIssue } from '../../store/reducers/issuesReducer/actionsIssue'
-import { isEditIssue, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
+import {
+  CustomIssueInterface,
+  IStore,
+  locationPath,
+} from '../../common/interfaces'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  deleteIssue,
+  editIssue,
+} from '../../store/reducers/issuesReducer/actionsIssue'
+import {
+  isEditIssue,
+  toggleModalWindow,
+} from '../../store/reducers/globalReducer/globalActions'
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
-
 
 const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
   const currentCard = false
@@ -16,21 +25,23 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
   const closeButton = false
   const deleteButton = true
   const dispatch = useDispatch()
-  const [issueCard , setIssueCard] = useState<CustomIssueInterface>({link:link,title:title,priority:priority})
- 
+  const [issueCard, setIssueCard] = useState<CustomIssueInterface>({
+    link: link,
+    title: title,
+    priority: priority,
+  })
+  const currentLocation: string = useSelector((state: IStore) => state.location)
+  console.log(currentLocation)
   const handlerEditIssue = () => {
     dispatch(editIssue(issueCard))
     dispatch(isEditIssue(true))
     dispatch(toggleModalWindow(true))
-    
   }
 
   const handlerDeleteIssue = () => {
     dispatch(deleteIssue(title))
     dispatch(editIssue(initialEditIssueCard))
   }
-
-  
 
   return (
     <div className={`custom-issue ${currentCard ? 'current-card' : ''}`}>
@@ -43,30 +54,35 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link }) => {
         )}
         {priority && <div className="priority-text">{priority} priority</div>}
       </div>
+        {currentLocation === locationPath.startPage && (
+          <div className="buttons">
+            {closeButton && (
+              <button>
+                <img src={closeIcon} alt="Close" className="close-button " />
+              </button>
+            )}
+          </div>
+        )}
+      {currentLocation === locationPath.lobbyPage && (
+        <div className="buttons">
+          {editButton && (
+            <div onClick={handlerEditIssue}>
+              <img src={editIcon} alt="Edit" className="edit-button " />
+            </div>
+          )}
 
-      <div className="buttons">
-        {editButton && (
-          <div onClick={handlerEditIssue}>
-            <img src={editIcon} alt="Edit" className="edit-button " />
-          </div>
-        )}
-
-        {deleteButton && (
-          <div>
-            <img
-              onClick={handlerDeleteIssue}
-              src={deleteIcon}
-              alt="Delete"
-              className="delete-button "
-            />
-          </div>
-        )}
-        {closeButton && (
-          <div>
-            <img src={closeIcon} alt="Close" className="close-button " />
-          </div>
-        )}
-      </div>
+          {deleteButton && (
+            <div>
+              <img
+                onClick={handlerDeleteIssue}
+                src={deleteIcon}
+                alt="Delete"
+                className="delete-button "
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

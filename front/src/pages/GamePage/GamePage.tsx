@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { IPlayer, IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
@@ -6,20 +6,27 @@ import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { Button } from '../../UI-components/Button/button'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
+import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
 import PlayerCard from '../../UI-components/player-card/player-card'
 import { TimerElement } from '../../UI-components/timer/timer'
 import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
+import { ResultVoiting } from './ResultVoiting'
+
+
+
+const idCoffee : number = 98
 
 export const GamePage: React.FC = () => {
   const timeRound = 2
   const [isActive, setIsActive] = useState<boolean>(false)
 
-  const muster = useSelector(({ set }: { set: IPlayer }) => set.playerCards[0])
+  const master = useSelector((set: IStore) => set.playerCards.playerCards[0])
   const cardStorage: number[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
+
 
   const issue = arrOfIssues.map(({ title, link, priority }) => {
     return (
@@ -31,6 +38,7 @@ export const GamePage: React.FC = () => {
 
 
   const onStartTimer = () => {
+    console.log('start')
     setIsActive(true)
   }
 
@@ -47,9 +55,9 @@ export const GamePage: React.FC = () => {
             <div className="game_field__scram_title">Scrum master:</div>
             <div className="game_field__scram_main">
               <PlayerCard
-                photo={muster.photo}
-                name={muster.name}
-                position={muster.position}
+                photo={master.photo}
+                name={master.name}
+                position={master.position}
                 btnDelPlayer={false}
                 above={true}
               />
@@ -106,16 +114,17 @@ export const GamePage: React.FC = () => {
             <div className="statistics_cards">
               <div className="statistics_cards-card">
                 {cardStorage.map((card, index) => (
-                  <CustomCard
+                  <CustomCardGame id = {index} key={index}
                     inGameSelected
                   />
                 ))
                 }
-                <CustomCard inGameSelected coffee/>
+                <CustomCardGame inGameSelected coffee id={idCoffee}/>
               </div>
-              <div className="statistics_cards-percent">44%</div>
             </div>
-          </div>}        
+          </div>}
+          <ResultVoiting/>
+        
         </div>
         <ScoreComponent />
       </div>

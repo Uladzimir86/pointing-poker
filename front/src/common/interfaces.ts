@@ -21,6 +21,12 @@ export enum TypeUser {
   member = 'member',
   observer = 'observer',
 }
+
+export enum locationPath {
+  startPage = '/',
+  lobbyPage = '/lobby',
+  gamePage = '/game',
+}
 export interface IStateGlobal {
   modalWindow:boolean,  
   typeModalWindow : ModalType,
@@ -33,6 +39,9 @@ export interface IStore {
   globalSettings: IStateGlobal
   settings: SettingsState
   issues: IIssues
+  playerCards: IPlayer
+  location: string
+  game: IStateGame
 }
 
 export interface IPlayerForm {
@@ -53,4 +62,13 @@ export interface IPlayerCard {
 
 export interface IPlayer {
   playerCards: IPlayerCard[], ws: WebSocket | null
+}
+
+export interface ISelectedCard {
+  isSelected : boolean
+  idCard : number
+}
+
+export interface IStateGame{
+  selectedCardVote : ISelectedCard
 }
