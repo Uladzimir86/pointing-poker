@@ -1,46 +1,56 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { IStore } from '../../common/interfaces'
+import { SettingsState } from '../../types/reducers/game-settings'
 import './timer.scss'
 
 type PropsTimer = {
   minutes?: number
   seconds?: number
-  isActive: boolean
+  isActive?: boolean
+  stopTimer: boolean
+  setIsActive?: Function | undefined
 }
 
 export const TimerElement: React.FC<PropsTimer> = ({
   isActive = false,
-  minutes = 0,
-  seconds = 0,
+  stopTimer = true,
+  setIsActive
 }) => {
-  const [time, setTime] = useState({
-    minutes,
-    seconds,
-    counter: minutes * 60 + seconds,
-  })
-  const [startTimer, setStartTimer] = useState(isActive)
-  
+  const settings:SettingsState = useSelector((state:IStore)=> state.settings)
+ const [time, setTime] = useState({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
+
+function restartTime() {
+  setTime({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
+}
+
   useEffect(() => {
+    console.log(isActive)
     let interval: NodeJS.Timeout
 
-    if (startTimer) {
+    if (isActive) {
       interval = setInterval(() => {
         const secondsCounter = time.counter % 60
         const minutesCounter = Math.floor(time.counter / 60)
-        if (time.counter === 0) {
-          setStartTimer(false)
+        if (time.counter !== -1) {
+          setTime((state) => ({
+            minutes: minutesCounter,
+            seconds: secondsCounter,
+            counter: state.counter - 1,
+          }))
         }
-        setTime((state) => ({
-          minutes: minutesCounter,
-          seconds: secondsCounter,
-          counter: state.counter - 1,
-        }))
+        if(time.counter===0){
+          //restartTime()
+          
+        }
+        
       }, 1000)
     }
     return () => clearInterval(interval)
-  }, [startTimer, time.counter])
+  }, [isActive, setIsActive, time.counter])
 
   return (
-    <div  className="container_timer">
+    <div className="container_timer">
       <div className="timer_minutes">
         <span className="timer_minutes-title">minutes</span>
         <div className="timer_minutes-counter">{time.minutes}</div>
