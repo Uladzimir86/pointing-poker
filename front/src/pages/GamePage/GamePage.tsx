@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { IPlayer, IStore, TypeUser } from '../../common/interfaces'
+import { IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
 import { SettingsState } from '../../types/reducers/game-settings'
@@ -13,7 +13,8 @@ import { TimerElement } from '../../UI-components/timer/timer'
 import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
-
+import { createID } from '../../common/randomId'
+import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
 
 
 const idCoffee : number = 98
@@ -27,9 +28,10 @@ export const GamePage: React.FC = () => {
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
-  const issue = arrOfIssues.map(({ title, link, priority }) => {
+
+  const issue = arrOfIssues.map(({ title, link, priority, id }) => {
     return (
-      <CustomIssue key={title} priority={priority} title={title} link={link} />
+      <CustomIssue key={title} priority={priority} title={title} link={link} id={createID()}/>
     )
   })
 
@@ -54,36 +56,45 @@ export const GamePage: React.FC = () => {
                 btnDelPlayer={false}
                 above={true}
               />
-              <Button
+              {typeUser===TypeUser.master && <Button
                 text={'Stop Game'}
                 styleButton={'add'}
                 onClick={onShiftTimer(0)}
-              />
+              />}
+              {typeUser===TypeUser.member && <Button
+                text={'Exit'}
+                styleButton={'add'}
+                onClick={()=>alert('You leave on game')}
+              />}
+              
             </div>
           </div>
           <div className="game_field__playArea">
             <div className="game_field__playArea_issues">
               <div className="game_field__playArea_issues-title">Issues:</div>
-              <div className="game_field__playArea_issues-list">
+              <div className="game_field__playArea_issues-list ">
                 {issue}
-                <CustomIssue link={''} title={''} priority={'Low'} />
+                {typeUser===TypeUser.master && 
+                <CreateIssueCard />}
               </div>
             </div>
             <div id="timer" className="game_field__playArea_timer">
               <TimerElement minutes={timeRound} isActive={isActive} setIsActive={setIsActive}  stopTimer={stopTimer}/>
-              <Button
+              {typeUser===TypeUser.master && 
+                <Button
                 text={'Run Round'}
                 styleButton={'primary'}
                 onClick={()=>setIsActive(true)}
-              />
+              />}
             </div>
 
             <div className="game_field__playArea_nextIssue">
-              <Button
+            {typeUser===TypeUser.master &&  <Button
                 text={'Next Issue'}
                 styleButton={'primary'}
                 onClick={onShiftTimer(issue.length)}
-              />
+              />}
+             
             </div>
           </div>
           {typeUser===TypeUser.master&&    <div className="statistics">
@@ -91,7 +102,7 @@ export const GamePage: React.FC = () => {
             <div className="statistics_cards">
               <div className="statistics_cards-card">
                 {cardStorage.map((card, index) => (
-                  <CustomCard
+                  <CustomCardGame
                     key={index}
                     centerValue={'SP'}
                     values={String(card)}
@@ -117,7 +128,8 @@ export const GamePage: React.FC = () => {
               </div>
             </div>
           </div>}
-          <ResultVoiting/>
+          {typeUser===TypeUser.master&& 
+          <ResultVoiting/>}
         </div>
         <ScoreComponent />
       </div>

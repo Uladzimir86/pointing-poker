@@ -4,6 +4,7 @@ export interface CustomIssueInterface {
   link: string
   title: string
   priority: 'Low' | 'Medium' | 'High'
+  id: string
 }
 
 export interface IIssues {
@@ -69,8 +70,12 @@ export interface ISelectedCard {
   idCard : number
 }
 
+
+
+
 export interface IStateGame{
   selectedCardVote : ISelectedCard
+  idCurrentIssue: string
 }
 
 export interface ITimer{
@@ -79,7 +84,3 @@ export interface ITimer{
   restart: boolean
 }
 
-export interface ICurrentIssue{
- id: number
-
-}
