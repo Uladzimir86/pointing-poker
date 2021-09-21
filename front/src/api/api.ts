@@ -43,6 +43,13 @@ export const setSession = (idSession?: string): AppThunk => {
             dispatch({ type: 'START_TIMER' })
             // dispatch({ type: 'SET_ISSUES', payload: data.issues })
             break
+          case 'SET_ROUND_RESULT':
+            console.log('SET_ROUND_RESULT',  data.issue)
+            console.log(data.score)
+            console.log( data.statistic)
+            // dispatch({ type: 'START_TIMER' })
+            // dispatch({ type: 'SET_ISSUES', payload: data.issues })
+            break
         }
       }
 
@@ -111,7 +118,7 @@ export const setRoundResult: AppThunk = (dispatch, getState) => {
   // const issue = getState().issues;  !!!need flag
   // const card = getState().  !!!need flag
   const issue = 0;
-  const card = 0;
+  const card = getState().game.selectedCardVote.idCard;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, issue, card }))
 }
 

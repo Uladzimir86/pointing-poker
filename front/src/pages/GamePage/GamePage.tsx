@@ -28,7 +28,7 @@ export const GamePage: React.FC = () => {
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
-  const cardStorage: number[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
+  const cardStorage: string[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
@@ -101,10 +101,11 @@ export const GamePage: React.FC = () => {
                     centerValue={'SP'}
                     values={String(card)}
                     id={index}
+                    isBtns={true}
                   />
                 ))}
               </div>
-              <div className="statistics_cards-percent">44%</div>
+              <div className="statistics_cards-percent"></div>
             </div>
           </div>}
           {typeUser===TypeUser.member&&   
@@ -112,13 +113,16 @@ export const GamePage: React.FC = () => {
             <div className="statistics_title"></div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
-                {cardStorage.map((card, index) => (
-                  <CustomCardGame id = {index} key={index}
-                    inGameSelected
-                  />
-                ))
-                }
                 <CustomCardGame inGameSelected coffee id={idCoffee}/>
+                {cardStorage.map((card, index) => {
+                  if (index) {
+                    return(
+                      <CustomCardGame id = {index} key={index}
+                      inGameSelected
+                    />
+                  )}
+                })
+                }
               </div>
             </div>
           </div>}
