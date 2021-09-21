@@ -70,7 +70,8 @@ export interface ISelectedCard {
 }
 
 export interface IStateGame{
-  selectedCardVote : ISelectedCard
+  selectedCardVote : ISelectedCard,
+  startTimer: boolean,
 }
 
 export interface ITimer{

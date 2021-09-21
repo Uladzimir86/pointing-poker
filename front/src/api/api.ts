@@ -39,6 +39,10 @@ export const setSession = (idSession?: string): AppThunk => {
             dispatch({ type: 'SET_SETTINGS', payload: data.settings })
             dispatch({ type: 'SET_ISSUES', payload: data.issues })
             break
+          case 'SET_ROUND_START':
+            dispatch({ type: 'START_TIMER' })
+            // dispatch({ type: 'SET_ISSUES', payload: data.issues })
+            break
         }
       }
 
@@ -77,7 +81,7 @@ export const deletePlayerCard =
   (dispatch, getState) => {
     if (id)
       getState().playerCards.ws?.send(
-        JSON.stringify({ type: 'DEL_PLAYER', id })
+        JSON.stringify({ type: 'DEL_PLAYER', playerId: id })
       )
   }
 
@@ -86,7 +90,7 @@ export const closeSession =
   (dispatch, getState) => {
     if (id)
       getState().playerCards.ws?.send(
-        JSON.stringify({ type: 'CLOSE_SESSION', id })
+        JSON.stringify({ type: 'CLOSE_SESSION', playerId: id })
       )
 }
 
@@ -96,15 +100,19 @@ export const startGame: AppThunk = (dispatch, getState) => {
   getState().playerCards.ws?.send(JSON.stringify({ type: 'START_GAME', issues, settings }))
 }
 
-// export const setRoundStart = (): AppThunk => (dispatch, getState) => {
-//   // const issue = getState().issues;  !!!need flag
-//   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_START', issue }))
-// }
-// export const setRoundResult = (): AppThunk => (dispatch, getState) => {
-//   const playerId = getState().playerCards.id;
-//   // const issue = getState().issues;  !!!need flag
-//   // const card = getState().  !!!need flag
-//   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, issue, card }))
-// }
+export const setRoundStart: AppThunk = (dispatch, getState) => {
+  // const issue = getState().issues;  !!!need flag
+  const issue = 0;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_START', issue }))
+
+}
+export const setRoundResult: AppThunk = (dispatch, getState) => {
+  const playerId = getState().playerCards.id;
+  // const issue = getState().issues;  !!!need flag
+  // const card = getState().  !!!need flag
+  const issue = 0;
+  const card = 0;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, issue, card }))
+}
 
 

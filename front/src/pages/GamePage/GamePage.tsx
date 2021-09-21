@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setRoundStart } from '../../api/api'
 import { IPlayer, IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { RootState } from '../../store/reducers'
 import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
-import { SettingsState } from '../../types/reducers/game-settings'
+import { AppThunk, SettingsState } from '../../types/reducers/game-settings'
 import { Button } from '../../UI-components/Button/button'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
@@ -20,23 +21,24 @@ import { ResultVoiting } from './ResultVoiting'
 const idCoffee : number = 98
 
 export const GamePage: React.FC = () => {
-  const timeRound = 2
-  const [isActive, setIsActive] = useState<boolean>(false)
 
-  const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
+  const timeRound = 2
+
+  const [isActive, setIsActive] = useState<boolean>(false)
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
-  const cardStorage: number[] = useSelector(
-    ({ settings }: { settings: SettingsState }) => settings.cardStorage
-  )
+  const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
+  const cardStorage: number[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
+  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+
+  const dispatch = useDispatch();
+
   const issue = arrOfIssues.map(({ title, link, priority }) => {
     return (
       <CustomIssue key={title} priority={priority} title={title} link={link} />
     )
   })
-
-  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
   return (
     <div className="wrapper_game">
@@ -73,11 +75,11 @@ export const GamePage: React.FC = () => {
               </div>
             </div>
             <div id="timer" className="game_field__playArea_timer">
-              <TimerElement minutes={timeRound} isActive={isActive} setIsActive={setIsActive}  stopTimer={stopTimer}/>
+              <TimerElement minutes={timeRound} stopTimer={stopTimer}/>
               <Button
                 text={'Run Round'}
                 styleButton={'primary'}
-                onClick={()=>setIsActive(true)}
+                onClick={() => dispatch(setRoundStart)}
               />
             </div>
 

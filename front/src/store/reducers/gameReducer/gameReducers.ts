@@ -1,5 +1,5 @@
 import { IStateGame, ISelectedCard } from './../../../common/interfaces'
-import { ActionSetSelectedCard, SELECTED_CARD } from './gameActions'
+import { ActionSetSelectedCard, SELECTED_CARD, START_TIMER } from './gameActions'
 
 type gameActionsType = ActionSetSelectedCard
 
@@ -10,6 +10,7 @@ export const initialVoteCard: ISelectedCard = {
 
 export const initialStateGame: IStateGame = {
   selectedCardVote: initialVoteCard,
+  startTimer: false,
 }
 
 export function gameReducer(
@@ -25,9 +26,10 @@ export function gameReducer(
             isSelected: action.payload.isSelected,
             idCard: action.payload.idCard,
           },
-        
       }
     }
+    case START_TIMER: 
+      return {...state, startTimer: !state.startTimer}
     default:
       return state
   }
