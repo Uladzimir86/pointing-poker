@@ -23,7 +23,9 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
   const id = useSelector((state: RootState) => state.playerCards.id)
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
   const sessionTitle = useSelector((state: RootState) => state.settings.title)
+  const location = useSelector((state: RootState) => state.location)
   const dispatch = useDispatch();
+
   
   useEffect(() => {
     if (/\w/.test(sessionTitle) || /[А-Яа-я]/.test(sessionTitle)) {
@@ -37,7 +39,13 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
     const input = e.target as HTMLInputElement
     dispatch({type: 'SET_TITLE', payload: input.value})
   }
-
+  const handleStartGame = () => {
+    if(location === '/lobby') dispatch(startGame)
+    else {
+      dispatch({type: 'SET_LOCATION', payload: '/lobby'});
+      dispatch(startGame);
+    }
+  }
   return (
     <div className="session-title">
       <div className="headder">
@@ -83,18 +91,20 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
           above={id === master.id}
         />
       </div>
-      <div className="link-lobby">
-        <span className="link-lobby__text">Link to lobby:</span>
-        <div className="link-lobby__input">
-          <input type="text" className="inputElem" value={master.id} disabled/>
-          <Button text="Copy" type="button" styleButton="primary" onClick={() => {
-            navigator.clipboard.writeText(master.id)
-            setIsCopied(true)
-            setTimeout(() => setIsCopied(false), 1000)
-            }}/>
-            {isCopied && <span className="link-lobby__copy-confirm">ID copied...</span>}
+      {typeUser === TypeUser.master && (
+        <div className="link-lobby">
+          <span className="link-lobby__text">Link to lobby:</span>
+          <div className="link-lobby__input">
+            <input type="text" className="inputElem" value={master.id} disabled/>
+            <Button text="Copy" type="button" styleButton="primary" onClick={() => {
+              navigator.clipboard.writeText(master.id)
+              setIsCopied(true)
+              setTimeout(() => setIsCopied(false), 1000)
+              }}/>
+              {isCopied && <span className="link-lobby__copy-confirm">ID copied...</span>}
+          </div>
         </div>
-      </div>
+      )}
       <div className="session-title__buttons">
         {typeUser === TypeUser.master && (
           <>
@@ -102,7 +112,7 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
               text="Start Game"
               type="button"
               styleButton="primary"
-              onClick={() => dispatch(startGame)}
+              onClick={handleStartGame}
             />
             <Button
               text="Cancel Game" 

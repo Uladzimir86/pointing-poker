@@ -29,7 +29,7 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
   const [isUpdate, setIsUpdate] = useState(false);
   const [inputValue, setInputValue] = useState(values);
   const dispatch = useDispatch();
-  const cardStorage: number[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
+  const cardStorage: string[] = useSelector(({settings}: {settings: SettingsState})=>settings.cardStorage)
   const [cards, setCards] = useState(cardStorage);
   const handleClick = () => {
     if (inGameSelected) {
@@ -40,11 +40,13 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
   }
 
   const handleAddCard = () => {
-    cardStorage.push(0);
-    dispatch({
-      type: SettingsActionTypes.UPDATE_CARDSTORAGE,
-      payload: cardStorage,
-    })
+    if (addCard) {
+      cardStorage.push('0');
+      dispatch({
+        type: SettingsActionTypes.UPDATE_CARDSTORAGE,
+        payload: cardStorage,
+      })
+    }
   }
   const handleDeleteCard = (e: SyntheticEvent) => {
     const el = e.target as HTMLElement;
@@ -64,8 +66,8 @@ const CustomCard: FC<CustomCardPropsInterface> = ({
     const el = e.target as HTMLElement;
     const card = el.closest('.custom-card') as HTMLElement;
     const index = Number(card.id.slice(12));
-    const value = Number(inputValue);
-    cardStorage.splice(index, 1, value);
+    const value = inputValue;
+    if (value) cardStorage.splice(index, 1, value);
     dispatch({
       type: SettingsActionTypes.UPDATE_CARDSTORAGE,
       payload: cardStorage,

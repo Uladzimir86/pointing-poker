@@ -22,15 +22,15 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
   inGameSelected,
 }) => {
   const dispatch = useDispatch()
-  let topAndBottomValues: number | 'Coffee' = 0
+  let topAndBottomValues: string | 'Coffee' = '0'
   const selectedCard: ISelectedCard = useSelector(
     (state: IStore) => state.game.selectedCardVote
   )
-  const cardStorage: number[] = useSelector(
+  const cardStorage: string[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
   if (id !== undefined) {
-    let elementCardStorage = cardStorage[id]
+    let elementCardStorage: string = cardStorage[id]
     topAndBottomValues = coffee ? 'Coffee' : elementCardStorage
   }
   const shortScoreType: string = useSelector(

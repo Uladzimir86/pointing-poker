@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setRoundResult } from '../../api/api'
 import { IStore } from '../../common/interfaces'
+import { RootState } from '../../store/reducers'
 import { SettingsState } from '../../types/reducers/game-settings'
 import './timer.scss'
 
 type PropsTimer = {
   minutes?: number
   seconds?: number
-  isActive?: boolean
   stopTimer: boolean
-  setIsActive?: Function | undefined
 }
 
 export const TimerElement: React.FC<PropsTimer> = ({
-  isActive = false,
   stopTimer = true,
-  setIsActive
 }) => {
   const settings:SettingsState = useSelector((state:IStore)=> state.settings)
- const [time, setTime] = useState({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
+  const isActive = useSelector((state: RootState) => state.game.startTimer)
+  const [time, setTime] = useState({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
+  
+  const dispatch = useDispatch();
 
-function restartTime() {
-  setTime({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
-}
+  function restartTime() {
+    setTime({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
+  }
 
   useEffect(() => {
-    console.log(isActive)
+
     let interval: NodeJS.Timeout
 
     if (isActive) {
@@ -41,13 +42,13 @@ function restartTime() {
         }
         if(time.counter===0){
           //restartTime()
-          
+          dispatch({type: 'START_TIMER'})
+          dispatch(setRoundResult);
         }
-        
       }, 1000)
     }
     return () => clearInterval(interval)
-  }, [isActive, setIsActive, time.counter])
+  }, [isActive, time.counter])
 
   return (
     <div className="container_timer">

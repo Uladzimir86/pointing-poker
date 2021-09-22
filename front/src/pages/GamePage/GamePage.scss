@@ -3,7 +3,6 @@
 .wrapper_game {
   display: flex;
   flex-direction: column;
-  height: 88vh;
   margin: 0 auto;
   flex-wrap: wrap;
 }
@@ -16,6 +15,7 @@
 .game_field {
   flex: 2;
   padding: 0 6.3rem;
+  padding-bottom: 80px;
   &__title {
     display: flex;
     align-items: center;
@@ -77,18 +77,16 @@
         letter-spacing: 0em;
         text-align: center;
       }
-      &-list>.custom_issue{
+      &-list > .custom_issue {
         height: 78px;
       }
     }
     &_timer {
-
       flex: 1;
       display: flex;
       flex-direction: column;
-      &>.container_timer{
+      & > .container_timer {
         margin-top: 2rem;
-
       }
       & > .btn_primary {
         margin-top: 3.3rem;
@@ -138,8 +136,8 @@
     &-percent {
       display: flex;
       justify-content: center;
-      
-      &_item{
+
+      &_item {
         padding: 1.5rem;
         display: flex;
         @include font-Ruda-24;
@@ -183,7 +181,6 @@
     }
   }
 }
-
 
 .current-card {
   background-color: rgba($color: #60dabf54, $alpha: 0.33);

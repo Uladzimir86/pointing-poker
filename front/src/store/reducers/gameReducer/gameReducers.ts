@@ -1,5 +1,12 @@
 import { IStateGame, ISelectedCard } from './../../../common/interfaces'
-import { ActionGamePage, CURRENT_ISSUE, SELECTED_CARD } from './gameActions'
+import {
+  ActionSetSelectedCard,
+  SELECTED_CARD,
+  START_TIMER,
+} from './gameActions'
+import { ActionGamePage, CURRENT_ISSUE } from './gameActions'
+
+type gameActionsType = ActionSetSelectedCard
 
 export const initialVoteCard: ISelectedCard = {
   isSelected: false,
@@ -8,6 +15,7 @@ export const initialVoteCard: ISelectedCard = {
 
 export const initialStateGame: IStateGame = {
   selectedCardVote: initialVoteCard,
+  startTimer: false,
   idCurrentIssue: '',
 }
 
@@ -25,6 +33,9 @@ export function gameReducer(
         },
       }
     }
+    case START_TIMER:
+      return { ...state, startTimer: !state.startTimer }
+
     case CURRENT_ISSUE: {
       return {
         ...state,

@@ -29,12 +29,11 @@ export enum locationPath {
   gamePage = '/game',
 }
 export interface IStateGlobal {
-  modalWindow:boolean,  
-  typeModalWindow : ModalType,
-  typeUser : TypeUser,
-  isEditIssue:boolean
+  modalWindow: boolean
+  typeModalWindow: ModalType
+  typeUser: TypeUser
+  isEditIssue: boolean
 }
-
 
 export interface IStore {
   globalSettings: IStateGlobal
@@ -62,25 +61,23 @@ export interface IPlayerCard {
 }
 
 export interface IPlayer {
-  playerCards: IPlayerCard[], ws: WebSocket | null
+  playerCards: IPlayerCard[]
+  ws: WebSocket | null
 }
 
 export interface ISelectedCard {
-  isSelected : boolean
-  idCard : number
+  isSelected: boolean
+  idCard: number
 }
 
-
-
-
-export interface IStateGame{
-  selectedCardVote : ISelectedCard
+export interface IStateGame {
+  selectedCardVote: ISelectedCard
+  startTimer: boolean
   idCurrentIssue: string
 }
 
-export interface ITimer{
+export interface ITimer {
   start: boolean
   stop: boolean
   restart: boolean
 }
-

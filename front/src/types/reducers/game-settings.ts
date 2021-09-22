@@ -8,7 +8,7 @@ export enum SettingsActionTypes {
 }
 
 export interface SettingsState {
-  cardStorage: number[]
+  cardStorage: string[]
   changingCardInRoundEnd: boolean
   isTimerNeeded: boolean
   scoreType: string
