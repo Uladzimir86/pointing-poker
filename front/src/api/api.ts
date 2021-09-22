@@ -38,6 +38,7 @@ export const setSession = (idSession?: string): AppThunk => {
           case 'SET_SETTINGS':
             dispatch({ type: 'SET_SETTINGS', payload: data.settings })
             dispatch({ type: 'SET_ISSUES', payload: data.issues })
+            if (data.issues.length) dispatch({ type: 'CURRENT_ISSUE', payload: data.issues[0].id })
             break
           case 'SET_ROUND_START':
             dispatch({ type: 'START_TIMER' })
@@ -108,8 +109,7 @@ export const startGame: AppThunk = (dispatch, getState) => {
 }
 
 export const setRoundStart: AppThunk = (dispatch, getState) => {
-  // const issue = getState().issues;  !!!need flag
-  const issue = 0;
+  const issue = getState().game.idCurrentIssue;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_START', issue }))
 
 }
