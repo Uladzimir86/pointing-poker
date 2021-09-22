@@ -4,6 +4,7 @@ import editIcon from '../../assets/icons/edit-card-icon.png'
 import deleteIcon from '../../assets/icons/delete-card-icon.png'
 import closeIcon from '../../assets/icons/close-card-icon.png'
 import {
+  
   CustomIssueInterface,
   IStore,
   locationPath,
@@ -20,9 +21,10 @@ import {
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
 
 
-const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link}) => {
-  
-  const currentCard = false
+const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link, id}) => {
+  const idCurrentIssue : string = useSelector((state:IStore)=> state.game.idCurrentIssue)
+
+
   const editButton = true
   let closeButton = false
   const deleteButton = true
@@ -31,6 +33,7 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link}) => {
     link: link,
     title: title,
     priority: priority,
+    id: id
   })
   const currentLocation: string = useSelector((state: IStore) => state.location)
   if(currentLocation===locationPath.startPage){
@@ -48,9 +51,9 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link}) => {
   }
 
   return (
-    <div className={`custom-issue ${currentCard ? 'current-card' : ''}`}>
+    <div className={`custom-issue ${id ===idCurrentIssue ? 'current-card' : ''} `}>
       <div className="content-text">
-        {currentCard && <div className="selected-issue-text">CURRENT</div>}
+        {id ===idCurrentIssue   && <div className="selected-issue-text">current</div>}
         {title && (
           <a className="main-text" href={link}>
             {title}
