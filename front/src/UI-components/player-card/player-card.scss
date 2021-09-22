@@ -1,0 +1,68 @@
+.player-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 75px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  line-break: 125%;
+  margin: 10px;
+  box-sizing: border-box;
+  &__photo-container {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #60dabf;
+    margin-right: 20px;
+  }
+  &__photo {
+    display: block;
+    margin: auto;
+    width: fit-content;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  &__text-container {
+    position: relative;
+    padding-top: 10px;
+  }
+  &__name {
+    font-size: 28px;
+    font-weight: 300;
+    overflow: hidden;
+    max-width: 170px;
+    max-height: 35px;
+    white-space: nowrap;
+  }
+  &__name-above {
+    position: absolute;
+    top: 0px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 2px;
+    min-width: 35px;
+  }
+  &__position {
+    font-size: 10px;
+    font-weight: 300;
+    margin-left: 2px;
+    overflow: hidden;
+  }
+  &__button {
+    top: 25px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    background-image: url('../../assets/icons/block_black_button.png');
+    background-size: contain;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
