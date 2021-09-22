@@ -1,24 +1,28 @@
 import { ActionIssues, DELETE_ISSUE, EDIT_ISSUE } from './actionsIssue'
 import { CREATE_NEW_ISSUE } from './actionsIssue'
 import { CustomIssueInterface, IIssues } from './../../../common/interfaces'
+import { createID } from '../../../common/randomId'
 
 export const arrOfIssues: CustomIssueInterface[] = [
   {
     title: 'issue 14',
     link: 'https://react-hook-form.com/api/useform',
     priority: 'Medium',
+    id: createID()
   },
   {
     title: 'issue 06',
     link: 'https://react-hook-form.com/api/useform',
     priority: 'High',
+    id: createID()
   },
 ]
 
 export const initialEditIssueCard :CustomIssueInterface={
   link: '',
   title: '',
-  priority: 'Low'
+  priority: 'Low',
+  id: ''
 }
 
 export const initialStateIssues: IIssues = {

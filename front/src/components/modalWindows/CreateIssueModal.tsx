@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CustomIssueInterface, IStore } from '../../common/interfaces'
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
 import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
+import { createID } from '../../common/randomId'
 
 export const CreateIssueModal: React.FC = () => {
   const dispatch = useDispatch()
@@ -30,6 +31,7 @@ export const CreateIssueModal: React.FC = () => {
     (state: IStore) => state.issues.editIssueCard
   )
   const onSubmit: SubmitHandler<CustomIssueInterface> = (data) => {
+    data.id = createID()
     setResult(data)
     if (isEditIssue) {
       dispatch(deleteIssue(editIssueCard.title))

@@ -117,6 +117,7 @@ export const setRoundResult: AppThunk = (dispatch, getState) => {
   const playerId = getState().playerCards.id;
   // const issue = getState().issues;  !!!need flag
   // const card = getState().  !!!need flag
+  console.log('setRoundResult')
   const issue = 0;
   const card = getState().game.selectedCardVote.idCard;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, issue, card }))
