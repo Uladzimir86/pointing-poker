@@ -10,7 +10,7 @@ interface CustomCardPropsInterface {
   centerValue?: string
   coffee?: boolean
   isBtns?: boolean
-  id: string
+  id: number
   inGameSelected?: boolean
   isStatiscics?: boolean
 }

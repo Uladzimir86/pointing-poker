@@ -135,7 +135,7 @@ export const GamePage: React.FC = () => {
                     key={index}
                     centerValue={'SP'}
                     values={String(card)}
-                    id={String(index)}
+                    id={index}
                     isBtns={true}
                   />
                 ))}
@@ -148,11 +148,11 @@ export const GamePage: React.FC = () => {
             <div className="statistics_title"></div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
-                <CustomCardGame inGameSelected coffee id={idCoffee}/>
+                <CustomCardGame inGameSelected coffee id={0}/>
                 {cardStorage.map((card, index) => {
                   if (index) {
                     return(
-                      <CustomCardGame id = {String(index)} key={index}
+                      <CustomCardGame id = {index} key={index}
                       inGameSelected
                     />
                   )}
