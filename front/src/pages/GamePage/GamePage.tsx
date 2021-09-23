@@ -100,12 +100,13 @@ export const GamePage: React.FC = () => {
             </div>
             <div id="timer" className="game_field__playArea_timer">
               <TimerElement minutes={timeRound} stopTimer={stopTimer}/>
-              <Button
+              {typeUser===TypeUser.master && <Button
                 text={startBtnText}
                 styleButton={'primary'}
                 onClick={handleRunRound}
                 disabled={isTimerActive}
-              />
+              /> 
+              }
             </div>
 
             <div className="game_field__playArea_nextIssue">

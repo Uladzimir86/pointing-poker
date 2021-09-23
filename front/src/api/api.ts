@@ -53,6 +53,7 @@ export const setSession = (idSession?: string): AppThunk => {
             console.log('SET_ROUND_RESULT',  data.issue)
             console.log(data.score)
             console.log( data.statistic)
+            dispatch({ type: 'SET_STAT', payload: data.statistic })
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
             break
         }
