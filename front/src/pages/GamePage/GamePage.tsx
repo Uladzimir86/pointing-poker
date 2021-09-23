@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
+import { CustomIssueInterface, IStore, TypeUser } from '../../common/interfaces'
+import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
+import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
 import { restartRound, restartTimer, setRoundStart } from '../../api/api'
-import { IStore, TypeUser } from '../../common/interfaces'
-import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { RootState } from '../../store/reducers'
-import { SettingsState } from '../../types/reducers/game-settings'
 import { Button } from '../../UI-components/Button/button'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
@@ -16,11 +16,19 @@ import { ResultVoiting } from './ResultVoiting'
 import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
 
 
-const idCoffee : number = 98
+const idCoffee : string = '0'
 
 export const GamePage: React.FC = () => {
 
   const timeRound = 2
+  const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
+/* 
+
+  const issue = issues.map(({ title, link, priority, id }) => {
+    return (
+      <CustomIssue key={title} priority={priority} title={title} link={link} id={id}/>
+    )
+  }) */
 
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
@@ -126,7 +134,7 @@ export const GamePage: React.FC = () => {
                     key={index}
                     centerValue={'SP'}
                     values={String(card)}
-                    id={index}
+                    id={String(index)}
                     isBtns={true}
                   />
                 ))}
@@ -143,7 +151,7 @@ export const GamePage: React.FC = () => {
                 {cardStorage.map((card, index) => {
                   if (index) {
                     return(
-                      <CustomCardGame id = {index} key={index}
+                      <CustomCardGame id = {String(index)} key={index}
                       inGameSelected
                     />
                   )}
@@ -153,7 +161,7 @@ export const GamePage: React.FC = () => {
               </div>
             </div>
           </div>}
-          {typeUser===TypeUser.master&& 
+          {typeUser===TypeUser.member&& 
           <ResultVoiting/>}
         </div>
         <ScoreComponent />

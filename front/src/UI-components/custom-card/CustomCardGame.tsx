@@ -10,8 +10,9 @@ interface CustomCardPropsInterface {
   centerValue?: string
   coffee?: boolean
   isBtns?: boolean
-  id: number
+  id: string
   inGameSelected?: boolean
+  isStatiscics?: boolean
 }
 
 const CustomCardGame: FC<CustomCardPropsInterface> = ({
@@ -20,6 +21,7 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
   isBtns,
   id,
   inGameSelected,
+  isStatiscics
 }) => {
   const dispatch = useDispatch()
   let topAndBottomValues: string | 'Coffee' = '0'
@@ -30,24 +32,25 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
   if (id !== undefined) {
-    let elementCardStorage: string = cardStorage[id]
+    let elementCardStorage: string = cardStorage[Number(id)]
     topAndBottomValues = coffee ? 'Coffee' : elementCardStorage
   }
   const shortScoreType: string = useSelector(
     (state: IStore) => state.settings.shortScoreType
   )
   const handleClick = () => {
-    console.log(id)
+    if(isStatiscics) return
     if (id !== undefined) {
       dispatch(
         setSelectedCard({ isSelected: !selectedCard.isSelected, idCard: id })
       )
     }
   }
+
   return (
     <div
       className={`custom-card ${
-        selectedCard.idCard === id /* && selectedCard.isSelected */
+        selectedCard.idCard === id && !isStatiscics
           ? 'selected-card'
           : ''
       }`}
@@ -62,7 +65,7 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
         {shortScoreType !== '' ? shortScoreType : coffee ? '' : 'PP'}
       </div>
       <div className="lower-value">{topAndBottomValues}</div>
-      {selectedCard.idCard === id /* && selectedCard.isSelected */ ? (
+      {selectedCard.idCard === id && !isStatiscics ? (
         <div className="check-mark"></div>
       ) : null}
     </div>
