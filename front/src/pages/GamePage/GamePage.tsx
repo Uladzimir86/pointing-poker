@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { IStore, TypeUser } from '../../common/interfaces'
+import { CustomIssueInterface, IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
-import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
-import { SettingsState } from '../../types/reducers/game-settings'
+/* import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
+ */import { SettingsState } from '../../types/reducers/game-settings'
 import { Button } from '../../UI-components/Button/button'
-import CustomCard from '../../UI-components/custom-card/custom-card.component'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
 import PlayerCard from '../../UI-components/player-card/player-card'
@@ -13,28 +12,30 @@ import { TimerElement } from '../../UI-components/timer/timer'
 import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
-import { createID } from '../../common/randomId'
 import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
 
 
-const idCoffee : number = 98
+const idCoffee : number = 0
 
 export const GamePage: React.FC = () => {
   const timeRound = 2
+  const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
+  /* const [initialIssue, setInitialIssue]= useState<string>()
+  setInitialIssue(issues[0].id) */
+
   const [isActive, setIsActive] = useState<boolean>(false)
   const [stopTimer, onStopTimer] = useState<boolean>(true)
+
   const master = useSelector((set: IStore) => set.playerCards.playerCards[0])
   const cardStorage: number[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
-
-  const issue = arrOfIssues.map(({ title, link, priority, id }) => {
+  const issue = issues.map(({ title, link, priority, id }) => {
     return (
-      <CustomIssue key={title} priority={priority} title={title} link={link} id={createID()}/>
+      <CustomIssue key={title} priority={priority} title={title} link={link} id={id}/>
     )
   })
-
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
   return (
@@ -119,7 +120,7 @@ export const GamePage: React.FC = () => {
             <div className="statistics_cards">
               <div className="statistics_cards-card">
                 {cardStorage.map((card, index) => (
-                  <CustomCardGame id = {index} key={index}
+                  <CustomCardGame id = {index+1} key={index} 
                     inGameSelected
                   />
                 ))
@@ -128,7 +129,7 @@ export const GamePage: React.FC = () => {
               </div>
             </div>
           </div>}
-          {typeUser===TypeUser.master&& 
+          {typeUser===TypeUser.member&& 
           <ResultVoiting/>}
         </div>
         <ScoreComponent />

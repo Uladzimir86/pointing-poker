@@ -1,11 +1,6 @@
 import { SettingsState } from './../types/reducers/game-settings'
 
-export interface CustomIssueInterface {
-  link: string
-  title: string
-  priority: 'Low' | 'Medium' | 'High'
-  id: string
-}
+
 
 export interface IIssues {
   issueCard: CustomIssueInterface[]
@@ -70,12 +65,10 @@ export interface ISelectedCard {
   idCard : number
 }
 
-
-
-
 export interface IStateGame{
   selectedCardVote : ISelectedCard
   idCurrentIssue: string
+  statGame : IStatiscicsGame
 }
 
 export interface ITimer{
@@ -84,3 +77,27 @@ export interface ITimer{
   restart: boolean
 }
 
+export interface IStatiscicsRound{
+  idIssue : string
+  resultsVote : Array<number>
+}
+export interface IStatiscicsGame{
+  showStatRound : boolean
+  results: IStatiscicsRound[]
+}
+
+export interface IScoreMember {
+ members : IPlayerCard 
+ points:  number
+}
+
+export interface IScore {
+  score: IScoreMember[]
+
+}  
+  export interface CustomIssueInterface {
+    link: string
+    title: string
+    priority: 'Low' | 'Medium' | 'High'
+    id: string
+  }

@@ -3,7 +3,6 @@
 .wrapper_game {
   display: flex;
   flex-direction: column;
-  height: 88vh;
   margin: 0 auto;
   flex-wrap: wrap;
 }
@@ -137,13 +136,29 @@
     }
     &-percent {
       display: flex;
-      justify-content: center;
-      
-      &_item{
-        padding: 1.5rem;
+      padding-bottom: 6rem;
+      &_column{
         display: flex;
-        @include font-Ruda-24;
+        justify-content: center;
+        flex-direction: column;
+        &_item{
+          flex: 1 10%;
+          padding: 1.5rem;
+          display: flex;
+          @include font-Ruda-24;
+        }
+        &_card{
+          flex: 1 10%;
+          &>.custom-card:hover{
+            animation: none;
+          }
+          &>.current-card {
+            background-color: white;
+          }
+        }
       }
+      
+    
     }
   }
 }

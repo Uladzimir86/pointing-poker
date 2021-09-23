@@ -32,9 +32,9 @@ function App() {
       )}
       <Switch>
         <Route exact path="/">
-          <StartPage />
-{/*          <LobbyPage />
- */} </Route>
+{/*           <StartPage />
+ */}        <GamePage/>
+ </Route>
         <Route exact path="/lobby">
           <LobbyPage />
         </Route>
@@ -48,4 +48,3 @@ function App() {
 }
 
 export default App
-//создать ишью ид  добавить поле  и отправить в стор  ,  
