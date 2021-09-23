@@ -11,8 +11,8 @@ const initialState: SettingsState = {
   scoreType: '',
   scramMasterAsPlayer: false,
   shortScoreType: '',
-  timerMinutes: 2,
-  timerSeconds: 30,
+  timerMinutes: 0,
+  timerSeconds: 10,
   title: 'Session #1'
 }
 

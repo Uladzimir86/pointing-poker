@@ -2,7 +2,7 @@ import { IStateGame, ISelectedCard } from './../../../common/interfaces'
 import {
   ActionSetSelectedCard,
   SELECTED_CARD,
-  START_TIMER,
+  TOGGLE_TIMER,
 } from './gameActions'
 import { ActionGamePage, CURRENT_ISSUE } from './gameActions'
 
@@ -33,8 +33,7 @@ export function gameReducer(
         },
       }
     }
-    case START_TIMER:
-      return { ...state, startTimer: !state.startTimer }
+
 
     case CURRENT_ISSUE: {
       return {

@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setRoundStart } from '../../api/api'
+import { restartRound, restartTimer, setRoundStart } from '../../api/api'
 import { IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { RootState } from '../../store/reducers'
-import { arrOfIssues } from '../../store/reducers/issuesReducer/issueReducer'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { Button } from '../../UI-components/Button/button'
-import CustomCard from '../../UI-components/custom-card/custom-card.component'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
 import PlayerCard from '../../UI-components/player-card/player-card'
@@ -15,7 +13,6 @@ import { TimerElement } from '../../UI-components/timer/timer'
 import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
-import { createID } from '../../common/randomId'
 import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
 
 
@@ -31,14 +28,34 @@ export const GamePage: React.FC = () => {
   const cardStorage: string[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+  const isTimerActive = useSelector((state: RootState) => state.timer.startTimer)
+  const startBtnText: string = useSelector((state: RootState) => state.timer.startBtnText);
+  const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
 
   const dispatch = useDispatch();
+  const arrOfIssues = useSelector((state: RootState) => state.issues.issueCard);
 
-  const issue = arrOfIssues.map(({ title, link, priority, id }) => {
+  const issue = arrOfIssues.map(({ title, link, priority, id } ) => {
     return (
-      <CustomIssue key={title} priority={priority} title={title} link={link} id={createID()}/>
+      <CustomIssue key={id} priority={priority} title={title} link={link}  id = {id}/>
     )
   })
+
+  const handleRunRound = () => {
+    if (startBtnText === 'Restart Round') dispatch(restartRound);
+    else dispatch(setRoundStart);
+  }
+
+  const handleShiftIssue = () => {
+    onShiftTimer(issue.length)
+    const index = arrOfIssues.findIndex(item => item.id === currentIssue)
+    console.log(arrOfIssues)
+    if (index < arrOfIssues.length - 1) {
+      dispatch({type: 'CURRENT_ISSUE', payload: arrOfIssues[index + 1].id})
+      dispatch({type: 'TOGGLE_START_BTN_TEXT', payload: 'Run Round'})
+      dispatch(restartTimer)
+    }
+  }
 
   return (
     <div className="wrapper_game">
@@ -62,7 +79,7 @@ export const GamePage: React.FC = () => {
               {typeUser===TypeUser.master && <Button
                 text={'Stop Game'}
                 styleButton={'add'}
-                onClick={onShiftTimer(0)}
+                // onClick={onShiftTimer(0)}
               />}
               {typeUser===TypeUser.member && <Button
                 text={'Exit'}
@@ -84,17 +101,18 @@ export const GamePage: React.FC = () => {
             <div id="timer" className="game_field__playArea_timer">
               <TimerElement minutes={timeRound} stopTimer={stopTimer}/>
               <Button
-                text={'Run Round'}
+                text={startBtnText}
                 styleButton={'primary'}
-                onClick={() => dispatch(setRoundStart)}
+                onClick={handleRunRound}
+                disabled={isTimerActive}
               />
             </div>
 
             <div className="game_field__playArea_nextIssue">
-            {typeUser===TypeUser.master &&  <Button
+            {typeUser===TypeUser.master && startBtnText === 'Restart Round' && <Button
                 text={'Next Issue'}
                 styleButton={'primary'}
-                onClick={onShiftTimer(issue.length)}
+                onClick={handleShiftIssue}
               />}
              
             </div>
@@ -129,6 +147,7 @@ export const GamePage: React.FC = () => {
                       inGameSelected
                     />
                   )}
+                  return undefined;
                 })
                 }
               </div>
