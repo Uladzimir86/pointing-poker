@@ -1,9 +1,12 @@
 import { IStateGame, ISelectedCard, IStatiscicsGame } from './../../../common/interfaces'
-import { ActionGamePage, CURRENT_ISSUE, SELECTED_CARD, SET_STAT_ROUND, SHOW_STAT } from './gameActions'
+import { ActionGamePage, CURRENT_ISSUE, SELECTED_CARD, SET_STAT_ROUND, SHOW_STAT,ActionSetSelectedCard, TOGGLE_TIMER } from './gameActions'
+
+
+type gameActionsType = ActionSetSelectedCard
 
 export const initialVoteCard: ISelectedCard = {
   isSelected: false,
-  idCard: 99,
+  idCard: '99',
 }
 
 export const initialStatGame : IStatiscicsGame= {
@@ -13,8 +16,9 @@ export const initialStatGame : IStatiscicsGame= {
 
 export const initialStateGame: IStateGame = {
   selectedCardVote: initialVoteCard,
-  idCurrentIssue: '333',
-  statGame :initialStatGame
+  statGame :initialStatGame,
+  startTimer: false,
+  idCurrentIssue: '',
 }
 
 export function gameReducer(
@@ -31,6 +35,8 @@ export function gameReducer(
         },
       }
     }
+
+
     case CURRENT_ISSUE: {
       return {
         ...state,

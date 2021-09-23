@@ -19,6 +19,7 @@ import {
   toggleModalWindow,
 } from '../../store/reducers/globalReducer/globalActions'
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
+import { RootState } from '../../store/reducers'
 
 
 const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link, id}) => {
@@ -50,6 +51,7 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link, id}) => 
     dispatch(editIssue(initialEditIssueCard))
   }
 
+  
   return (
     <div className={`custom-issue ${id ===idCurrentIssue ? 'current-card' : ''} `}>
       <div className="content-text">

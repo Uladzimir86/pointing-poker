@@ -5,14 +5,14 @@ import {
 } from '../../../types/reducers/game-settings'
 
 const initialState: SettingsState = {
-  cardStorage: [1, 2, 3],
+  cardStorage: ['Coffee', '1', '2', '3', '5', '8'],
   changingCardInRoundEnd: false,
   isTimerNeeded: false,
   scoreType: '',
   scramMasterAsPlayer: false,
   shortScoreType: '',
-  timerMinutes: 2,
-  timerSeconds: 30,
+  timerMinutes: 0,
+  timerSeconds: 10,
   title: 'Session #1'
 }
 
@@ -26,8 +26,9 @@ export const gameSettingsReducer = (
     case SettingsActionTypes.UPDATE_CARDSTORAGE:
       return { ...state, cardStorage: action.payload }
     case 'SET_TITLE':
-      console.log('action.payload')
       return { ...state, title: action.payload }
+    case 'SET_SETTINGS':
+      return { ...state, ...action.payload }
 
     default:
       return state

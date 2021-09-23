@@ -16,7 +16,7 @@ export const ResultVoiting: React.FC = () => {
     (state: IStore) => state.game.statGame.results
   )
 
-  const cardStorage: number[] = useSelector(
+  const cardStorage: string[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
 

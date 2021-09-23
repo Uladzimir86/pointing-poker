@@ -12,10 +12,10 @@ const GameSettings: FC = () => {
   const [isTimerNeeded, setIsTimerNeeded] = useState(false)
   const [scoreType, setScoreType] = useState('')
   const [shortScoreType, setShortScoreType] = useState('')
-  const [timerMinutes, setTimerMinutes] = useState(2)
-  const [timerSeconds, setTimerSeconds] = useState(30)
+  const [timerMinutes, setTimerMinutes] = useState(0)
+  const [timerSeconds, setTimerSeconds] = useState(10)
 
-  const cardStorage: number[] = useSelector((state: RootState) => state.settings.cardStorage.slice())
+  const cardStorage: string[] = useSelector((state: RootState) => state.settings.cardStorage.slice())
   const dispatch = useDispatch()
 
   const smartSecondsSetter = (seconds: number) => {
@@ -169,14 +169,18 @@ const GameSettings: FC = () => {
           coffee
           isBtns={true}
         />
-        {cardStorage.map((card, index) => (
-          <CustomCard
-            key={index}
-            centerValue={shortScoreType}
-            values={String(card)}
-            id={index}
-          />
-        ))}
+        {cardStorage.map((card, index) => {
+          if (index !== 0 ) {
+            return (
+              <CustomCard
+                key={index}
+                centerValue={shortScoreType}
+                values={card}
+                id={index}
+              />
+            )
+          }
+        })}
         <CustomCard
           addCard
           isBtns

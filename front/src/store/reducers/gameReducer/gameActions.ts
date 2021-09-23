@@ -1,11 +1,12 @@
 import { ISelectedCard, IStatiscicsRound } from './../../../common/interfaces'
 export const SELECTED_CARD = 'SELECTED_CARD'
+export const TOGGLE_TIMER = 'TOGGLE_TIMER'
 export const CURRENT_ISSUE = 'CURRENT_ISSUE'
 export const SET_STAT_ROUND = 'SET_STAT_ROUND'
 export const SHOW_STAT = 'SHOW_STAT'
 
 export type ActionSetSelectedCard = {
-  type: typeof SELECTED_CARD
+  type: typeof SELECTED_CARD | typeof TOGGLE_TIMER
   payload: ISelectedCard
 }
 

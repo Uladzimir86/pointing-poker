@@ -1,7 +1,6 @@
 import { SettingsState } from './../types/reducers/game-settings'
 
 
-
 export interface IIssues {
   issueCard: CustomIssueInterface[]
   editIssueCard: CustomIssueInterface
@@ -24,12 +23,11 @@ export enum locationPath {
   gamePage = '/game',
 }
 export interface IStateGlobal {
-  modalWindow:boolean,  
-  typeModalWindow : ModalType,
-  typeUser : TypeUser,
-  isEditIssue:boolean
+  modalWindow: boolean
+  typeModalWindow: ModalType
+  typeUser: TypeUser
+  isEditIssue: boolean
 }
-
 
 export interface IStore {
   globalSettings: IStateGlobal
@@ -57,21 +55,23 @@ export interface IPlayerCard {
 }
 
 export interface IPlayer {
-  playerCards: IPlayerCard[], ws: WebSocket | null
+  playerCards: IPlayerCard[]
+  ws: WebSocket | null
 }
 
 export interface ISelectedCard {
-  isSelected : boolean
-  idCard : number
+  isSelected: boolean
+  idCard: string
 }
 
-export interface IStateGame{
-  selectedCardVote : ISelectedCard
+export interface IStateGame {
+  selectedCardVote: ISelectedCard
+  startTimer: boolean
   idCurrentIssue: string
   statGame : IStatiscicsGame
 }
 
-export interface ITimer{
+export interface ITimer {
   start: boolean
   stop: boolean
   restart: boolean
@@ -99,5 +99,5 @@ export interface IScore {
     link: string
     title: string
     priority: 'Low' | 'Medium' | 'High'
-    id: string
+    id?: string
   }
