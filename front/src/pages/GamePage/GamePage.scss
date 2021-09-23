@@ -140,8 +140,26 @@
       &_item {
         padding: 1.5rem;
         display: flex;
-        @include font-Ruda-24;
+        justify-content: center;
+        flex-direction: column;
+        &_item{
+          flex: 1 10%;
+          padding: 1.5rem;
+          display: flex;
+          @include font-Ruda-24;
+        }
+        &_card{
+          flex: 1 10%;
+          &>.custom-card:hover{
+            animation: none;
+          }
+          &>.current-card {
+            background-color: white;
+          }
+        }
       }
+      
+    
     }
   }
 }
