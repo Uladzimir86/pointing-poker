@@ -6,6 +6,7 @@ import { locationReducer } from './location/locationReducer'
 import { globalReducer } from './globalReducer/globalReducers'
 import { setAlert } from './alert/alertReducer'
 import { gameReducer } from './gameReducer/gameReducers'
+import { timerReducer } from './timerReducer/timerReducer'
 
 export const rootReducer = combineReducers({
   settings: gameSettingsReducer,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   location: locationReducer,
   alert: setAlert,
   game : gameReducer,
+  timer: timerReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

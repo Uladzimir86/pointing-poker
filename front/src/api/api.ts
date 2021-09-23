@@ -41,15 +41,19 @@ export const setSession = (idSession?: string): AppThunk => {
             if (data.issues.length) dispatch({ type: 'CURRENT_ISSUE', payload: data.issues[0].id })
             break
           case 'SET_ROUND_START':
-            dispatch({ type: 'START_TIMER' })
-            // dispatch({ type: 'SET_ISSUES', payload: data.issues })
+            dispatch({ type: 'TOGGLE_TIMER' })
+            break
+          case 'RESTART_TIMER':
+            console.log('RESTART_TIMER')
+            console.log(data.issue)
+            dispatch({ type: 'RESTART_TIMER' })
+            dispatch({ type: 'CURRENT_ISSUE', payload: data.issue })
             break
           case 'SET_ROUND_RESULT':
             console.log('SET_ROUND_RESULT',  data.issue)
             console.log(data.score)
             console.log( data.statistic)
-            // dispatch({ type: 'START_TIMER' })
-            // dispatch({ type: 'SET_ISSUES', payload: data.issues })
+            dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
             break
         }
       }
@@ -111,16 +115,27 @@ export const startGame: AppThunk = (dispatch, getState) => {
 export const setRoundStart: AppThunk = (dispatch, getState) => {
   const issue = getState().game.idCurrentIssue;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_START', issue }))
-
 }
+
+export const restartRound: AppThunk = (dispatch, getState) => {
+  const issue = getState().game.idCurrentIssue;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'RESTART_ROUND', issue}))
+}
+
+export const restartTimer: AppThunk = (dispatch, getState) => {
+  console.log('restartTimer')
+  const issue = getState().game.idCurrentIssue;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'RESTART_TIMER', issue}))
+}
+
 export const setRoundResult: AppThunk = (dispatch, getState) => {
   const playerId = getState().playerCards.id;
   // const issue = getState().issues;  !!!need flag
   // const card = getState().  !!!need flag
+  // const issue = 0;
   console.log('setRoundResult')
-  const issue = 0;
   const card = getState().game.selectedCardVote.idCard;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, issue, card }))
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card }))
 }
 
 

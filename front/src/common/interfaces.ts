@@ -4,7 +4,7 @@ export interface CustomIssueInterface {
   link: string
   title: string
   priority: 'Low' | 'Medium' | 'High'
-  id: string
+  id?: string
 }
 
 export interface IIssues {
