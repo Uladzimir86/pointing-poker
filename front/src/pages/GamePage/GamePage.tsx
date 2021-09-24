@@ -39,6 +39,7 @@ export const GamePage: React.FC = () => {
   const isTimerActive = useSelector((state: RootState) => state.timer.startTimer)
   const startBtnText: string = useSelector((state: RootState) => state.timer.startBtnText);
   const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
+  const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
 
   const dispatch = useDispatch();
   const arrOfIssues = useSelector((state: RootState) => state.issues.issueCard);
@@ -130,15 +131,27 @@ export const GamePage: React.FC = () => {
             <div className="statistics_title">Statistics:</div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
-                {cardStorage.map((card, index) => (
-                  <CustomCardGame
+                {cardStorage.map((card, index) => {
+                  if (index) {
+                    return ( 
+                      <CustomCardGame
+                        key={index}
+                        centerValue={centerCardValue}
+                        values={String(card)}
+                        id={index}
+                        isBtns={true}
+                      />
+                    )
+                  } else return (
+                    <CustomCardGame
                     key={index}
-                    centerValue={'SP'}
+                    coffee
                     values={String(card)}
                     id={index}
                     isBtns={true}
                   />
-                ))}
+                  )
+                })}
               </div>
               <div className="statistics_cards-percent"></div>
             </div>
