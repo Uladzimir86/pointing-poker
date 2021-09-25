@@ -133,7 +133,8 @@
       flex-direction: row;
       justify-content: center;
     }
-    &-percent {
+    &-results {
+      transform: scale(0.8);
       display: flex;
       justify-content: center;
 
@@ -142,24 +143,22 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        &_item{
+        &_item {
           flex: 1 10%;
           padding: 1.5rem;
           display: flex;
           @include font-Ruda-24;
         }
-        &_card{
+        &_card {
           flex: 1 10%;
-          &>.custom-card:hover{
+          & > .custom-card:hover {
             animation: none;
           }
-          &>.current-card {
+          & > .current-card {
             background-color: white;
           }
         }
       }
-      
-    
     }
   }
 }

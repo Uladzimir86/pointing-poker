@@ -7,12 +7,13 @@ const ScoreComponent: React.FC = () => {
   const arrPlayers: IPlayerCard[] = useSelector(
     (state: IStore) => state.playerCards.playerCards
   )
-  
 
+  
+  
   const player = arrPlayers.map((item, index) => {
     return (
       <div key= {index} className="score_players">
-        <div className="score_players__points">10SP</div>
+        <div className="score_players__points">{item.id}</div>
         <div className="score_players__member">
           <PlayerCard
             key={index}
@@ -32,12 +33,6 @@ const ScoreComponent: React.FC = () => {
         <span>Players:</span>
       </div>
       {player}
-      <div className="score_players">
-        <div className="score_players__points">In Progress</div>
-        <div className="score_players__member">
-          <PlayerCard />
-        </div>
-      </div>
     </div>
   )
 }

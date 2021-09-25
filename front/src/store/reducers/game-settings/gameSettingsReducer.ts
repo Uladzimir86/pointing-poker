@@ -5,7 +5,7 @@ import {
 } from '../../../types/reducers/game-settings'
 
 const initialState: SettingsState = {
-  cardStorage: ['Coffee', '1', '2', '3', '5', '8'],
+  cardStorage: ['Coffee', '1', '2', '3', '5', '9'],
   changingCardInRoundEnd: false,
   isTimerNeeded: false,
   scoreType: '',

@@ -1,4 +1,5 @@
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
+import { setStatRound } from '../store/reducers/gameReducer/gameActions'
 import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
@@ -54,6 +55,7 @@ export const setSession = (idSession?: string): AppThunk => {
             console.log(data.score)
             console.log( data.statistic)
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
+            dispatch({type: 'SET_ROUND_RESULT', payload : data.statistic})
             break
         }
       }
@@ -134,6 +136,7 @@ export const setRoundResult: AppThunk = (dispatch, getState) => {
   // const card = getState().  !!!need flag
   // const issue = 0;
   console.log('setRoundResult')
+  //dispatch({ type: 'SET_ROUND_RESULT', payload:  })
   const card = getState().game.selectedCardVote.idCard;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card }))
 }
