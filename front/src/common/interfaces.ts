@@ -61,7 +61,7 @@ export interface IPlayer {
 
 export interface ISelectedCard {
   isSelected: boolean
-  idCard: string
+  idCard: number
 }
 
 export interface IStateGame {

@@ -19,7 +19,7 @@ export const ChooseCard: React.FC = () => {
               if (card ==='Coffee') {
                   return(
                     <CustomCardGame
-                    id={String(card)}
+                    id={Number(card)}
                     key={index}
                     inGameSelected
                     coffee
@@ -31,7 +31,7 @@ export const ChooseCard: React.FC = () => {
               }
               else return (
                 <CustomCardGame
-                  id={String(card)}
+                  id={Number(card)}
                   key={index}
                   inGameSelected
                 />

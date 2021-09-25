@@ -4,17 +4,17 @@ import { ActionGamePage, CURRENT_ISSUE, SELECTED_CARD, SET_STAT_ROUND, SHOW_STAT
 
 export const initialVoteCard: ISelectedCard = {
   isSelected: false,
-  idCard: '99',
+  idCard: 99,
 }
 
 export const initialStatGame : IStatiscicsGame= {
-  results: [{idIssue: '333', resultsVote: [19,22,15,46,99,0]}],
-  showStatRound :false
+  results: [{idIssue: '', resultsVote: [/* 19,22,15,46,99,0 */]}],
+  showStatRound : true
 }
 
 export const initialStateGame: IStateGame = {
   selectedCardVote: initialVoteCard,
-  statGame :initialStatGame,
+  statGame: initialStatGame,
   startTimer: false,
   idCurrentIssue: '333',
 }
@@ -34,7 +34,6 @@ export function gameReducer(
       }
     }
 
-
     case CURRENT_ISSUE: {
       return {
         ...state,
@@ -51,8 +50,7 @@ export function gameReducer(
     case SHOW_STATISCICS: {
       return {
         ...state,
-        showStatRound :action.payload
-       
+        showStatRound: action.payload,
       }
     }
     default:

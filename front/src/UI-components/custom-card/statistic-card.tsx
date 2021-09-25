@@ -1,16 +1,14 @@
 import { FC } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { ISelectedCard, IStore } from "../../common/interfaces"
-import { setSelectedCard } from "../../store/reducers/gameReducer/gameActions"
-import { SettingsState } from "../../types/reducers/game-settings"
 import './statiscic-card.scss'
 import coffeeImg from '../../assets/icons/coffee.png'
+import { useSelector } from "react-redux"
 
 interface CustomCardPropsInterface {
     values: string
     centerValue?: string
     isBtns?: boolean
-    id: string
+    id: number
     inGameSelected?: boolean
     isStatiscics?: boolean
   }
@@ -20,19 +18,12 @@ interface CustomCardPropsInterface {
     id,
     isStatiscics
   }) => {
-    console.log(values)
     const isCoffee : boolean = values==='Coffee'? true:false 
     const topAndBottomValues: string = values==='Coffee'? 'coffee':values
     const selectedCard: ISelectedCard = useSelector(
       (state: IStore) => state.game.selectedCardVote
     )
-   /*  const cardStorage: string[] = useSelector(
-      ({ settings }: { settings: SettingsState }) => settings.cardStorage
-    ) */
-  /*   if (id !== undefined) {
-      let elementCardStorage: string = cardStorage[Number(id)]
-      topAndBottomValues = coffee ? 'Coffee' : elementCardStorage
-    } */
+
     const shortScoreType: string = useSelector(
       (state: IStore) => state.settings.shortScoreType
     )

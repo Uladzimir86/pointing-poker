@@ -6,10 +6,12 @@ import {
   IStore,
 } from '../../common/interfaces'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
+import { RootState } from '../../store/reducers'
+
 
 export const ResultVoiting: React.FC = () => {
   const showStatRound: boolean = useSelector(
-    (state: IStore) => state.game.statGame.showStatRound
+    (state: RootState) => state.game.statGame.showStatRound
   )
   const arrOfResultsRound: IStatiscicsRound[] = useSelector(
     (state: IStore) => state.game.statGame.results
@@ -36,7 +38,7 @@ export const ResultVoiting: React.FC = () => {
   const result = resultRound.map((item) => (
     <div key={item.valueCard} className="statistics_cards-results_column">
       <div className="statistics_cards-results_column_card">
-        {<StatiscicCard id={item.valueCard} values={item.valueCard} />}
+        {<StatiscicCard id={Number(item.valueCard)} values={item.valueCard} />}
       </div>
       <div className="statistics_cards-results_column_percent">
         <h4>{item.percent}%</h4>
