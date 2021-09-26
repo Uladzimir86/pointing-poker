@@ -14,9 +14,8 @@ import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
 import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
+import { ChooseCard } from './ChooseCard'
 
-
-const idCoffee : string = '0'
 
 export const GamePage: React.FC = () => {
 
@@ -128,7 +127,7 @@ export const GamePage: React.FC = () => {
             </div>
           </div>
           {typeUser===TypeUser.master&&    <div className="statistics">
-            <div className="statistics_title">Statistics:</div>
+            <div className="statistics_title"></div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
                 {cardStorage.map((card, index) => {
@@ -157,24 +156,9 @@ export const GamePage: React.FC = () => {
             </div>
           </div>}
           {typeUser===TypeUser.member&&   
-           <div className="statistics">
-            <div className="statistics_title"></div>
-            <div className="statistics_cards">
-              <div className="statistics_cards-card">
-                <CustomCardGame inGameSelected coffee id={0}/>
-                {cardStorage.map((card, index) => {
-                  if (index) {
-                    return(
-                      <CustomCardGame id = {index} key={index}
-                      inGameSelected
-                    />
-                  )}
-                  return undefined;
-                })
-                }
-              </div>
-            </div>
-          </div>}
+           <ChooseCard/>
+           }
+         
           {typeUser===TypeUser.member&& 
           <ResultVoiting/>}
         </div>

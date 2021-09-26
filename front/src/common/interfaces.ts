@@ -79,7 +79,7 @@ export interface ITimer {
 
 export interface IStatiscicsRound{
   idIssue : string
-  resultsVote : Array<number>
+  resultsVote : number[]
 }
 export interface IStatiscicsGame{
   showStatRound : boolean
@@ -100,4 +100,12 @@ export interface IScore {
     title: string
     priority: 'Low' | 'Medium' | 'High'
     id?: string
+  }
+  export interface IStatiscics{
+    cardStat : IStatiscicsCard[]
+  }
+  export interface IStatiscicsCard{
+    percent : number 
+    valueCard : string
+
   }

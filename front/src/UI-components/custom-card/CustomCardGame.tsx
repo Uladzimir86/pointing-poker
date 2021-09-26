@@ -4,6 +4,7 @@ import './custom-card.styles.scss'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { setSelectedCard } from '../../store/reducers/gameReducer/gameActions'
 import { ISelectedCard, IStore } from '../../common/interfaces'
+import coffeeImg from '../../assets/icons/coffee.png'
 
 interface CustomCardPropsInterface {
   values?: string
@@ -36,9 +37,7 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
     let elementCardStorage: string = cardStorage[Number(id)]
     topAndBottomValues = coffee ? 'Coffee' : elementCardStorage
   }
-  // const shortScoreType: string = useSelector(
-  //   (state: IStore) => state.settings.shortScoreType
-  // )
+ 
   const handleClick = () => {
     if(isStatiscics) return
     if (id !== undefined) {

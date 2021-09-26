@@ -1,4 +1,5 @@
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
+import { setStatRound } from '../store/reducers/gameReducer/gameActions'
 import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
@@ -60,6 +61,7 @@ export const setSession = (idSession?: string): AppThunk => {
             dispatch({ type: 'SET_STAT', payload: data.statistic })
             dispatch({ type: 'SET_SCORE', payload: data.score })
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
+            dispatch({type: 'SET_ROUND_RESULT', payload : data.statistic})
             break
         }
       }
