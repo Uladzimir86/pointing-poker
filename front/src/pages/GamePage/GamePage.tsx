@@ -14,9 +14,8 @@ import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
 import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
+import { ChooseCard } from './ChooseCard'
 
-
-const idCoffee : string = '0'
 
 export const GamePage: React.FC = () => {
 
@@ -39,6 +38,7 @@ export const GamePage: React.FC = () => {
   const isTimerActive = useSelector((state: RootState) => state.timer.startTimer)
   const startBtnText: string = useSelector((state: RootState) => state.timer.startBtnText);
   const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
+  const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
 
   const dispatch = useDispatch();
   const arrOfIssues = useSelector((state: RootState) => state.issues.issueCard);
@@ -108,12 +108,13 @@ export const GamePage: React.FC = () => {
             </div>
             <div id="timer" className="game_field__playArea_timer">
               <TimerElement minutes={timeRound} stopTimer={stopTimer}/>
-              <Button
+              {typeUser===TypeUser.master && <Button
                 text={startBtnText}
                 styleButton={'primary'}
                 onClick={handleRunRound}
                 disabled={isTimerActive}
-              />
+              /> 
+              }
             </div>
 
             <div className="game_field__playArea_nextIssue">
@@ -126,41 +127,38 @@ export const GamePage: React.FC = () => {
             </div>
           </div>
           {typeUser===TypeUser.master&&    <div className="statistics">
-            <div className="statistics_title">Statistics:</div>
+            <div className="statistics_title"></div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
-                {cardStorage.map((card, index) => (
-                  <CustomCardGame
+                {cardStorage.map((card, index) => {
+                  if (index) {
+                    return ( 
+                      <CustomCardGame
+                        key={index}
+                        centerValue={centerCardValue}
+                        values={String(card)}
+                        id={index}
+                        isBtns={true}
+                      />
+                    )
+                  } else return (
+                    <CustomCardGame
                     key={index}
-                    centerValue={'SP'}
+                    coffee
                     values={String(card)}
-                    id={String(index)}
+                    id={index}
                     isBtns={true}
                   />
-                ))}
+                  )
+                })}
               </div>
               <div className="statistics_cards-percent"></div>
             </div>
           </div>}
           {typeUser===TypeUser.member&&   
-           <div className="statistics">
-            <div className="statistics_title"></div>
-            <div className="statistics_cards">
-              <div className="statistics_cards-card">
-                <CustomCardGame inGameSelected coffee id={idCoffee}/>
-                {cardStorage.map((card, index) => {
-                  if (index) {
-                    return(
-                      <CustomCardGame id = {String(index)} key={index}
-                      inGameSelected
-                    />
-                  )}
-                  return undefined;
-                })
-                }
-              </div>
-            </div>
-          </div>}
+           <ChooseCard/>
+           }
+         
           {typeUser===TypeUser.member&& 
           <ResultVoiting/>}
         </div>
