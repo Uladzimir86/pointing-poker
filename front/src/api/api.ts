@@ -13,10 +13,12 @@ export const setSession = (idSession?: string): AppThunk => {
 
     if (getState().playerCards.ws)
       getState().playerCards.ws.close(1000, 'New connection...')
-    const wsConnection = new WebSocket('ws://localhost:4000')
+    const wsConnection = new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000') 
 
     wsConnection.onopen = () => {
-
+      
+      const ping = setInterval(() => wsConnection.send(JSON.stringify('ping')), 20000);
+      
       dispatch(toggleModalWindow(true))
       if (idSession) {
         wsConnection.send(
@@ -49,11 +51,13 @@ export const setSession = (idSession?: string): AppThunk => {
             console.log(data.issue)
             dispatch({ type: 'RESTART_TIMER' })
             dispatch({ type: 'CURRENT_ISSUE', payload: data.issue })
+            dispatch({ type: 'SET_SCORE', payload: null })
             break
           case 'SET_ROUND_RESULT':
             console.log('SET_ROUND_RESULT',  data.issue)
             console.log(data.score)
-            console.log( data.statistic)
+            console.log(data.statistic);
+
             dispatch({ type: 'SET_STAT', payload: data.statistic })
             dispatch({ type: 'SET_SCORE', payload: data.score })
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
@@ -65,6 +69,7 @@ export const setSession = (idSession?: string): AppThunk => {
       wsConnection.onclose = function (event) {
         if (event.wasClean) closedConnection('Connection to session closed. Reason: ' + event.reason)
         else closedConnection('Connection to session closed. Reason: Server disconnect...')
+        clearInterval(ping)
       }
     }
     wsConnection.onerror = function (err: Event) {
@@ -134,11 +139,6 @@ export const restartTimer: AppThunk = (dispatch, getState) => {
 
 export const setRoundResult: AppThunk = (dispatch, getState) => {
   const playerId = getState().playerCards.id;
-  // const issue = getState().issues;  !!!need flag
-  // const card = getState().  !!!need flag
-  // const issue = 0;
-  console.log('setRoundResult')
-  //dispatch({ type: 'SET_ROUND_RESULT', payload:  })
   const card = getState().game.selectedCardVote.idCard;
   getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card }))
 }
