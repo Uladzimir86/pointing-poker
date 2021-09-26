@@ -17,7 +17,7 @@ export const setSession = (idSession?: string): AppThunk => {
 
     wsConnection.onopen = () => {
       
-      const ping = setInterval(() => wsConnection.send(JSON.stringify('ping')), 2000);
+      const ping = setInterval(() => wsConnection.send(JSON.stringify('ping')), 20000);
       
       dispatch(toggleModalWindow(true))
       if (idSession) {
