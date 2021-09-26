@@ -7,8 +7,8 @@ import photo_member from '../../assets/icons/checkmark.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { IPlayerForm } from '../../common/interfaces'
 import {sendPlayerForm} from '../../api/api'
-import {RootState} from '../../store/index'
-import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
+import {RootState} from '../../redux/index'
+import { toggleModalWindow } from '../../redux/reducers/globalReducer/globalActions'
 
 export const ConnectLobbyModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export const ConnectLobbyModal: React.FC = () => {
             <input
               className="inputElem"
               {...register('lastName', {
-                required: true,
+                required: false,
                 pattern: {
                   value: /(^[A-Za-z-]+$)/,
                   message: 'Last name must contain only letters',
@@ -94,7 +94,7 @@ export const ConnectLobbyModal: React.FC = () => {
             <input
               className="inputElem"
               {...register('position', {
-                required: true,
+                required: false,
                 pattern: {
                   value: /(^[A-Za-z-]+$)/,
                   message: 'Invalid Job Position',

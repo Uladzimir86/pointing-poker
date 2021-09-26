@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './custom-card.styles.scss'
 import { SettingsState } from '../../types/reducers/game-settings'
-import { setSelectedCard } from '../../store/reducers/gameReducer/gameActions'
+import { setSelectedCard } from '../../redux/reducers/gameReducer/gameActions'
 import { ISelectedCard, IStore } from '../../common/interfaces'
 import coffeeImg from '../../assets/icons/coffee.png'
 

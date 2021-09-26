@@ -4,7 +4,7 @@ import img from '../../assets/icons/edit-card-icon.png';
 import PlayerCard from '../../UI-components/player-card/player-card';
 import {Button} from '../../UI-components/Button/button';
 import { useDispatch, useSelector } from 'react-redux';
-import {RootState} from '../../store/index'
+import {RootState} from '../../redux/index'
 import { IStore, TypeUser } from '../../common/interfaces';
 import { closeSession, startGame } from '../../api/api';
 

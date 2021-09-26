@@ -1,6 +1,6 @@
 import { ActionIssues, DELETE_ISSUE, EDIT_ISSUE } from './actionsIssue'
 import { CREATE_NEW_ISSUE } from './actionsIssue'
-import { CustomIssueInterface, IIssues } from './../../../common/interfaces'
+import { CustomIssueInterface, IIssues } from '../../../common/interfaces'
 import { createID } from '../../../common/randomId'
 
 export const arrOfIssues: CustomIssueInterface[] = [

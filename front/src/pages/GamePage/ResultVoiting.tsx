@@ -6,7 +6,7 @@ import {
   IStore,
 } from '../../common/interfaces'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
-import { RootState } from '../../store/reducers'
+import { RootState } from '../../redux/reducers'
 
 
 export const ResultVoiting: React.FC = () => {

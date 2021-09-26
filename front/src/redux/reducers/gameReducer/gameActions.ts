@@ -1,4 +1,4 @@
-import { ISelectedCard, IStatiscicsRound } from './../../../common/interfaces'
+import { ISelectedCard, IStatiscicsRound } from '../../../common/interfaces'
 export const SELECTED_CARD = 'SELECTED_CARD'
 export const TOGGLE_TIMER = 'TOGGLE_TIMER'
 export const CURRENT_ISSUE = 'CURRENT_ISSUE'

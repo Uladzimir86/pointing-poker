@@ -1,6 +1,6 @@
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
-import { setStatRound } from '../store/reducers/gameReducer/gameActions'
-import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
+import { setStatRound } from '../redux/reducers/gameReducer/gameActions'
+import { toggleModalWindow } from '../redux/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
 export const setSession = (idSession?: string): AppThunk => {

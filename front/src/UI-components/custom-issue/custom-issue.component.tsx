@@ -13,13 +13,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   deleteIssue,
   editIssue,
-} from '../../store/reducers/issuesReducer/actionsIssue'
+} from '../../redux/reducers/issuesReducer/actionsIssue'
 import {
   isEditIssue,
   toggleModalWindow,
-} from '../../store/reducers/globalReducer/globalActions'
-import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
-import { RootState } from '../../store/reducers'
+} from '../../redux/reducers/globalReducer/globalActions'
+import { initialEditIssueCard } from '../../redux/reducers/issuesReducer/issueReducer'
+import { RootState } from '../../redux/reducers'
 
 
 const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link, id}) => {

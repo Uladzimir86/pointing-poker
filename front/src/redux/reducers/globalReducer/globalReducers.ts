@@ -1,4 +1,4 @@
-import { IStateGlobal, TypeUser } from './../../../common/interfaces';
+import { IStateGlobal, TypeUser } from '../../../common/interfaces';
 import { ModalType } from '../../../common/interfaces'
 import {
   ActionToggleModalWindow,

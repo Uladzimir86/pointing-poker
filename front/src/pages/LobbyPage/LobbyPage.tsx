@@ -13,7 +13,7 @@ import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal
 import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import './LobbyPage.scss'
-import { RootState } from '../../store/reducers'
+import { RootState } from '../../redux/reducers'
 
 const LobbyPage: FC = () => {
   const typeModalWindow = useSelector(

@@ -1,4 +1,4 @@
-import { IStateGame, ISelectedCard, IStatiscicsGame } from './../../../common/interfaces'
+import { IStateGame, ISelectedCard, IStatiscicsGame } from '../../../common/interfaces'
 import { ActionGamePage, CURRENT_ISSUE, SELECTED_CARD, SET_STAT_ROUND, SHOW_STATISCICS,ActionSetSelectedCard, TOGGLE_TIMER } from './gameActions'
 
 

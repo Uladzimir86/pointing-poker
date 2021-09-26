@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { IPlayerCard, IStore } from '../../common/interfaces'
-import { RootState } from '../../store/reducers'
+import { RootState } from '../../redux/reducers'
 import PlayerCard from '../../UI-components/player-card/player-card'
 
 const ScoreComponent: React.FC = () => {

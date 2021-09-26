@@ -2,7 +2,7 @@ import React from 'react'
 import './modalWindow.scss'
 import '../../pages/StartPage/StartPage.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
+import { toggleModalWindow } from '../../redux/reducers/globalReducer/globalActions'
 import { IStateGlobal, IStore } from '../../common/interfaces'
 
 export const ModalWindow: React.FC = ({ children }) => {

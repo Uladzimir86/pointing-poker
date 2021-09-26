@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './player-card.scss'
 import {IPlayerCard} from '../../common/interfaces'
-import {RootState} from '../../store/index'
+import {RootState} from '../../redux/index'
 import { deletePlayerCard } from '../../api/api'
 
 const PlayerCard: React.FC<IPlayerCard> = ({

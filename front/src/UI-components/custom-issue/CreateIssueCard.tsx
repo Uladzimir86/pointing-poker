@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux'
 import { ModalType } from '../../common/interfaces'
 import './custom-issue.styles.scss'
 import addCard from "../../assets/icons/add-card.png"
-import { setTypeModalWindow, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
-import { editIssue } from '../../store/reducers/issuesReducer/actionsIssue'
-import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
+import { setTypeModalWindow, toggleModalWindow } from '../../redux/reducers/globalReducer/globalActions'
+import { editIssue } from '../../redux/reducers/issuesReducer/actionsIssue'
+import { initialEditIssueCard } from '../../redux/reducers/issuesReducer/issueReducer'
 
 const CreateIssueCard: FC = () => {
   const dispatch = useDispatch()

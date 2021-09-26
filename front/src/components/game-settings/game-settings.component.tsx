@@ -3,7 +3,7 @@ import './game-settings.styles.scss'
 import Switcher from '../../UI-components/switcher/switcher'
 import CustomCard from '../../UI-components/custom-card/custom-card.component'
 import { useDispatch, useSelector } from 'react-redux'
-import {RootState} from '../../store/index'
+import {RootState} from '../../redux/index'
 
 const GameSettings: FC = () => {
 

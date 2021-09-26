@@ -5,7 +5,7 @@ import { GamePage } from './pages/GamePage/GamePage'
 import { useHistory } from 'react-router-dom'
 import LobbyPage from './pages/LobbyPage/LobbyPage'
 import StartPage from './pages/StartPage/StartPage'
-import { RootState } from './store'
+import { RootState } from './redux'
 import Footer from './UI-components/footer/footer'
 import Header from './UI-components/header/header'
 
