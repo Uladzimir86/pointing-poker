@@ -53,8 +53,10 @@
     font-weight: 300;
     margin-left: 2px;
     overflow: hidden;
+    max-width: 170px;
   }
   &__button {
+    position: absolute;
     top: 25px;
     right: 10px;
     width: 34px;

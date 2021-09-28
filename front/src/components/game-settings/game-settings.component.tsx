@@ -10,8 +10,8 @@ const GameSettings: FC = () => {
   const [scramMasterAsPlayer, setScramMasterAsPlayer] = useState(false)
   const [changingCardInRoundEnd, setChangingCardInRoundEnd] = useState(false)
   const [isTimerNeeded, setIsTimerNeeded] = useState(false)
-  const [scoreType, setScoreType] = useState('')
-  const [shortScoreType, setShortScoreType] = useState('')
+  const [scoreType, setScoreType] = useState('story point')
+  const [shortScoreType, setShortScoreType] = useState('SP')
   const [timerMinutes, setTimerMinutes] = useState(0)
   const [timerSeconds, setTimerSeconds] = useState(10)
 
@@ -88,6 +88,7 @@ const GameSettings: FC = () => {
             required
             type="text"
             className="inputElem"
+            value={constant}
           />
         )}
       </div>

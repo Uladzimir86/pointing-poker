@@ -16,7 +16,7 @@ const player = arrPlayers.map((item, index) => {
     const id = item.id;
     return (
       <div key= {id} className="score_players">
-        <div className="score_players__points">{(checkedCards && id && checkedCards[id] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
+        <div className="score_players__points">{(checkedCards && id && checkedCards[id] && arrOfCards[checkedCards[id]] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
         <div className="score_players__member">
           <PlayerCard
             photo={item.photo}

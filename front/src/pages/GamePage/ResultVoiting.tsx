@@ -36,7 +36,7 @@ export const ResultVoiting: React.FC = () => {
     })
 
   const result = resultRound.map((item) => (
-    <div key={item.valueCard} className="statistics_cards-results_column">
+    <div key={item.valueCard} className="statistics_cards-results_column" hidden={item.percent ? false : true}>
       <div className="statistics_cards-results_column_card">
         {<StatiscicCard id={Number(item.valueCard)} values={item.valueCard} />}
       </div>
