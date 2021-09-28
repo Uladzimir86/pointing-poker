@@ -1,0 +1,34 @@
+@import '../../common/fonts.scss';
+
+.results {
+  display: flex;
+  flex-direction: column;
+  &_title {
+    @include font-Ruda-24;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 2rem;
+  }
+  &_content {
+    display: flex;
+    flex-direction: column;
+    &__round {
+        display: flex;
+        flex-direction: column;
+      &_issueTitle {
+        width: 100%;
+      }
+      &_cards{
+          display: flex;
+          flex-direction: row;
+        &_card>.custom-card:hover{
+            animation: none;
+        }
+        }
+    }
+  }
+}
+.footer{
+    position: relative;
+}

@@ -109,3 +109,12 @@ export interface IScore {
     valueCard : string
 
   }
+
+  export interface IResultCard{
+    idIssue : string
+    resultRound : IStatiscicsCard[]
+  }
+
+  export interface IResults {
+     rounds : IResultCard[]
+  }

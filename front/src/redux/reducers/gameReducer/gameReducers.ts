@@ -12,12 +12,15 @@ export const initialStatGame : IStatiscicsGame= {
   showStatRound : true
 }
 
+
 export const initialStateGame: IStateGame = {
   selectedCardVote: initialVoteCard,
   statGame: initialStatGame,
   startTimer: false,
   idCurrentIssue: '333',
 }
+
+
 
 export function gameReducer(
   state: IStateGame = initialStateGame,

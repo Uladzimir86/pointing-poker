@@ -8,17 +8,16 @@ import StartPage from './pages/StartPage/StartPage'
 import { RootState } from './redux'
 import Footer from './UI-components/footer/footer'
 import Header from './UI-components/header/header'
-
+import { ResultsPage } from './pages/ResultsPage/ResultsPage'
 
 function App() {
-
-  const history = useHistory();
+  const history = useHistory()
   const location = useSelector((state: RootState) => state.location)
   const alert = useSelector((state: RootState) => state.alert)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-      history.push(location)
+    history.push(location)
   }, [location])
 
   return (
@@ -27,19 +26,25 @@ function App() {
       {alert && (
         <div className="alert">
           <span>{alert}</span>
-          <button type="button" className="alert__btn" onClick={() => dispatch({type: 'HIDE_ALERT'})}/>
+          <button
+            type="button"
+            className="alert__btn"
+            onClick={() => dispatch({ type: 'HIDE_ALERT' })}
+          />
         </div>
       )}
       <Switch>
         <Route exact path="/">
-{          <StartPage />
-}       {/*  <GamePage/>  */}
- </Route>
+          <StartPage />
+        </Route>
         <Route exact path="/lobby">
           <LobbyPage />
         </Route>
         <Route exact path="/game">
-          <GamePage/>
+          <GamePage />
+        </Route>
+        <Route exact path="/results">
+          <ResultsPage />
         </Route>
       </Switch>
       <Footer />

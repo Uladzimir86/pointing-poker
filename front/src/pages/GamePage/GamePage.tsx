@@ -21,13 +21,6 @@ export const GamePage: React.FC = () => {
 
   const timeRound = 2
   const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
-/* 
-
-  const issue = issues.map(({ title, link, priority, id }) => {
-    return (
-      <CustomIssue key={title} priority={priority} title={title} link={link} id={id}/>
-    )
-  }) */
 
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
@@ -39,6 +32,10 @@ export const GamePage: React.FC = () => {
   const startBtnText: string = useSelector((state: RootState) => state.timer.startBtnText);
   const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
+
+  function onHandlerStopGame(){
+    dispatch({ type: 'SET_LOCATION', payload: '/results' })
+  }
 
   const dispatch = useDispatch();
   const arrOfIssues = useSelector((state: RootState) => state.issues.issueCard);
@@ -87,7 +84,7 @@ export const GamePage: React.FC = () => {
               {typeUser===TypeUser.master && <Button
                 text={'Stop Game'}
                 styleButton={'add'}
-                // onClick={onShiftTimer(0)}
+                onClick={onHandlerStopGame}
               />}
               {typeUser===TypeUser.member && <Button
                 text={'Exit'}

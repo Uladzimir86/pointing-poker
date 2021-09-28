@@ -36,12 +36,6 @@ const player = arrPlayers.map((item, index) => {
         <span>Players:</span>
       </div>
       {player}
-      {/* <div className="score_players">
-        <div className="score_players__points">In Progress</div>
-        <div className="score_players__member">
-          <PlayerCard />
-        </div>
-      </div> */}
     </div>
   )
 }

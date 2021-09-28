@@ -26,7 +26,7 @@ export const ChooseCard: React.FC = () => {
                   />
                   ) 
               //TODO why add empty card on end array??
-              }else if(index===Number(cardStorage.length-1)){
+              }else if(index===Number(cardStorage.length)){
                 return null
               }
               else return (
