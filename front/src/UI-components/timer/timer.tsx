@@ -7,8 +7,6 @@ import { SettingsState } from '../../types/reducers/game-settings'
 import './timer.scss'
 
 type PropsTimer = {
-  minutes?: number
-  seconds?: number
   stopTimer: boolean
 }
 

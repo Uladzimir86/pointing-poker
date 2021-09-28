@@ -83,7 +83,7 @@ export interface IStatiscicsRound{
 }
 export interface IStatiscicsGame{
   showStatRound : boolean
-  results: IStatiscicsRound[]
+  results: any[]
 }
 
 export interface IScoreMember {

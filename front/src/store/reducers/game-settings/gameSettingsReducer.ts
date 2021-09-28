@@ -5,12 +5,12 @@ import {
 } from '../../../types/reducers/game-settings'
 
 const initialState: SettingsState = {
-  cardStorage: ['Coffee', '1', '2', '3', '5', '9'],
+  cardStorage: ['Coffee', '1', '2', '3', '5', '8'],
   changingCardInRoundEnd: false,
   isTimerNeeded: false,
-  scoreType: '',
+  scoreType: 'story point',
   scramMasterAsPlayer: false,
-  shortScoreType: '',
+  shortScoreType: 'SP',
   timerMinutes: 0,
   timerSeconds: 10,
   title: 'Session #1'

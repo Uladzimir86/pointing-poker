@@ -131,7 +131,7 @@ export const ConnectLobbyModal: React.FC = () => {
               text={'Cancel'}
               styleButton={'add'}
               onClick={onCloseModal}
-              disabled={isConnection}
+  
             />
           </div>
         </form>

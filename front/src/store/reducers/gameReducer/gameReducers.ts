@@ -1,15 +1,27 @@
-import { IStateGame, ISelectedCard, IStatiscicsGame } from './../../../common/interfaces'
-import { ActionGamePage, CURRENT_ISSUE, SELECTED_CARD, SET_STAT_ROUND, SHOW_STATISCICS,ActionSetSelectedCard, TOGGLE_TIMER } from './gameActions'
-
+import {
+  IStateGame,
+  ISelectedCard,
+  IStatiscicsGame,
+} from './../../../common/interfaces'
+import {
+  ActionGamePage,
+  CURRENT_ISSUE,
+  SELECTED_CARD,
+  SET_STAT_ROUND,
+  SHOW_STATISTICS,
+  ActionSetSelectedCard,
+  TOGGLE_TIMER,
+} from './gameActions'
 
 export const initialVoteCard: ISelectedCard = {
   isSelected: false,
   idCard: 99,
 }
 
-export const initialStatGame : IStatiscicsGame= {
-  results: [{idIssue: '', resultsVote: [/* 19,22,15,46,99,0 */]}],
-  showStatRound : true
+export const initialStatGame: IStatiscicsGame = {
+
+  results: [],
+  showStatRound: false,
 }
 
 export const initialStateGame: IStateGame = {
@@ -40,17 +52,25 @@ export function gameReducer(
         idCurrentIssue: action.payload,
       }
     }
-
+  
     case SET_STAT_ROUND: {
       return {
         ...state,
-        stateGame : [...state.statGame.results, action.payload],
+         statGame: { ...state.statGame, results: [...state.statGame.results, ...action.payload] },
       }
     }
-    case SHOW_STATISCICS: {
+    case 'DEL_STAT_ROUND': {
+      const arr = [...state.statGame.results]
+      arr.pop()
       return {
         ...state,
-        showStatRound: action.payload,
+         statGame: { ...state.statGame, results: [...arr]},
+      }
+    }
+    case SHOW_STATISTICS: {
+      return {
+        ...state,
+        statGame: { ...state.statGame, showStatRound: action.payload },
       }
     }
     default:
