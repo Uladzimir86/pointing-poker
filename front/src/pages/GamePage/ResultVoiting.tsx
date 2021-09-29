@@ -25,6 +25,7 @@ export const ResultVoiting: React.FC = () => {
   let currentResultRound = arrOfResultsRound.filter(
     (item) => item.idIssue === idCurrentIssue
   )
+  console.log('arrOfResultsRound',arrOfResultsRound)
   let resultRound: IStatiscicsCard[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
