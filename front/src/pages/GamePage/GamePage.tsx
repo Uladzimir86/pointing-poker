@@ -45,7 +45,6 @@ export const GamePage: React.FC = () => {
     if (startBtnText === 'Restart Round') {
       dispatch(restartRound);
       dispatch({ type: 'SHOW_STATISTICS', payload: false })
-      dispatch({ type: 'DEL_STAT_ROUND'})
     }
     else dispatch(setRoundStart);
   }

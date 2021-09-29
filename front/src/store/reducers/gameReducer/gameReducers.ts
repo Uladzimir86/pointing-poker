@@ -56,17 +56,17 @@ export function gameReducer(
     case SET_STAT_ROUND: {
       return {
         ...state,
-         statGame: { ...state.statGame, results: [...state.statGame.results, ...action.payload] },
+         statGame: { showStatRound: true, results: [...action.payload] },
       }
     }
-    case 'DEL_STAT_ROUND': {
-      const arr = [...state.statGame.results]
-      arr.pop()
-      return {
-        ...state,
-         statGame: { ...state.statGame, results: [...arr]},
-      }
-    }
+    // case 'DEL_STAT_ROUND': {
+    //   const arr = [...state.statGame.results]
+    //   arr.pop()
+    //   return {
+    //     ...state,
+    //      statGame: { ...state.statGame, results: [...arr]},
+    //   }
+    // }
     case SHOW_STATISTICS: {
       return {
         ...state,
