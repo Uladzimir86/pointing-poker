@@ -1,5 +1,5 @@
+import { Interface } from 'readline'
 import { SettingsState } from './../types/reducers/game-settings'
-
 
 export interface IIssues {
   issueCard: CustomIssueInterface[]
@@ -68,7 +68,7 @@ export interface IStateGame {
   selectedCardVote: ISelectedCard
   startTimer: boolean
   idCurrentIssue: string
-  statGame : IStatiscicsGame
+  statGame: IStatiscicsGame
 }
 
 export interface ITimer {
@@ -77,35 +77,36 @@ export interface ITimer {
   restart: boolean
 }
 
-export interface IStatiscicsRound{
-  idIssue : string
-  resultsVote : number[]
+export interface IStatiscicsRound {
+  idIssue: string
+  resultsVote: number[]
 }
-export interface IStatiscicsGame{
-  showStatRound : boolean
-  results: any[]
+export interface Res {
+  [key:string]: number[], 
+}
+export interface IStatiscicsGame {
+  showStatRound: boolean
+  results: Res
 }
 
 export interface IScoreMember {
- members : IPlayerCard 
- points:  number
+  members: IPlayerCard
+  points: number
 }
 
 export interface IScore {
   score: IScoreMember[]
-
-}  
-  export interface CustomIssueInterface {
-    link: string
-    title: string
-    priority: 'Low' | 'Medium' | 'High'
-    id?: string
-  }
-  export interface IStatiscics{
-    cardStat : IStatiscicsCard[]
-  }
-  export interface IStatiscicsCard{
-    percent : number 
-    valueCard : string
-
-  }
+}
+export interface CustomIssueInterface {
+  link: string
+  title: string
+  priority: 'Low' | 'Medium' | 'High'
+  id?: string
+}
+export interface IStatiscics {
+  cardStat: IStatiscicsCard[]
+}
+export interface IStatiscicsCard {
+  percent: number
+  valueCard: string
+}

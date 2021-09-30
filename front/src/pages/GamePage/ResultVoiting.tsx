@@ -9,28 +9,31 @@ import StatiscicCard from '../../UI-components/custom-card/statistic-card'
 import { RootState } from '../../store/reducers'
 
 
-export const ResultVoiting: React.FC = () => {
+export const ResultVoiting = ({idIs}:{idIs:any}) => {
   const showStatRound: boolean = useSelector(
     (state: RootState) => state.game.statGame.showStatRound
-  )
-  const arrOfResultsRound: IStatiscicsRound[] = useSelector(
-    (state: IStore) => state.game.statGame.results
-  )
+  )  
   const idCurrentIssue: string = useSelector(
     (state: IStore) => state.game.idCurrentIssue
   )
+  let ind: string = idIs;
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
   )
-  let currentResultRound = arrOfResultsRound.filter(
-    (item) => item.idIssue === idCurrentIssue
-  )
+  let resultsGame = useSelector(
+    (state: IStore) => state.game.statGame.results)
+  let arrOfResultsRound: number[] = resultsGame[ind]
+ 
+  // let currentResultRound = arrOfResultsRound.filter(
+  //   (item) => item.idIssue === idCurrentIssue
+  // )
   console.log('arrOfResultsRound',arrOfResultsRound)
+  console.log('resultsGame',resultsGame)
+  console.log('ind',ind)
   let resultRound: IStatiscicsCard[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
-      percent:
-        arrOfResultsRound[arrOfResultsRound.length - 1].resultsVote[index],
+      percent: arrOfResultsRound[index],
     }))
     .sort(function (a, b) {
       return b.percent - a.percent

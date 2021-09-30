@@ -19,7 +19,7 @@ import { ChooseCard } from './ChooseCard'
 
 export const GamePage: React.FC = () => {
 
-  const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
+  //const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
@@ -31,6 +31,7 @@ export const GamePage: React.FC = () => {
   const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
   const showStatistic = useSelector((state: RootState) => state.game.statGame.showStatRound);
+  const allStatistic = useSelector((state: RootState) => state.game.statGame.results);
 
   const dispatch = useDispatch();
   const arrOfIssues = useSelector((state: RootState) => state.issues.issueCard);
@@ -154,7 +155,16 @@ export const GamePage: React.FC = () => {
            }
          
           {showStatistic&& 
-          <ResultVoiting/>}
+         arrOfIssues.map(item => {
+          //let id=item.id?item.id : 'w' 
+          if(item.id && (item.id in allStatistic)){
+          return(
+           <><h2>{item.title}</h2>
+            <ResultVoiting idIs={item.id}/>
+           </>
+         )}})
+
+          }
         </div>
         <ScoreComponent />
       </div>

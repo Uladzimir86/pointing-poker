@@ -20,7 +20,7 @@ export const initialVoteCard: ISelectedCard = {
 
 export const initialStatGame: IStatiscicsGame = {
 
-  results: [],
+  results: {},
   showStatRound: false,
 }
 
@@ -56,7 +56,7 @@ export function gameReducer(
     case SET_STAT_ROUND: {
       return {
         ...state,
-         statGame: { showStatRound: true, results: [...action.payload] },
+         statGame: { showStatRound: true, results: action.payload },
       }
     }
     // case 'DEL_STAT_ROUND': {
