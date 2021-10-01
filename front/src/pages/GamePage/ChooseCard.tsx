@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import { SettingsState } from '../../types/reducers/game-settings'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
 
@@ -7,6 +8,7 @@ export const ChooseCard: React.FC = () => {
   const cardStorage: string[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )
+  const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
 
   return (
     <div>
@@ -19,19 +21,17 @@ export const ChooseCard: React.FC = () => {
               if (card ==='Coffee') {
                   return(
                     <CustomCardGame
-                    id={Number(card)}
+                    id={index}
                     key={index}
                     inGameSelected
                     coffee
                   />
                   ) 
-              //TODO why add empty card on end array??
-              }else if(index===Number(cardStorage.length)){
-                return null
-              }
+               }
               else return (
                 <CustomCardGame
-                  id={Number(card)}
+                  id={index}
+                  centerValue={centerCardValue}
                   key={index}
                   inGameSelected
                 />

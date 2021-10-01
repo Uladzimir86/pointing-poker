@@ -1,6 +1,5 @@
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
-import { setStatRound } from '../redux/reducers/gameReducer/gameActions'
-import { toggleModalWindow } from '../redux/reducers/globalReducer/globalActions'
+import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
 export const setSession = (idSession?: string): AppThunk => {
@@ -13,7 +12,7 @@ export const setSession = (idSession?: string): AppThunk => {
 
     if (getState().playerCards.ws)
       getState().playerCards.ws.close(1000, 'New connection...')
-    const wsConnection = new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000') 
+    const wsConnection =  new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000')//
 
     wsConnection.onopen = () => {
       
@@ -52,14 +51,16 @@ export const setSession = (idSession?: string): AppThunk => {
             dispatch({ type: 'RESTART_TIMER' })
             dispatch({ type: 'CURRENT_ISSUE', payload: data.issue })
             dispatch({ type: 'SET_SCORE', payload: null })
+            dispatch({ type: 'SHOW_STATISTICS', payload: false })
             break
           case 'SET_ROUND_RESULT':
             console.log('SET_ROUND_RESULT',  data.issue)
             console.log(data.score)
             console.log(data.statistic);
-
-            dispatch({ type: 'SET_STAT', payload: data.statistic })
-            dispatch({ type: 'SET_SCORE', payload: data.score })
+            const statistic = [{resultsVote: data.statistic, idIssue: data.issue}]
+            dispatch({ type: 'SET_STAT_ROUND', payload: statistic })
+/*             dispatch({ type: 'SHOW_STATISTICS', payload: true })
+ */            dispatch({ type: 'SET_SCORE', payload: data.score })
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
             dispatch({type: 'SET_ROUND_RESULT', payload : data.statistic})
             break
@@ -140,7 +141,8 @@ export const restartTimer: AppThunk = (dispatch, getState) => {
 export const setRoundResult: AppThunk = (dispatch, getState) => {
   const playerId = getState().playerCards.id;
   const card = getState().game.selectedCardVote.idCard;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card }))
+  const issue = getState().game.idCurrentIssue;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card, issue }))
 }
 
 

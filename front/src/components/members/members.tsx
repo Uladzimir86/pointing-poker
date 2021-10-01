@@ -3,7 +3,7 @@ import PlayerCard from '../../UI-components/player-card/player-card';
 import { ReactElement } from 'react';
 import { IPlayerCard } from '../../common/interfaces'
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/reducers';
+import { RootState } from '../../store/reducers';
 
 interface IMembers {
   arrOfMembers?: IPlayerCard[],

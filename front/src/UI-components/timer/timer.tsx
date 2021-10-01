@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setRoundResult } from '../../api/api'
 import { IStore } from '../../common/interfaces'
-import { RootState } from '../../redux/reducers'
+import { RootState } from '../../store/reducers'
 import { SettingsState } from '../../types/reducers/game-settings'
 import './timer.scss'
 
 type PropsTimer = {
-  minutes?: number
-  seconds?: number
   stopTimer: boolean
 }
 

@@ -31,11 +31,7 @@ interface CustomCardPropsInterface {
         
     return (
       <div
-        className={`custom-card ${
-          selectedCard.idCard === id && !isStatiscics
-            ? 'selected-card'
-            : ''
-        }`}
+        className="custom-card"
         id={'custom-card-' + id}
       >
         <div className="custom-card__head">

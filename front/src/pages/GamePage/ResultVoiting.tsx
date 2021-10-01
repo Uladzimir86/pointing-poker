@@ -6,39 +6,37 @@ import {
   IStore,
 } from '../../common/interfaces'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
-import { RootState } from '../../redux/reducers'
-
+import { RootState } from '../../store/reducers'
 
 export const ResultVoiting: React.FC = () => {
   const showStatRound: boolean = useSelector(
     (state: RootState) => state.game.statGame.showStatRound
   )
-  const arrOfResultsRound: IStatiscicsRound[] = useSelector(
+  const stateGameResults: IStatiscicsRound[] = useSelector(
     (state: IStore) => state.game.statGame.results
   )
-  const idCurrentIssue: string = useSelector(
-    (state: IStore) => state.game.idCurrentIssue
+  const cardStorage: string[] = useSelector(
+    (state: IStore) => state.settings.cardStorage
   )
-  let currentResultRound = arrOfResultsRound.filter(
-    (item) => item.idIssue === idCurrentIssue
-    )
-    const cardStorage: string[] = useSelector(
-      (state: IStore) => state.settings.cardStorage
-    )
-  let resultRound: IStatiscicsCard[] = cardStorage
+  let round: any[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
-      percent:
-        arrOfResultsRound[arrOfResultsRound.length - 1].resultsVote[index],
+      percent: stateGameResults[stateGameResults.length - 1].resultRound[index],
     }))
-    .sort(function (a, b) {
+    .sort(function (a: any, b: any) {
       return b.percent - a.percent
     })
+  console.log(round)
 
-  const result = resultRound.map((item) => (
-    <div key={item.valueCard} className="statistics_cards-results_column">
+  
+  const result = round.map((item) => (
+    <div
+      key={item.valueCard}
+      className="statistics_cards-results_column"
+      hidden={item.percent ? false : true}
+    >
       <div className="statistics_cards-results_column_card">
-        {<StatiscicCard id={Number(item.valueCard)} values={item.valueCard}  />}
+        {<StatiscicCard id={Number(item.valueCard)} values={item.valueCard} />}
       </div>
       <div className="statistics_cards-results_column_percent">
         <h4>{item.percent}%</h4>

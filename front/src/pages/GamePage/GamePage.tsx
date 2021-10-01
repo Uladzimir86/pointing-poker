@@ -4,7 +4,7 @@ import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
 import { restartRound, restartTimer, setRoundStart } from '../../api/api'
-import { RootState } from '../../redux/reducers'
+import { RootState } from '../../store/reducers'
 import { Button } from '../../UI-components/Button/button'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
 import CustomIssue from '../../UI-components/custom-issue/custom-issue.component'
@@ -19,9 +19,7 @@ import { ChooseCard } from './ChooseCard'
 
 export const GamePage: React.FC = () => {
 
-  const timeRound = 2
   const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
-
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
@@ -32,6 +30,7 @@ export const GamePage: React.FC = () => {
   const startBtnText: string = useSelector((state: RootState) => state.timer.startBtnText);
   const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
+  const showStatistic = useSelector((state: RootState) => state.game.statGame.showStatRound);
 
   function onHandlerStopGame(){
     dispatch({ type: 'SET_LOCATION', payload: '/results' })
@@ -47,7 +46,11 @@ export const GamePage: React.FC = () => {
   })
 
   const handleRunRound = () => {
-    if (startBtnText === 'Restart Round') dispatch(restartRound);
+    if (startBtnText === 'Restart Round') {
+      dispatch(restartRound);
+      dispatch({ type: 'SHOW_STATISTICS', payload: false })
+      dispatch({ type: 'DEL_STAT_ROUND'})
+    }
     else dispatch(setRoundStart);
   }
 
@@ -104,7 +107,7 @@ export const GamePage: React.FC = () => {
               </div>
             </div>
             <div id="timer" className="game_field__playArea_timer">
-              <TimerElement minutes={timeRound} stopTimer={stopTimer}/>
+              <TimerElement stopTimer={stopTimer}/>
               {typeUser===TypeUser.master && <Button
                 text={startBtnText}
                 styleButton={'primary'}
@@ -124,7 +127,6 @@ export const GamePage: React.FC = () => {
             </div>
           </div>
           {typeUser===TypeUser.master&&    <div className="statistics">
-            <div className="statistics_title"></div>
             <div className="statistics_cards">
               <div className="statistics_cards-card">
                 {cardStorage.map((card, index) => {
@@ -156,8 +158,8 @@ export const GamePage: React.FC = () => {
            <ChooseCard/>
            }
          
-          {typeUser===TypeUser.member&& 
-          <ResultVoiting/>}
+          {showStatistic&& 
+          <ResultVoiting/> }
         </div>
         <ScoreComponent />
       </div>

@@ -1,58 +1,64 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { IResultCard, IStatiscicsRound, IStore } from '../../common/interfaces'
-import { RootState } from '../../redux/reducers'
+import { JsxElement } from 'typescript'
+import {
+  IStatiscicsCard,
+  IStatiscicsRound,
+  IStore,
+} from '../../common/interfaces'
+import { RootState } from '../../store/reducers'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
 import './ResultsPage.scss'
 
 export const ResultsPage: React.FC = () => {
+  const issueCard = useSelector((state: RootState) => state.issues.issueCard)
   const titleGame: string = useSelector((state: IStore) => state.settings.title)
-  const arrOfIssues = useSelector((state: RootState) => state.issues.issueCard)
-
-  const objResults: IResultCard[] = [
-    {
-      idIssue: '333',
-      resultRound: [
-        { percent: 21, valueCard: '2' },
-        { percent: 22, valueCard: '5' },
-        { percent: 23, valueCard: '6' },
-      ],
-    },
-    {
-      idIssue: '533',
-      resultRound: [
-        { percent: 27, valueCard: '23' },
-        { percent: 28, valueCard: '53' },
-        { percent: 26, valueCard: '63' },
-      ],
-    },
-  ]
 
   const statisticsGame: IStatiscicsRound[] = useSelector(
     (state: IStore) => state.game.statGame.results
   )
+
+
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
   )
+  let round: any[] = cardStorage
+    .map((item, index) => ({
+      valueCard: item,
+      percent: statisticsGame[statisticsGame.length - 1].resultRound[index],
+    }))
+    .sort(function (a: any, b: any) {
+      return b.percent - a.percent
+    })
+  console.log(round)  
 
-  //const idList: string[] ;
-  //const y = objResults.filter(({idIssue}) => idList.some(idIssue))
-  const x = statisticsGame.filter(
-    ({ idIssue }, index) => arrOfIssues[index].id === idIssue
-  )
 
-  function statisticsCards(index: number): JSX.Element[]{
-    return objResults[index].resultRound.map((item) => (
-      <div key={item.valueCard} className="results_content__round_cards_card">
-        {<StatiscicCard id={Number(item.valueCard)} values={item.valueCard} />}
-        <div className="statistics_cards-results_column_percent">
-          <h4>{item.percent}%</h4>
+
+
+  function sortIdArray(id: string): JSX.Element[] {
+    
+    const filterArray = statisticsGame.filter(({ idIssue }) => idIssue === id)
+    console.log(filterArray,'filterArray')
+    
+      const filterArrayElement = filterArray[0].resultRound.sort(function (
+        a: IStatiscicsCard,
+        b: IStatiscicsCard
+      ) {
+        return b.percent - a.percent
+      })
+      return filterArrayElement.map(({ percent, valueCard }) => (
+        <div key={valueCard} className="results_content__round_cards_card">
+          {<StatiscicCard id={Number(valueCard)} values={valueCard} />}
+          <div className="statistics_cards-results_column_percent">
+            <h4>{percent}%</h4>
+          </div>
         </div>
-      </div>
-    ))
+      ))
+    
+    
   }
 
-  const results = arrOfIssues.map(({ title, link, id }, index) => {
+  const results = issueCard.map(({ title, link, id }) => {
     return (
       <div key={id} className="results_content__round">
         <div className="results_content__round_issueTitle">
@@ -66,9 +72,7 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="results_content__round_cards">
-          {statisticsCards(index)}
-        </div>
+        <div className="results_content__round_cards">{sortIdArray(id!)}</div>
       </div>
     )
   })

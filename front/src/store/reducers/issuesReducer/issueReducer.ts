@@ -14,7 +14,7 @@ export const arrOfIssues: CustomIssueInterface[] = [
     title: 'issue 06',
     link: 'https://react-hook-form.com/api/useform',
     priority: 'High',
-    id: '333'
+    id: createID()
   },
 ]
 

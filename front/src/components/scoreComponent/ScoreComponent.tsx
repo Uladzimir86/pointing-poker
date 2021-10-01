@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { IPlayerCard, IStore } from '../../common/interfaces'
-import { RootState } from '../../redux/reducers'
+import { RootState } from '../../store/reducers'
 import PlayerCard from '../../UI-components/player-card/player-card'
 
 const ScoreComponent: React.FC = () => {
@@ -16,7 +16,7 @@ const player = arrPlayers.map((item, index) => {
     const id = item.id;
     return (
       <div key= {id} className="score_players">
-        <div className="score_players__points">{(checkedCards && id && checkedCards[id] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
+        <div className="score_players__points">{(checkedCards && id && checkedCards[id] && arrOfCards[checkedCards[id]] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
         <div className="score_players__member">
           <PlayerCard
             photo={item.photo}

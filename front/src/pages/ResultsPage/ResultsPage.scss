@@ -3,6 +3,7 @@
 .results {
   display: flex;
   flex-direction: column;
+  min-height: 84vh;
   &_title {
     @include font-Ruda-24;
     display: flex;
@@ -13,6 +14,7 @@
   &_content {
     display: flex;
     flex-direction: column;
+    padding: 6rem 4.8rem;
     &__round {
         display: flex;
         flex-direction: column;
@@ -25,6 +27,9 @@
         &_card>.custom-card:hover{
             animation: none;
         }
+        &_card>.custom-card.selected-card{
+          background-color: white;
+      }
         }
     }
   }

@@ -5,7 +5,7 @@ import { Button } from '../../UI-components/Button/button'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { ConnectLobbyModal } from '../../components/modalWindows/ConnectLobbyModal'
 import { useDispatch } from 'react-redux'
-import { setTypeUser, toggleModalWindow } from '../../redux/reducers/globalReducer/globalActions'
+import { setTypeUser, toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 import { TypeUser } from '../../common/interfaces'
 import { setSession } from '../../api/api'
 

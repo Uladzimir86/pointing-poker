@@ -7,11 +7,11 @@ import {
   addNewIssue,
   deleteIssue,
   editIssue,
-} from '../../redux/reducers/issuesReducer/actionsIssue'
+} from '../../store/reducers/issuesReducer/actionsIssue'
 import { useDispatch, useSelector } from 'react-redux'
 import { CustomIssueInterface, IStore } from '../../common/interfaces'
-import { initialEditIssueCard } from '../../redux/reducers/issuesReducer/issueReducer'
-import { toggleModalWindow } from '../../redux/reducers/globalReducer/globalActions'
+import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
+import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 import { createID } from '../../common/randomId'
 
 export const CreateIssueModal: React.FC = () => {

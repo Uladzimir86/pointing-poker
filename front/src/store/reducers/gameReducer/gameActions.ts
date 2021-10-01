@@ -3,9 +3,7 @@ export const SELECTED_CARD = 'SELECTED_CARD'
 export const TOGGLE_TIMER = 'TOGGLE_TIMER'
 export const CURRENT_ISSUE = 'CURRENT_ISSUE'
 export const SET_STAT_ROUND = 'SET_STAT_ROUND'
-export const SHOW_STATISCICS = 'SHOW_STATISCICS'
-export const CREATE_RESULTS = 'CREATE_RESULTS'
-
+export const SHOW_STATISTICS = 'SHOW_STATISTICS'
 
 export type ActionSetSelectedCard = {
   type: typeof SELECTED_CARD | typeof TOGGLE_TIMER
@@ -19,11 +17,11 @@ export type ActionCurrentIssue = {
 
 export type ActionSetStatRound = {
   type: typeof SET_STAT_ROUND
-  payload: IStatiscicsRound
+  payload: IStatiscicsRound[]
 }
 
 export type ActionShowStat = {
-  type: typeof SHOW_STATISCICS
+  type: typeof SHOW_STATISTICS
   payload: boolean
 }
 
@@ -32,7 +30,7 @@ export type ActionGamePage =
   | ActionCurrentIssue
   | ActionSetStatRound
   | ActionShowStat
-  
+| { type: 'DEL_STAT_ROUND'}
 
 export const setSelectedCard = ({
   isSelected,
@@ -49,12 +47,13 @@ export const setCurrentIssue = (idIssue: string): ActionGamePage => ({
 
 export const setStatRound = ({
   idIssue,
-  resultsVote,
+  resultRound,
 }: IStatiscicsRound): ActionGamePage => ({
   type: SET_STAT_ROUND,
-  payload: { idIssue, resultsVote },
+  payload: [{ idIssue, resultRound }],
 })
 
-export const showStatiscics = ( status : boolean) :ActionShowStat => ({
-  type: SHOW_STATISCICS, payload: status
+export const showStatiscics = (status: boolean): ActionShowStat => ({
+  type: SHOW_STATISTICS,
+  payload: status,
 })

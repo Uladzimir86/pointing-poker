@@ -77,26 +77,22 @@ export interface ITimer {
   restart: boolean
 }
 
-export interface IStatiscicsRound{
-  idIssue : string
-  resultsVote : number[]
-}
 export interface IStatiscicsGame{
-  showStatRound : boolean
   results: IStatiscicsRound[]
+  showStatRound : boolean
 }
 
 export interface IScoreMember {
- members : IPlayerCard 
+  members : IPlayerCard 
  points:  number
 }
 
 export interface IScore {
   score: IScoreMember[]
-
+  
 }  
-  export interface CustomIssueInterface {
-    link: string
+export interface CustomIssueInterface {
+  link: string
     title: string
     priority: 'Low' | 'Medium' | 'High'
     id?: string
@@ -107,14 +103,20 @@ export interface IScore {
   export interface IStatiscicsCard{
     percent : number 
     valueCard : string
-
+    
   }
-
+  
   export interface IResultCard{
     idIssue : string
-    resultRound : IStatiscicsCard[]
+    resultsVote: IStatiscicsCard[]
   }
 
   export interface IResults {
      rounds : IResultCard[]
-  }
+    }
+    export interface IStatiscicsRound{
+      idIssue : string
+      resultRound : IStatiscicsCard[]
+    }
+
+    
