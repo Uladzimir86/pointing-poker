@@ -2,8 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { JsxElement } from 'typescript'
 import {
+  IResponse,
+  IResultsVote,
   IStatiscicsCard,
-  IStatiscicsRound,
   IStore,
 } from '../../common/interfaces'
 import { RootState } from '../../store/reducers'
@@ -14,23 +15,23 @@ export const ResultsPage: React.FC = () => {
   const issueCard = useSelector((state: RootState) => state.issues.issueCard)
   const titleGame: string = useSelector((state: IStore) => state.settings.title)
 
-  const statisticsGame: IStatiscicsRound[] = useSelector(
+  const statisticsGame: IResponse[] = useSelector(
     (state: IStore) => state.game.statGame.results
   )
-
+    
 
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
   )
-  let round: any[] = cardStorage
+  let round: IStatiscicsCard[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
-      percent: statisticsGame[statisticsGame.length - 1].resultRound[index],
+      percent: index,
     }))
     .sort(function (a: any, b: any) {
       return b.percent - a.percent
     })
-  console.log(round)  
+  console.log(round, statisticsGame)  
 
 
 

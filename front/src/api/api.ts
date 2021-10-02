@@ -57,10 +57,10 @@ export const setSession = (idSession?: string): AppThunk => {
             console.log('SET_ROUND_RESULT',  data.issue)
             console.log(data.score)
             console.log(data.statistic);
-            const statistic = [{resultsVote: data.statistic, idIssue: data.issue}]
-            dispatch({ type: 'SET_STAT_ROUND', payload: statistic })
-/*             dispatch({ type: 'SHOW_STATISTICS', payload: true })
- */            dispatch({ type: 'SET_SCORE', payload: data.score })
+            // const statistic = [{resultsVote: data.statistic, idIssue: data.issue}]
+            dispatch({ type: 'SET_STAT_ROUND', payload: data.statistic })
+            // dispatch({ type: 'SHOW_STATISTICS', payload: true })
+            dispatch({ type: 'SET_SCORE', payload: data.score })
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
             dispatch({type: 'SET_ROUND_RESULT', payload : data.statistic})
             break

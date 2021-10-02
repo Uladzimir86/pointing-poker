@@ -49,7 +49,6 @@ export const GamePage: React.FC = () => {
     if (startBtnText === 'Restart Round') {
       dispatch(restartRound);
       dispatch({ type: 'SHOW_STATISTICS', payload: false })
-      dispatch({ type: 'DEL_STAT_ROUND'})
     }
     else dispatch(setRoundStart);
   }
@@ -158,8 +157,8 @@ export const GamePage: React.FC = () => {
            <ChooseCard/>
            }
          
-          {showStatistic&& 
-          <ResultVoiting/> }
+         {/*  {showStatistic&& 
+          <ResultVoiting/> } */}
         </div>
         <ScoreComponent />
       </div>

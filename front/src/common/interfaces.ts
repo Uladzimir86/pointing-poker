@@ -35,7 +35,10 @@ export interface IStore {
   issues: IIssues
   playerCards: IPlayer
   location: string
+  alert: any
   game: IStateGame
+  timer : ITimer
+  score: any
 }
 
 export interface IPlayerForm {
@@ -78,7 +81,7 @@ export interface ITimer {
 }
 
 export interface IStatiscicsGame{
-  results: IStatiscicsRound[]
+  results: IResponseResults[]
   showStatRound : boolean
 }
 
@@ -119,4 +122,12 @@ export interface CustomIssueInterface {
       resultRound : IStatiscicsCard[]
     }
 
-    
+   export interface IResultsVote {
+     resultsVote : number[]
+     idIssue : string
+   }
+
+   export interface IResponseResults {
+    idIssue : string
+    resultsVote : number[]
+   }

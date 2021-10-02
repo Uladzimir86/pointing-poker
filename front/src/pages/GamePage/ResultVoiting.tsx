@@ -12,24 +12,28 @@ export const ResultVoiting: React.FC = () => {
   const showStatRound: boolean = useSelector(
     (state: RootState) => state.game.statGame.showStatRound
   )
-  const stateGameResults: IStatiscicsRound[] = useSelector(
+  const arrOfResultsRound: IStatiscicsRound[] = useSelector(
     (state: IStore) => state.game.statGame.results
   )
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
   )
-  let round: any[] = cardStorage
+  let currentResultRound = arrOfResultsRound.filter(
+    (item) => item.idIssue === '5'
+  )
+  console.log('arrOfResultsRound',arrOfResultsRound)
+  let resultRound: any[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
-      percent: stateGameResults[stateGameResults.length - 1].resultRound[index],
+      percent: arrOfResultsRound[arrOfResultsRound.length - 1].resultRound[index],
     }))
     .sort(function (a: any, b: any) {
       return b.percent - a.percent
     })
-  console.log(round)
+  console.log(resultRound)
 
   
-  const result = round.map((item) => (
+  const result = resultRound.map((item) => (
     <div
       key={item.valueCard}
       className="statistics_cards-results_column"

@@ -9,8 +9,7 @@ import {
   SELECTED_CARD,
   SET_STAT_ROUND,
   SHOW_STATISTICS,
-  ActionSetSelectedCard,
-  TOGGLE_TIMER,
+
 } from './gameActions'
 
 export const initialVoteCard: ISelectedCard = {
@@ -20,8 +19,10 @@ export const initialVoteCard: ISelectedCard = {
 
 export const initialStatGame: IStatiscicsGame = {
 
-  results: [
-    {
+  results: [ {resultsVote : [1,3,4],
+    
+    idIssue: '333'},
+    /* {
       resultRound: [
         { percent: 21, valueCard: '2' },
         { percent: 22, valueCard: '5' },
@@ -36,8 +37,8 @@ export const initialStatGame: IStatiscicsGame = {
         { percent: 26, valueCard: '63' },
       ],
       idIssue: '533',
-    },
-  ],
+    },*/
+  ], 
   showStatRound: false,
 }
 
@@ -76,17 +77,17 @@ export function gameReducer(
     case SET_STAT_ROUND: {
       return {
         ...state,
-         statGame: { ...state.statGame, results: [...state.statGame.results, ...action.payload] },
+         statGame: { showStatRound: true, results: [...action.payload] },
       }
     }
-    case 'DEL_STAT_ROUND': {
-      const arr = [...state.statGame.results]
-      arr.pop()
-      return {
-        ...state,
-         statGame: { ...state.statGame, results: [...arr]},
-      }
-    }
+    // case 'DEL_STAT_ROUND': {
+    //   const arr = [...state.statGame.results]
+    //   arr.pop()
+    //   return {
+    //     ...state,
+    //      statGame: { ...state.statGame, results: [...arr]},
+    //   }
+    // }
     case SHOW_STATISTICS: {
       return {
         ...state,
