@@ -9,7 +9,8 @@ import {
   SELECTED_CARD,
   SET_STAT_ROUND,
   SHOW_STATISTICS,
-
+  ActionSetSelectedCard,
+  TOGGLE_TIMER,
 } from './gameActions'
 
 export const initialVoteCard: ISelectedCard = {

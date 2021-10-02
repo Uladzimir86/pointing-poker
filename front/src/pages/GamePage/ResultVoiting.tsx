@@ -1,31 +1,27 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {
-  IStatiscicsCard,
-  IStatiscicsRound,
+  IResponseResults,
   IStore,
 } from '../../common/interfaces'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
-import { RootState } from '../../store/reducers'
 
 export const ResultVoiting: React.FC = () => {
   const showStatRound: boolean = useSelector(
-    (state: RootState) => state.game.statGame.showStatRound
+    (state: IStore) => state.game.statGame.showStatRound
   )
-  const arrOfResultsRound: IStatiscicsRound[] = useSelector(
+  const arrOfResultsRound: IResponseResults[] = useSelector(
     (state: IStore) => state.game.statGame.results
   )
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
   )
-  let currentResultRound = arrOfResultsRound.filter(
-    (item) => item.idIssue === '5'
-  )
+
   console.log('arrOfResultsRound',arrOfResultsRound)
   let resultRound: any[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
-      percent: arrOfResultsRound[arrOfResultsRound.length - 1].resultRound[index],
+      percent: arrOfResultsRound[arrOfResultsRound.length - 1].resultsVote[index],
     }))
     .sort(function (a: any, b: any) {
       return b.percent - a.percent
@@ -52,7 +48,7 @@ export const ResultVoiting: React.FC = () => {
     <>
       {showStatRound ? (
         <>
-          <div className="statistics_title">Statistics:</div>
+          <div className="statistics_title">Voting results:</div>
           <div className="statistics_cards-results">{result}</div>
         </>
       ) : null}

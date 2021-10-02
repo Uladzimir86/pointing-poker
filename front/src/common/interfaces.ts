@@ -60,6 +60,7 @@ export interface IPlayerCard {
 export interface IPlayer {
   playerCards: IPlayerCard[]
   ws: WebSocket | null
+  id : number
 }
 
 export interface ISelectedCard {

@@ -28,9 +28,9 @@ export const GamePage: React.FC = () => {
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
   const isTimerActive = useSelector((state: RootState) => state.timer.startTimer)
   const startBtnText: string = useSelector((state: RootState) => state.timer.startBtnText);
-  const currentIssue = useSelector((state: RootState) => state.game.idCurrentIssue);
+  const currentIssue = useSelector((state: IStore) => state.game.idCurrentIssue);
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
-  const showStatistic = useSelector((state: RootState) => state.game.statGame.showStatRound);
+  const showStatistic = useSelector((state: IStore) => state.game.statGame.showStatRound);
 
   function onHandlerStopGame(){
     dispatch({ type: 'SET_LOCATION', payload: '/results' })
@@ -157,8 +157,8 @@ export const GamePage: React.FC = () => {
            <ChooseCard/>
            }
          
-         {/*  {showStatistic&& 
-          <ResultVoiting/> } */}
+        {showStatistic&& 
+          <ResultVoiting/> }
         </div>
         <ScoreComponent />
       </div>
