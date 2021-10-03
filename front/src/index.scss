@@ -1,5 +1,5 @@
 :root {
-  font-size: 10px;
+  font-size: 8px;
 }
 body {
   margin: 0;
@@ -67,4 +67,9 @@ label {
     border-color: red;
     border-radius: 50%;
   }
+}
+
+.container{
+  display: flex;
+  justify-content: center;
 }
