@@ -118,6 +118,10 @@ export const closeSession =
         JSON.stringify({ type: 'CLOSE_SESSION', playerId: id })
       )
 }
+export const cancelSession: AppThunk =
+  (dispatch, getState) => {
+    getState().playerCards.ws?.close(1000, 'Cancel session...')
+}
 
 export const startGame: AppThunk = (dispatch, getState) => {
   const settings = getState().settings;

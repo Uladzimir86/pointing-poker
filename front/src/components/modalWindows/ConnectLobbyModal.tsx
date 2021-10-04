@@ -6,7 +6,7 @@ import './ConnectLobby.scss'
 import photo_member from '../../assets/icons/checkmark.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { IPlayerForm } from '../../common/interfaces'
-import {sendPlayerForm} from '../../api/api'
+import {cancelSession, sendPlayerForm} from '../../api/api'
 import {RootState} from '../../store/index'
 import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 
@@ -33,7 +33,13 @@ export const ConnectLobbyModal: React.FC = () => {
   }
 
   const onCloseModal = () => {
-    dispatch(toggleModalWindow(false))
+    dispatch(toggleModalWindow(false));
+    dispatch(cancelSession);
+    console.log('onCloseModal')
+  }
+  const cancelCurrentSession = () => {
+    onCloseModal();
+    dispatch(cancelSession);
   }
 
   return (
@@ -130,7 +136,7 @@ export const ConnectLobbyModal: React.FC = () => {
             <Button
               text={'Cancel'}
               styleButton={'add'}
-              onClick={onCloseModal}
+              onClick={cancelCurrentSession}
   
             />
           </div>
