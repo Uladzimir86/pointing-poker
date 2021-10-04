@@ -11,22 +11,41 @@ const ScoreComponent: React.FC = () => {
 const checkedCards = useSelector((state: RootState) => state.score)
 const arrOfCards = useSelector((state: RootState) => state.settings.cardStorage)
 const centerOfCards = useSelector((state: RootState) => state.settings.shortScoreType)
+const currentPlayerId = useSelector((state: RootState) => state.playerCards.id)
+const masterAsPlayer = useSelector((state: RootState) => state.settings.scramMasterAsPlayer)
 
 const player = arrPlayers.map((item, index) => {
     const id = item.id;
-    return (
-      <div key= {id} className="score_players">
-        <div className="score_players__points">{(checkedCards && id && checkedCards[id] && arrOfCards[checkedCards[id]] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
-        <div className="score_players__member">
-          <PlayerCard
-            photo={item.photo}
-            name={item.name}
-            position={item.position}
-            id={id}
-          />
+    if (masterAsPlayer) {
+      return (
+        <div key= {id} className="score_players">
+          <div className="score_players__points">{(checkedCards && id && checkedCards[id] && arrOfCards[checkedCards[id]] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
+          <div className="score_players__member">
+            <PlayerCard
+              photo={item.photo}
+              name={item.name}
+              position={item.position}
+              id={id}
+              above={id === currentPlayerId}
+            />
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else if(index !== 0) {return (
+      <div key= {id} className="score_players">
+          <div className="score_players__points">{(checkedCards && id && checkedCards[id] && arrOfCards[checkedCards[id]] && (arrOfCards[checkedCards[id]] + ' ' + centerOfCards)) ||  'UNKNOWN'}</div>
+          <div className="score_players__member">
+            <PlayerCard
+              photo={item.photo}
+              name={item.name}
+              position={item.position}
+              id={id}
+              above={id === currentPlayerId}
+            />
+          </div>
+        </div>
+    )}
+
   })
 
   return (
