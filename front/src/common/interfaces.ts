@@ -35,7 +35,11 @@ export interface IStore {
   issues: IIssues
   playerCards: IPlayer
   location: string
+  alert: any
   game: IStateGame
+  timer : ITimer
+  score: any
+  session: string
 }
 
 export interface IPlayerForm {
@@ -57,6 +61,7 @@ export interface IPlayerCard {
 export interface IPlayer {
   playerCards: IPlayerCard[]
   ws: WebSocket | null
+  id : number
 }
 
 export interface ISelectedCard {
@@ -77,26 +82,22 @@ export interface ITimer {
   restart: boolean
 }
 
-export interface IStatiscicsRound{
-  idIssue : string
-  resultsVote : number[]
-}
 export interface IStatiscicsGame{
+  results: IResponseResults[]
   showStatRound : boolean
-  results: any[]
 }
 
 export interface IScoreMember {
- members : IPlayerCard 
+  members : IPlayerCard 
  points:  number
 }
 
 export interface IScore {
   score: IScoreMember[]
-
+  
 }  
-  export interface CustomIssueInterface {
-    link: string
+export interface CustomIssueInterface {
+  link: string
     title: string
     priority: 'Low' | 'Medium' | 'High'
     id?: string
@@ -107,5 +108,28 @@ export interface IScore {
   export interface IStatiscicsCard{
     percent : number 
     valueCard : string
-
+    
   }
+  
+  export interface IResultCard{
+    idIssue : string
+    resultsVote: IStatiscicsCard[]
+  }
+
+  export interface IResults {
+     rounds : IResultCard[]
+    }
+    export interface IStatiscicsRound{
+      idIssue : string
+      resultRound : IStatiscicsCard[]
+    }
+
+   export interface IResultsVote {
+     resultsVote : number[]
+     idIssue : string
+   }
+
+   export interface IResponseResults {
+    idIssue : string
+    resultsVote : number[]
+   }

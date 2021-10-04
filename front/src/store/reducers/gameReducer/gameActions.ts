@@ -1,4 +1,4 @@
-import { ISelectedCard, IStatiscicsRound } from './../../../common/interfaces'
+import {  ISelectedCard, IStatiscicsRound } from '../../../common/interfaces'
 export const SELECTED_CARD = 'SELECTED_CARD'
 export const TOGGLE_TIMER = 'TOGGLE_TIMER'
 export const CURRENT_ISSUE = 'CURRENT_ISSUE'
@@ -47,10 +47,10 @@ export const setCurrentIssue = (idIssue: string): ActionGamePage => ({
 
 export const setStatRound = ({
   idIssue,
-  resultsVote,
+  resultRound,
 }: IStatiscicsRound): ActionGamePage => ({
   type: SET_STAT_ROUND,
-  payload: [{ idIssue, resultsVote }],
+  payload: [{ idIssue, resultRound }],
 })
 
 export const showStatiscics = (status: boolean): ActionShowStat => ({

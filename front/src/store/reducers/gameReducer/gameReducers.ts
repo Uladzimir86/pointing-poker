@@ -20,9 +20,29 @@ export const initialVoteCard: ISelectedCard = {
 
 export const initialStatGame: IStatiscicsGame = {
 
-  results: [],
+  results: [ {resultsVote : [1,3,4],
+    
+    idIssue: '333'},
+    /* {
+      resultRound: [
+        { percent: 21, valueCard: '2' },
+        { percent: 22, valueCard: '5' },
+        { percent: 23, valueCard: '6' },
+      ],
+      idIssue: '333',
+    },
+    {
+      resultRound: [
+        { percent: 27, valueCard: '23' },
+        { percent: 28, valueCard: '53' },
+        { percent: 26, valueCard: '63' },
+      ],
+      idIssue: '533',
+    },*/
+  ], 
   showStatRound: false,
 }
+
 
 export const initialStateGame: IStateGame = {
   selectedCardVote: initialVoteCard,
@@ -30,6 +50,8 @@ export const initialStateGame: IStateGame = {
   startTimer: false,
   idCurrentIssue: '333',
 }
+
+
 
 export function gameReducer(
   state: IStateGame = initialStateGame,

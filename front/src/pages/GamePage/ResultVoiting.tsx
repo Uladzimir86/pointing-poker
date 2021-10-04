@@ -1,43 +1,40 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {
-  IStatiscicsCard,
-  IStatiscicsRound,
+  IResponseResults,
   IStore,
 } from '../../common/interfaces'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
-import { RootState } from '../../store/reducers'
-
 
 export const ResultVoiting: React.FC = () => {
   const showStatRound: boolean = useSelector(
-    (state: RootState) => state.game.statGame.showStatRound
+    (state: IStore) => state.game.statGame.showStatRound
   )
-  const arrOfResultsRound: IStatiscicsRound[] = useSelector(
+  const arrOfResultsRound: IResponseResults[] = useSelector(
     (state: IStore) => state.game.statGame.results
-  )
-  const idCurrentIssue: string = useSelector(
-    (state: IStore) => state.game.idCurrentIssue
   )
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
   )
-  let currentResultRound = arrOfResultsRound.filter(
-    (item) => item.idIssue === idCurrentIssue
-  )
+
   console.log('arrOfResultsRound',arrOfResultsRound)
-  let resultRound: IStatiscicsCard[] = cardStorage
+  let resultRound: any[] = cardStorage
     .map((item, index) => ({
       valueCard: item,
-      percent:
-        arrOfResultsRound[arrOfResultsRound.length - 1].resultsVote[index],
+      percent: arrOfResultsRound[arrOfResultsRound.length - 1].resultsVote[index],
     }))
-    .sort(function (a, b) {
+    .sort(function (a: any, b: any) {
       return b.percent - a.percent
     })
+  console.log(resultRound)
 
+  
   const result = resultRound.map((item) => (
-    <div key={item.valueCard} className="statistics_cards-results_column" hidden={item.percent ? false : true}>
+    <div
+      key={item.valueCard}
+      className="statistics_cards-results_column"
+      hidden={item.percent ? false : true}
+    >
       <div className="statistics_cards-results_column_card">
         {<StatiscicCard id={Number(item.valueCard)} values={item.valueCard} />}
       </div>
@@ -51,7 +48,7 @@ export const ResultVoiting: React.FC = () => {
     <>
       {showStatRound ? (
         <>
-          <div className="statistics_title">Statistics:</div>
+          <div className="statistics_title">Voting results:</div>
           <div className="statistics_cards-results">{result}</div>
         </>
       ) : null}

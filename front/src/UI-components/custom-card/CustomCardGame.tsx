@@ -21,7 +21,6 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
   coffee,
   isBtns,
   id,
-  centerValue,
   inGameSelected,
   isStatiscics
 }) => {
@@ -30,6 +29,7 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
   const selectedCard: ISelectedCard = useSelector(
     (state: IStore) => state.game.selectedCardVote
   )
+  const centerValue : string = useSelector((state:IStore)=> state.settings.shortScoreType)
   const cardStorage: string[] = useSelector(
     ({ settings }: { settings: SettingsState }) => settings.cardStorage
   )

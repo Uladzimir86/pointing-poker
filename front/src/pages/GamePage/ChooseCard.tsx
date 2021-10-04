@@ -27,9 +27,6 @@ export const ChooseCard: React.FC = () => {
                     coffee
                   />
                   ) 
-              //TODO why add empty card on end array??
-              // }else if(index===Number(cardStorage.length-1)){
-              //   return null
                }
               else return (
                 <CustomCardGame

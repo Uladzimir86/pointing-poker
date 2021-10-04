@@ -1,3 +1,4 @@
+import { IStore } from './../../common/interfaces';
 import { AnyAction } from 'redux'
 import { RootState } from '../../store/index'
 import { ThunkAction } from 'redux-thunk'
@@ -26,7 +27,7 @@ export interface UpdateSettingsAction {
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
-  RootState,
+  /* RootState */IStore,
   unknown,
   AnyAction
 >

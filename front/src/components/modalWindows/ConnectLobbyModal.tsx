@@ -83,7 +83,7 @@ export const ConnectLobbyModal: React.FC = () => {
             <input
               className="inputElem"
               {...register('lastName', {
-                required: true,
+                required: false,
                 pattern: {
                   value: /(^[A-Za-z-]+$)/,
                   message: 'Last name must contain only letters',
@@ -99,7 +99,7 @@ export const ConnectLobbyModal: React.FC = () => {
             <input
               className="inputElem"
               {...register('position', {
-                required: true,
+                required: false,
                 pattern: {
                   value: /(^[A-Za-z-]+$)/,
                   message: 'Invalid Job Position',
