@@ -34,7 +34,6 @@ export const ConnectLobbyModal: React.FC = () => {
 
   const onCloseModal = () => {
     dispatch(toggleModalWindow(false));
-    dispatch(cancelSession);
     console.log('onCloseModal')
   }
   const cancelCurrentSession = () => {
