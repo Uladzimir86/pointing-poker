@@ -14,18 +14,18 @@ export const ModalWindow: React.FC = ({ children }) => {
   return (
     <div
       className={statusModalWindow ? 'modal active' : 'modal'}
-      onClick={(e) => {
-        e.stopPropagation()
-        dispatch(toggleModalWindow(false))
-      }}
+      // onClick={(e) => {
+      //   e.stopPropagation()
+      //   dispatch(toggleModalWindow(false))
+      // }}
     >
       <div
         className={
           statusModalWindow ? 'modal__content active' : 'modal__content'
         }
-        onClick={(e) => {
-          e.stopPropagation()
-        }}
+        // onClick={(e) => {
+        //   e.stopPropagation()
+        // }}
       >
         {children}
       </div>

@@ -39,6 +39,7 @@ export interface IStore {
   game: IStateGame
   timer : ITimer
   score: any
+  session: string
 }
 
 export interface IPlayerForm {
