@@ -20,11 +20,14 @@ export const setSession = (idSession?: string): AppThunk => {
       
       dispatch(toggleModalWindow(true))
       if (idSession) {
+        dispatch({type: 'SET_SESSION', payload: idSession})
         wsConnection.send(
           JSON.stringify({ type: 'CHECK_ID_SESSION', idSession })
         )
-      } else
-        wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession }))
+      } else {
+        dispatch({type: 'SET_SESSION', payload: String(Date.now())})
+        wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession:  getState().session}))
+      }
 
       dispatch({ type: 'WS', ws: wsConnection })
 
@@ -57,9 +60,8 @@ export const setSession = (idSession?: string): AppThunk => {
             console.log('SET_ROUND_RESULT',  data.issue)
             console.log(data.score)
             console.log(data.statistic);
-            // const statistic = [{resultsVote: data.statistic, idIssue: data.issue}]
+
             dispatch({ type: 'SET_STAT_ROUND', payload: data.statistic })
-            // dispatch({ type: 'SHOW_STATISTICS', payload: true })
             dispatch({ type: 'SET_SCORE', payload: data.score })
             dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
             dispatch({type: 'SET_ROUND_RESULT', payload : data.statistic})
@@ -115,6 +117,10 @@ export const closeSession =
         JSON.stringify({ type: 'CLOSE_SESSION', playerId: id })
       )
 }
+export const cancelSession: AppThunk =
+  (dispatch, getState) => {
+    getState().playerCards.ws?.close(1000, 'Cancel session...')
+}
 
 export const startGame: AppThunk = (dispatch, getState) => {
   const settings = getState().settings;
@@ -142,7 +148,8 @@ export const setRoundResult: AppThunk = (dispatch, getState) => {
   const playerId = getState().playerCards.id;
   const card = getState().game.selectedCardVote.idCard;
   const issue = getState().game.idCurrentIssue;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card, issue }))
+  const settings = getState().settings;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card, issue, settings }))
 }
 
 
