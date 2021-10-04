@@ -12,7 +12,7 @@ export const setSession = (idSession?: string): AppThunk => {
 
     if (getState().playerCards.ws)
       getState().playerCards.ws.close(1000, 'New connection...')
-    const wsConnection =  new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000')//
+    const wsConnection =  new WebSocket('ws://localhost:4000')//new WebSocket('wss://pp-first-attempt-ws.herokuapp.com/')//
 
     wsConnection.onopen = () => {
       
@@ -20,11 +20,14 @@ export const setSession = (idSession?: string): AppThunk => {
       
       dispatch(toggleModalWindow(true))
       if (idSession) {
+        dispatch({type: 'SET_SESSION', payload: idSession})
         wsConnection.send(
           JSON.stringify({ type: 'CHECK_ID_SESSION', idSession })
         )
-      } else
-        wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession }))
+      } else {
+        dispatch({type: 'SET_SESSION', payload: String(Date.now())})
+        wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession:  getState().session}))
+      }
 
       dispatch({ type: 'WS', ws: wsConnection })
 
@@ -142,7 +145,8 @@ export const setRoundResult: AppThunk = (dispatch, getState) => {
   const playerId = getState().playerCards.id;
   const card = getState().game.selectedCardVote.idCard;
   const issue = getState().game.idCurrentIssue;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card, issue }))
+  const settings = getState().settings;
+  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card, issue, settings }))
 }
 
 

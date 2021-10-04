@@ -24,6 +24,7 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
   const sessionTitle = useSelector((state: RootState) => state.settings.title)
   const location = useSelector((state: RootState) => state.location)
+  const session = useSelector((state: RootState) => state.session)
   const dispatch = useDispatch();
 
   
@@ -95,9 +96,9 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
         <div className="link-lobby">
           <span className="link-lobby__text">Link to lobby:</span>
           <div className="link-lobby__input">
-            <input type="text" className="inputElem" value={master.id} disabled/>
+            <input type="text" className="inputElem" value={session} disabled/>
             <Button text="Copy" type="button" styleButton="primary" onClick={() => {
-              navigator.clipboard.writeText(master.id)
+              navigator.clipboard.writeText(session)
               setIsCopied(true)
               setTimeout(() => setIsCopied(false), 1000)
               }}/>
