@@ -1,8 +1,10 @@
+@import "../../common//fonts.scss";
+/* 
 @mixin font-template {
   font-family: Ruda;
   font-style: normal;
   font-weight: bold;
-}
+} */
 
 @mixin icons {
   background-repeat: no-repeat;
@@ -14,16 +16,15 @@
 }
 
 .custom-card {
-  @include font-template();
+  @include font-Ruda-24-700;
   position: relative;
   box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4);
-  font-size: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 12%;
-  width: 100px;
-  height: 160px;
+  width: 90px;
+  height: 145px;
   margin: 10px;
   cursor: pointer;
   perspective: 25rem;
@@ -52,23 +53,24 @@
 }
 
 .upper-value {
-  @include font-template();
+  @include font-Ruda-24-700;
   align-self: flex-start;
   padding: 7px;
 }
 
 .lower-value {
-  @include font-template();
+  @include font-Ruda-24-700;
   align-self: flex-end;
   transform: rotate(180deg);
   padding: 7px;
 }
 
 .center-value {
-  @include font-template();
+  @include font-Ruda-24-700;
+
   text-transform: uppercase;
   align-self: center;
-  font-size: 3rem;
+  font-size: 24px;
 }
 
 .selected-card {

@@ -25,6 +25,9 @@
 .chatbar.disabled {
   left: 25%;
   width: 0%;
+  &>.chat{
+    display: none;
+  }
 }
 
 .chat {

@@ -1,5 +1,8 @@
 import { SettingsState } from './../types/reducers/game-settings'
 
+export interface IChatbar{
+  showChatbar: boolean
+}
 
 export interface IIssues {
   issueCard: CustomIssueInterface[]

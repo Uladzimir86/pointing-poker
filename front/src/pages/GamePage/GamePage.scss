@@ -11,10 +11,11 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-  height: 100%;
 }
 .game_field {
-  flex: 2;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
   padding: 0 6.3rem;
   padding-bottom: 80px;
   &__title {
@@ -40,11 +41,8 @@
     justify-content: center;
     flex-direction: column;
     &_title {
-      font-family: Ruda;
       font-size: 1.2rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 15px;
+     @include font-Ruda-24-700;
       letter-spacing: 0em;
       text-align: left;
       color: #00000099;
@@ -70,13 +68,7 @@
       flex-direction: column;
 
       &-title {
-        font-family: Ruda;
-        font-size: 2.4rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 3rem;
-        letter-spacing: 0em;
-        text-align: center;
+        @include font-Ruda-24-700;
       }
       &-list > .custom_issue {
         height: 78px;
@@ -117,12 +109,7 @@
   flex-direction: column;
   &_title {
     padding: 3rem 0;
-    font-family: Ruda;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 3rem;
-    letter-spacing: 0em;
+    @include font-Ruda-24-700;
   }
   &_cards {
     display: flex;
@@ -164,7 +151,9 @@
 }
 
 .score {
-  flex: 1;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
   border-left: 1px solid rgba(0, 0, 0, 0.5);
   padding: 2rem 1.5rem 2rem 3.6rem;
   &_titles {
@@ -181,21 +170,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 200px;
-      margin: 10px;
+      padding: 1.5rem;
+      margin: 1rem;
       border-radius: 5px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       box-sizing: border-box;
-      font-family: Ruda;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 3rem;
+     @include font-Ruda-24-700;
       letter-spacing: 0em;
       text-align: center;
       text-transform: uppercase;
     }
-    &__member {
+    &__member>.player-card {
+      margin: 1rem;
+      width: 215px;
     }
   }
 }

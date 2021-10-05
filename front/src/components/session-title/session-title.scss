@@ -1,8 +1,10 @@
+@import '../../common/fonts.scss';
 .session-title {
-  min-height: 300px;
+  min-height: 30rem;
   &__buttons {
     position: relative;
     margin-top: 20px;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,11 +25,7 @@
   margin-top: 20px;
   &__text,
   &__input {
-    text-align: center;
-    font-family: Ruda;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 125%;
+    @include font-Ruda-24;
     word-break: break-all;
     max-height: 1.2em;
     overflow: hidden;
@@ -36,9 +34,7 @@
     border: none;
     border-bottom: 3px solid black;
     width: max-content;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 125%;
+    @include font-Roboto-24;
     width: 80%;
   }
   &__button {
@@ -53,9 +49,7 @@
       height: 30px;
       width: 50px;
       background-image: none;
-      font-family: Ruda;
-      font-weight: 700;
-      font-size: 22px;
+      @include font-Ruda-24;
       line-height: 115%;
       color: yellow;
       border: 3px solid black;
@@ -63,40 +57,41 @@
     }
   }
   &__icon {
-    height: 24px;
-    width: 24px;
+    height: 2.4rem;
+    width: 2.4rem;
     object-fit: fill;
   }
   &__warning {
     position: absolute;
     top: 5px;
     color: red;
-    font-size: 20px;
+    @include font-Roboto-24;
   }
 }
 .scram-master {
   margin-top: 20px;
   &__text {
-    font-family: Ruda;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 125%;
+    padding: 0 2rem;
+
+    @include font-Ruda-24;
   }
 }
 .link-lobby {
   margin-top: 5px;
+  padding: 0 2rem;
   &__text {
-    font-family: Roboto;
-    font-size: 24px;
-    line-height: 125%;
-    font-style: italic;
+    @include font-Roboto-24;
   }
   &__input {
+    
     display: flex;
     align-items: center;
   }
   &__copy-confirm {
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     top: -15px;
     left: 15px;

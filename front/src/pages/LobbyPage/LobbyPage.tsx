@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import {
+  IChatbar,
   IStore,
   ModalType,
   TypeUser,
@@ -14,6 +15,10 @@ import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import './LobbyPage.scss'
 import { RootState } from '../../store/reducers'
+
+
+
+
 
 const LobbyPage: FC = () => {
   const typeModalWindow = useSelector(

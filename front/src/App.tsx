@@ -42,7 +42,7 @@ function App() {
           <StartPage />
         </Route>
         <Route exact path="/lobby">
-          <LobbyPage />
+          <LobbyPage/>
         </Route>
         <Route exact path="/game">
           <GamePage />
