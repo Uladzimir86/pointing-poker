@@ -15,14 +15,7 @@ export const sendMsgChat = ({
   payload: { userName, msg },
 })
 
-export const initialStateChat: IChatData []= [ {
-  userName: '',
-  msg: '',
-},
-{
-    userName: '2',
-    msg: '2',
-  }
+export const initialStateChat: IChatData []= [
 ]
 
 export function chatReducer(

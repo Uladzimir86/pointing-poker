@@ -16,6 +16,7 @@ export const TimerElement: React.FC<PropsTimer> = ({
   const settings:SettingsState = useSelector((state:IStore)=> state.settings)
   const isActive = useSelector((state: RootState) => state.timer.startTimer)
   const restartTimer = useSelector((state: RootState) => state.timer.restartTimer)
+  const typeUser = useSelector((state: RootState) => state.globalSettings.typeUser)
   const [time, setTime] = useState({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
   
   const dispatch = useDispatch();
@@ -42,12 +43,10 @@ export const TimerElement: React.FC<PropsTimer> = ({
             counter: state.counter - 1,
           }))
         }
+        
         if(time.counter===0){
-          
-          dispatch(setRoundResult);
-          //dispatch({type: 'TOGGLE_RESTART_ROUND'})
+          if (typeUser !== 'observer') dispatch(setRoundResult);
           dispatch({type: 'TOGGLE_TIMER'})
-          
         }
       }, 1000)
     }

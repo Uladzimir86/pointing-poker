@@ -23,6 +23,7 @@ export const GamePage: React.FC = () => {
   const [stopTimer, onStopTimer] = useState<boolean>(true)
 
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
+  const currentPlayerId = useSelector((state: RootState) => state.playerCards.id)
   const cardStorage: string[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)

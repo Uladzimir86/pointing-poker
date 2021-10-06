@@ -37,23 +37,12 @@ export const Chat: React.FC<PropsChat> = ({ showChatbar }) => {
     dispatch({ type: 'UPDATE_CHAT', payload: sendObj })
     dispatch(updateChatbar)
     console.log(findCurrentNameUser(player)!, sendObj)
-    //updateChatbar({type:'UPDATE_CHAT', payload: sendObj})
-    //setCurrentMsg('')
   }
 
   return (
     <div id="#chatbar" className={showChatbar ? 'chatbar' : 'chatbar disabled'}>
       <div className="chat">
-        <div className="chat_row">
-          <div className="chat_row__msg">
-            <div className="chat_row__msg_text">
-              Vladimir how are you? Where is the server?
-            </div>
-          </div>
-          <div className="chat_row__user">
-            <PlayerCard btnDelPlayer={false} name={'MrBean'} />
-          </div>
-        </div>
+        <div className="chat_title">Start chatting</div>
         {arrayMessages.map(({ msg, userName }) => (
           <div className="chat_row">
             <div className="chat_row__msg">
@@ -67,6 +56,7 @@ export const Chat: React.FC<PropsChat> = ({ showChatbar }) => {
         <div className="chat_control">
           <form onSubmit={(e: SyntheticEvent) => sendMsg(e)}>
             <input
+            placeholder="type your message"
               type="text"
               name="msg"
               id="input_msg"

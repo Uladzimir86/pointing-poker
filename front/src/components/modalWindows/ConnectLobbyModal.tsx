@@ -13,13 +13,20 @@ import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActi
 export const ConnectLobbyModal: React.FC = () => {
   const dispatch = useDispatch();
   
+  const [isObserver, setIsObserver] = useState(false);
   const [isConnection, setIsConnection] = useState(false);
   const location = useSelector((state: RootState) => state.location)
-
+  const user = useSelector((state: RootState) => state.globalSettings.typeUser)
+  
   useEffect(() => {
       setIsConnection(false)
       onCloseModal()
     }, [location])
+
+  useEffect(() => {
+    if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
+    else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
+    }, [isObserver, dispatch])
 
   const {
     register,
@@ -40,22 +47,20 @@ export const ConnectLobbyModal: React.FC = () => {
     onCloseModal();
     dispatch(cancelSession);
   }
-
+  
   return (
     <div className="container_ConnectLobby">
       <div className="connectLobby__title">
         <h3>Connect to lobby</h3>
-        <div className="connectLobby__title-right">
+        {user !== 'master' && <div className="connectLobby__title-right">
           <label htmlFor="connectObserver">connect as observer</label>
           {
             <Switcher
-              switcherOn={false}
-              setSwitcherOn={function (switcherState: boolean): void {
-                throw new Error('Function not implemented.')
-              }}
+              switcherOn={isObserver}
+              setSwitcherOn={setIsObserver}
             />
           }
-        </div>
+        </div>}
       </div>
       <div className="connectLobby__register">
         <form

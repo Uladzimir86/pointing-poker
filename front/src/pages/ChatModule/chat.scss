@@ -34,6 +34,9 @@
   display: flex;
   padding: 1rem;
   flex-direction: column;
+  &_title{
+    @include font-Ruda-24
+  }
   &_row {
     display: flex;
     justify-content: space-between;

@@ -116,8 +116,11 @@ export const sendPlayerForm = (playerForm: IPlayerForm): AppThunk => {
       id: Date.now(),
     }
     dispatch({ type: 'SET_PLAYER_ID', id: player.id })
-    getState().playerCards.ws?.send(
+    if (getState().globalSettings.typeUser === 'master' || getState().globalSettings.typeUser === 'member') getState().playerCards.ws?.send(
       JSON.stringify({ type: 'PUT_PLAYER', player })
+    )
+    if (getState().globalSettings.typeUser === 'observer') getState().playerCards.ws?.send(
+      JSON.stringify({ type: 'PUT_OBSERVER', player })
     )
     getState().playerCards.ws?.send(
       JSON.stringify({ type: 'SET_LOCATION', location: '/lobby' })
