@@ -14,6 +14,7 @@ const centerOfCards = useSelector((state: RootState) => state.settings.shortScor
 const currentPlayerId = useSelector((state: RootState) => state.playerCards.id)
 const masterAsPlayer = useSelector((state: RootState) => state.settings.scramMasterAsPlayer)
 
+// eslint-disable-next-line array-callback-return
 const player = arrPlayers.map((item, index) => {
     const id = item.id;
     if (masterAsPlayer) {
