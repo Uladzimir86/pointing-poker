@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CustomIssueInterface, IStore, TypeUser } from '../../common/interfaces'
+import {  IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,12 +18,9 @@ import { ChooseCard } from './ChooseCard'
 
 
 export const GamePage: React.FC = () => {
-
-  const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [stopTimer, onStopTimer] = useState<boolean>(true)
-
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
-  const currentPlayerId = useSelector((state: RootState) => state.playerCards.id)
   const cardStorage: string[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)

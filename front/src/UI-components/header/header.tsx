@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './header.scss'
 import chatImg from '../../assets/icons/chatBtn.svg'
 import { RootState } from '../../store'

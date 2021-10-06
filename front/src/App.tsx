@@ -21,6 +21,7 @@ function App() {
   useEffect(() => {
     history.push(location)
     console.log(showChatbar)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, showChatbar])
 
   return (

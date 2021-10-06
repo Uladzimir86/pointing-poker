@@ -1,6 +1,5 @@
 import {
   sendMsgChat,
-  UPDATE_CHAT,
 } from './../store/reducers/chatReducer/chatReducer'
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
 import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'

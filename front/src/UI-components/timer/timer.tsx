@@ -26,6 +26,7 @@ export const TimerElement: React.FC<PropsTimer> = ({
   // }
   useEffect(() => {
     setTime({minutes:settings.timerMinutes, seconds:settings.timerSeconds, counter: settings.timerMinutes * 60 + settings.timerSeconds})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restartTimer])
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export const TimerElement: React.FC<PropsTimer> = ({
       }, 1000)
     }
     return () => clearInterval(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, time.counter])
 
   return (

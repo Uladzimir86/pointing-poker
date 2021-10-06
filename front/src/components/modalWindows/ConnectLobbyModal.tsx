@@ -21,6 +21,7 @@ export const ConnectLobbyModal: React.FC = () => {
   useEffect(() => {
       setIsConnection(false)
       onCloseModal()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location])
 
   useEffect(() => {

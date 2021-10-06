@@ -19,7 +19,6 @@ import {
   toggleModalWindow,
 } from '../../store/reducers/globalReducer/globalActions'
 import { initialEditIssueCard } from '../../store/reducers/issuesReducer/issueReducer'
-import { RootState } from '../../store/reducers'
 
 
 const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link, id}) => {
@@ -30,6 +29,7 @@ const CustomIssue: FC<CustomIssueInterface> = ({ priority, title, link, id}) => 
   let closeButton = false
   const deleteButton = true
   const dispatch = useDispatch()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [issueCard, setIssueCard] = useState<CustomIssueInterface>({
     link: link,
     title: title,

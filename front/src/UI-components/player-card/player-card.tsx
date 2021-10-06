@@ -1,8 +1,7 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import './player-card.scss'
 import {IPlayerCard} from '../../common/interfaces'
-import {RootState} from '../../store/index'
 import { deletePlayerCard } from '../../api/api'
 
 const PlayerCard: React.FC<IPlayerCard> = ({
@@ -14,8 +13,8 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   id
 }) => {
 
-  const ws = useSelector((state: RootState) => state.playerCards.ws)
-  const dispatch = useDispatch();
+/*   const ws = useSelector((state: RootState) => state.playerCards.ws)
+ */  const dispatch = useDispatch();
 
   return (
     <div className="player-card">

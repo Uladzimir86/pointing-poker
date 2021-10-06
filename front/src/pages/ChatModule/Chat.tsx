@@ -56,7 +56,7 @@ export const Chat: React.FC<PropsChat> = ({ showChatbar }) => {
         <div className="chat_control">
           <form onSubmit={(e: SyntheticEvent) => sendMsg(e)}>
             <input
-            placeholder="type your message"
+              placeholder="type your message"
               type="text"
               name="msg"
               id="input_msg"

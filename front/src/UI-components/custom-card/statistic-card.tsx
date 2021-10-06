@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { ISelectedCard, IStore } from "../../common/interfaces"
+import { IStore } from "../../common/interfaces"
 import './statiscic-card.scss'
 import coffeeImg from '../../assets/icons/coffee.png'
 import { useSelector } from "react-redux"
@@ -20,10 +20,10 @@ interface CustomCardPropsInterface {
   }) => {
     const isCoffee : boolean = values==='Coffee'? true:false 
     const topAndBottomValues: string = values==='Coffee'? 'coffee':values
-    const selectedCard: ISelectedCard = useSelector(
+  /*   const selectedCard: ISelectedCard = useSelector(
       (state: IStore) => state.game.selectedCardVote
     )
-
+ */
     const shortScoreType: string = useSelector(
       (state: IStore) => state.settings.shortScoreType
     )

@@ -1,11 +1,11 @@
-interface IScoreState {
+/* interface IScoreState {
   score: any,
 }
 interface IScoreAction {
   type: string,
   payload: any,
 }
-
+ */
 export const scoreReducer = (state: any = null, action: any) => {
   
   switch (action.type) {
