@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { Button } from '../../UI-components/Button/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import '../../UI-components/custom-dropdown/custom-dropdown.styles.scss'
@@ -23,6 +23,7 @@ export const CreateIssueModal: React.FC = () => {
     formState: { errors },
   } = useForm<CustomIssueInterface>()
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [result, setResult] = useState<CustomIssueInterface>()
   const isEditIssue: boolean = useSelector(
     (state: IStore) => state.globalSettings.isEditIssue
@@ -74,6 +75,8 @@ export const CreateIssueModal: React.FC = () => {
           </div>
 
           <label htmlFor="">Link:</label>
+          <div className="createIssue__form_inputs_block">
+
           <input
             defaultValue={editIssueCard.link}
             className="inputElem"
@@ -88,6 +91,7 @@ export const CreateIssueModal: React.FC = () => {
           {errors.link && (
             <p className="error_validate">{errors.link.message}</p>
           )}
+           </div>
           <label htmlFor="">Priority:</label>
           <div className="container_drop-down">
             <select className="drop-down" {...register('priority')}>

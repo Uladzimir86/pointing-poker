@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { FC, useEffect, useState } from 'react'
 import './game-settings.styles.scss'
 import Switcher from '../../UI-components/switcher/switcher'

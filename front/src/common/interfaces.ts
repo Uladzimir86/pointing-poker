@@ -1,5 +1,12 @@
 import { SettingsState } from './../types/reducers/game-settings'
 
+export interface IChatbar{
+  showChatbar: boolean
+}
+export interface IChatData {
+  userName: string
+  msg: string
+}
 
 export interface IIssues {
   issueCard: CustomIssueInterface[]
@@ -40,6 +47,7 @@ export interface IStore {
   timer : ITimer
   score: any
   session: string
+  chat:IChatData[]
 }
 
 export interface IPlayerForm {

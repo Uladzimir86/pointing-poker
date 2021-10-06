@@ -2,12 +2,11 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 2.4rem;
+  line-height: 2.8rem;
   display: flex;
   align-items: center;
 }
-
 
 .container_createIssue {
   display: flex;
@@ -27,6 +26,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 1rem 3rem;
     &_inputs {
       display: flex;
       flex-wrap: wrap;
@@ -36,6 +36,11 @@
       > input {
         flex: 1 1 43%;
         margin: 4.7rem 0rem;
+      }
+      &_block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
     &_buttons {
@@ -55,7 +60,6 @@
   color: #ffc482;
   margin: 0;
   @include font-size24;
- 
 }
 .connection {
   font-size: 12px;

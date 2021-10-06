@@ -1,6 +1,5 @@
 import { IStore } from './../../common/interfaces';
 import { AnyAction } from 'redux'
-import { RootState } from '../../store/index'
 import { ThunkAction } from 'redux-thunk'
 
 export enum SettingsActionTypes {

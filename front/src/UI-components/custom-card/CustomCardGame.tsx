@@ -4,7 +4,6 @@ import './custom-card.styles.scss'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { setSelectedCard } from '../../store/reducers/gameReducer/gameActions'
 import { ISelectedCard, IStore } from '../../common/interfaces'
-import coffeeImg from '../../assets/icons/coffee.png'
 
 interface CustomCardPropsInterface {
   values?: string
@@ -62,7 +61,7 @@ const CustomCardGame: FC<CustomCardPropsInterface> = ({
         {!isBtns && <div className="custom-card__btns-container"></div>}
       </div>
       <div className={`${coffee ? 'coffee' : 'center-value'}`}>
-        {centerValue !== '' ? centerValue : coffee ? '' : 'PP'}
+        {coffee ? '' : centerValue }
       </div>
       <div className="lower-value">{topAndBottomValues}</div>
       {selectedCard.idCard === id && !isStatiscics ? (

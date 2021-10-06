@@ -1,10 +1,6 @@
 import { FC } from 'react'
 import { useSelector } from 'react-redux'
-import {
-  IStore,
-  ModalType,
-  TypeUser,
-} from '../../common/interfaces'
+import { IStore, ModalType, TypeUser } from '../../common/interfaces'
 import GameSettings from '../../components/game-settings/game-settings.component'
 import Issues from '../../components/issues/issues'
 import Members from '../../components/members/members'
@@ -19,9 +15,11 @@ const LobbyPage: FC = () => {
   const typeModalWindow = useSelector(
     (state: IStore) => state.globalSettings.typeModalWindow
   )
-const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
+  const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
-  const arrOfMembers = useSelector((state: RootState) => state.playerCards.playerCards)
+  const arrOfMembers = useSelector(
+    (state: RootState) => state.playerCards.playerCards
+  )
 
   return (
     <div className="lobby-page">

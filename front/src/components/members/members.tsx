@@ -11,6 +11,7 @@ interface IMembers {
 const Members: React.FC<IMembers> = ({arrOfMembers}) => {
   const id = useSelector((state: RootState) => state.playerCards.id)
   let members: (ReactElement | undefined)[] = [];
+  // eslint-disable-next-line array-callback-return
   if (arrOfMembers?.length) members = arrOfMembers.map((item: IPlayerCard, index: number) => {
     if (index ) {
       return (

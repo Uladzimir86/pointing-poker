@@ -1,6 +1,4 @@
 import { ModalType, TypeUser } from '../../../common/interfaces'
-import { ActionShowStat } from '../gameReducer/gameActions'
-
 export const TOGGLE_MODAL_WINDOW = 'TOGGLE_MODAL_WINDOW'
 export const TYPE_MODAL_LOBBY = 'TYPE_MODAL_LOBBY'
 export const SET_TYPE_USER = 'SET_TYPE_USER'

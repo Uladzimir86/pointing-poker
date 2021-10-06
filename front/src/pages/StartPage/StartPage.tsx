@@ -35,8 +35,8 @@ const StartPage: React.FC = () => {
             <img src={cardsLogo} alt="cards" />
           </div>
           <div className="startPage_title-naming">
-            <h2>Poker</h2>
-            <h2>Planning</h2>
+            <h1>Poker</h1>
+            <h1>Planning</h1>
           </div>
         </div>
         <div className="startPage_newGame">

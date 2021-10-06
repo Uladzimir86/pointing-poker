@@ -1,14 +1,5 @@
 @import '../../pages/StartPage/StartPage.scss';
-
-@mixin font-size24 {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
-  display: flex;
-  align-items: center;
-}
+@import '../../common/fonts.scss';
 
 .connectLobby {
   
@@ -16,9 +7,9 @@
   &__title {
     display: flex;
     justify-content: center;
-    height: 170px;
+    height: 17rem;
     & > h3 {
-      font-size: 64px;
+      font-size: 6.4rem;
       flex: 3;
     }
     &-right {
@@ -60,10 +51,8 @@
             align-items: center;
             justify-content: center;
             border: 1px solid #2b3a67;
-            font-family: Roboto;
-            font-size: 24px;
-            width: 22.5rem;
-            height: 47px;
+            @include font-Roboto-24-700;
+            font-weight: 300;
             background: #ffffff;
             border: 1px solid #eeeeee;
             box-sizing: border-box;
@@ -89,10 +78,9 @@
 .error_validate {
   color: #ffc482;
   margin: 0;
-  @include font-size24;
+  @include font-Roboto-24-700;
 }
 .connection {
-  font-size: 20px;
-  font-style: italic;
+  @include font-Roboto-24;
   color: #ffc482;
 }

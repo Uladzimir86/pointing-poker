@@ -23,6 +23,7 @@ export const ChooseCard: React.FC = () => {
                     <CustomCardGame
                     id={index}
                     key={index}
+                    centerValue={centerCardValue}
                     inGameSelected
                     coffee
                   />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CustomIssueInterface, IStore, TypeUser } from '../../common/interfaces'
+import {  IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,12 +18,9 @@ import { ChooseCard } from './ChooseCard'
 
 
 export const GamePage: React.FC = () => {
-
-  const issues : CustomIssueInterface[] = useSelector((state:IStore)=> state.issues.issueCard)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [stopTimer, onStopTimer] = useState<boolean>(true)
-
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
-  const currentPlayerId = useSelector((state: RootState) => state.playerCards.id)
   const cardStorage: string[] = useSelector(({ settings }: { settings: SettingsState }) => settings.cardStorage)
   const titleGame : string = useSelector((state:IStore)=> state.settings.title)
   const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
@@ -66,103 +63,93 @@ export const GamePage: React.FC = () => {
   }
 
   return (
-    <div className="wrapper_game">
-      <div className="game">
-        <div className="game_field">
-          <div className="game_field__title">
-            <div className="game_field__title-text">
-                {titleGame}
-            </div>
-          </div>
-          <div className="game_field__scram">
-            <div className="game_field__scram_title">Scrum master:</div>
-            <div className="game_field__scram_main">
-              <PlayerCard
-                photo={master.photo}
-                name={master.name}
-                position={master.position}
-                btnDelPlayer={false}
-                above={master.id === currentPlayerId}
-              />
-              {typeUser===TypeUser.master && <Button
-                text={'Stop Game'}
-                styleButton={'add'}
-                onClick={onHandlerStopGame}
-              />}
-              {typeUser===TypeUser.member && <Button
-                text={'Exit'}
-                styleButton={'add'}
-                onClick={()=>alert('You leave on game')}
-              />}
-              
-            </div>
-          </div>
-          <div className="game_field__playArea">
-            <div className="game_field__playArea_issues">
-              <div className="game_field__playArea_issues-title">Issues:</div>
-              <div className="game_field__playArea_issues-list ">
-                {issue}
-                {typeUser===TypeUser.master && 
-                <CreateIssueCard />}
-              </div>
-            </div>
-            <div id="timer" className="game_field__playArea_timer">
-              <TimerElement stopTimer={stopTimer}/>
-              {typeUser===TypeUser.master && <Button
-                text={startBtnText}
-                styleButton={'primary'}
-                onClick={handleRunRound}
-                disabled={isTimerActive}
-              /> 
-              }
-            </div>
+    
+        <><div className="game_field">
+      <div className="game_field__title">
+        <div className="game_field__title-text">
+          {titleGame}
+        </div>
+      </div>
+      <div className="game_field__scram">
+        <div className="game_field__scram_title">Scrum master:</div>
+        <div className="game_field__scram_main">
+          <PlayerCard
+            photo={master.photo}
+            name={master.name}
+            position={master.position}
+            btnDelPlayer={false}
+            above={true} />
+          {typeUser === TypeUser.master && <Button
+            text={'Stop Game'}
+            styleButton={'add'}
+            onClick={onHandlerStopGame} />}
+          {typeUser === TypeUser.member && <Button
+            text={'Exit'}
+            styleButton={'add'}
+            onClick={() => alert('You leave on game')} />}
 
-            <div className="game_field__playArea_nextIssue">
-            {typeUser===TypeUser.master && startBtnText === 'Restart Round' && <Button
-                text={'Next Issue'}
-                styleButton={'primary'}
-                onClick={handleShiftIssue}
-              />}
-             
-            </div>
+        </div>
+      </div>
+      <div className="game_field__playArea">
+        <div className="game_field__playArea_issues">
+          <div className="game_field__playArea_issues-title">Issues:</div>
+          <div className="game_field__playArea_issues-list ">
+            {issue}
+            {typeUser === TypeUser.master &&
+              <CreateIssueCard />}
           </div>
-          {typeUser===TypeUser.master&&    <div className="statistics">
-            <div className="statistics_cards">
-              <div className="statistics_cards-card">
-                {cardStorage.map((card, index) => {
-                  if (index) {
-                    return ( 
-                      <CustomCardGame
-                        key={index}
-                        centerValue={centerCardValue}
-                        values={String(card)}
-                        id={index}
-                        isBtns={true}
-                      />
-                    )
-                  } else return (
-                    <CustomCardGame
+        </div>
+        <div id="timer" className="game_field__playArea_timer">
+          <TimerElement stopTimer={stopTimer} />
+          {typeUser === TypeUser.master && <Button
+            text={startBtnText}
+            styleButton={'primary'}
+            onClick={handleRunRound}
+            disabled={isTimerActive} />}
+        </div>
+
+        <div className="game_field__playArea_nextIssue">
+          {typeUser === TypeUser.master && startBtnText === 'Restart Round' && <Button
+            text={'Next Issue'}
+            styleButton={'primary'}
+            onClick={handleShiftIssue} />}
+
+        </div>
+      </div>
+      {typeUser === TypeUser.master && <div className="statistics">
+        <div className="statistics_cards">
+          <div className="statistics_cards-card">
+            {cardStorage.map((card, index) => {
+              if (index) {
+                return (
+                  <CustomCardGame
+                    key={index}
+                    centerValue={centerCardValue}
+                    values={String(card)}
+                    id={index}
+                    isBtns={true} />
+                )
+              } else
+                return (
+                  <CustomCardGame
                     key={index}
                     coffee
                     values={String(card)}
                     id={index}
-                    isBtns={true}
-                  />
-                  )
-                })}
-              </div>
-              <div className="statistics_cards-percent"></div>
-            </div>
-          </div>}
-          {typeUser===TypeUser.member&&   
-           <ChooseCard/>
-           }
-         
-        {showStatistic&& 
-          <ResultVoiting/> }
+                    isBtns={true} />
+                )
+            })}
+          </div>
+          <div className="statistics_cards-percent"></div>
         </div>
-        <ScoreComponent />
-      </div>
-    </div>
+      </div>}
+      {typeUser === TypeUser.member &&
+        <ChooseCard />}
+
+      {showStatistic &&
+        <ResultVoiting />}
+    </div><ScoreComponent /></>
+   
+    
   )
 }

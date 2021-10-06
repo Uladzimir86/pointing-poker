@@ -1,5 +1,5 @@
 :root {
-  font-size: 10px;
+  font-size: 6px;
 }
 body {
   margin: 0;
@@ -18,11 +18,11 @@ a{
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 2.4rem;
+  line-height: 2.8rem;
   align-items: center;
   width: 32.5rem;
-  height: 47px;
+  height: 4.7rem;
   padding-left: 10px;
   background: #ffffff;
   box-sizing: border-box;
@@ -31,10 +31,10 @@ a{
 }
 label {
   font-family: Roboto;
-  font-size: 24px;
+  font-size: 2.4rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 28px;
+  line-height: 2.8rem;
   letter-spacing: 0em;
   text-align: left;
 }
@@ -67,4 +67,10 @@ label {
     border-color: red;
     border-radius: 50%;
   }
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }

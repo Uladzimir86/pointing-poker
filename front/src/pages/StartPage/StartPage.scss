@@ -1,9 +1,9 @@
-h2 {
+h1 {
   font-family: Roboto, sans-serif;
-  font-size: 70px;
+  font-size: 7rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 82px;
+  line-height: 8.2rem;
   letter-spacing: 0em;
   text-align: left;
   margin: 0;
@@ -12,20 +12,20 @@ h2 {
 h3 {
   color: #66999b;
   font-family: Roboto;
-  font-size: 48px;
+  font-size: 4.8rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 56px;
+  line-height: 5.6rem;
   letter-spacing: 0em;
   text-align: left;
 }
 
 @mixin label_font {
   font-family: Roboto;
-  font-size: 24px;
+  font-size: 2.4rem;
   font-style: normal;
   font-weight: 300;
-  line-height: 28px;
+  line-height: 2.8rem;
   letter-spacing: 0em;
   text-align: left;
 }
@@ -34,6 +34,7 @@ h3 {
   margin: 0 22rem;
     display: flex;
     min-height: 88vh;
+    width: 80%;
 }
 
 .content_startPage {
