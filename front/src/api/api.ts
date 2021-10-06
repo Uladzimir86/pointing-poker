@@ -1,32 +1,42 @@
+import {
+  sendMsgChat,
+  UPDATE_CHAT,
+} from './../store/reducers/chatReducer/chatReducer'
 import { IPlayerForm, IPlayerCard } from '../common/interfaces'
 import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
 export const setSession = (idSession?: string): AppThunk => {
   return (dispatch, getState) => {
-    
     const closedConnection = (mes: string) => {
-      dispatch({ type: 'SHOW_ALERT', payload: mes})
+      dispatch({ type: 'SHOW_ALERT', payload: mes })
       dispatch({ type: 'SET_LOCATION', payload: '/' })
     }
 
     if (getState().playerCards.ws)
       getState().playerCards.ws!.close(1000, 'New connection...')
-    const wsConnection =  new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000')//
-
+    const wsConnection =
+      new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/') /* new WebSocket(
+        'ws://localhost:4000'
+      )
+ */
     wsConnection.onopen = () => {
-      
-      const ping = setInterval(() => wsConnection.send(JSON.stringify('ping')), 20000);
-      
+      const ping = setInterval(
+        () => wsConnection.send(JSON.stringify('ping')),
+        20000
+      )
+
       dispatch(toggleModalWindow(true))
       if (idSession) {
-        dispatch({type: 'SET_SESSION', payload: idSession})
+        dispatch({ type: 'SET_SESSION', payload: idSession })
         wsConnection.send(
           JSON.stringify({ type: 'CHECK_ID_SESSION', idSession })
         )
       } else {
-        dispatch({type: 'SET_SESSION', payload: String(Date.now())})
-        wsConnection.send(JSON.stringify({ type: 'SET_SESSION', idSession:  getState().session}))
+        dispatch({ type: 'SET_SESSION', payload: String(Date.now()) })
+        wsConnection.send(
+          JSON.stringify({ type: 'SET_SESSION', idSession: getState().session })
+        )
       }
 
       dispatch({ type: 'WS', ws: wsConnection })
@@ -43,7 +53,8 @@ export const setSession = (idSession?: string): AppThunk => {
           case 'SET_SETTINGS':
             dispatch({ type: 'SET_SETTINGS', payload: data.settings })
             dispatch({ type: 'SET_ISSUES', payload: data.issues })
-            if (data.issues.length) dispatch({ type: 'CURRENT_ISSUE', payload: data.issues[0].id })
+            if (data.issues.length)
+              dispatch({ type: 'CURRENT_ISSUE', payload: data.issues[0].id })
             break
           case 'SET_ROUND_START':
             dispatch({ type: 'TOGGLE_TIMER' })
@@ -57,27 +68,41 @@ export const setSession = (idSession?: string): AppThunk => {
             dispatch({ type: 'SHOW_STATISTICS', payload: false })
             break
           case 'SET_ROUND_RESULT':
-            console.log('SET_ROUND_RESULT',  data.issue)
+            console.log('SET_ROUND_RESULT', data.issue)
             console.log(data.score)
-            console.log(data.statistic);
+            console.log(data.statistic)
 
             dispatch({ type: 'SET_STAT_ROUND', payload: data.statistic })
             dispatch({ type: 'SET_SCORE', payload: data.score })
-            dispatch({ type: 'TOGGLE_START_BTN_TEXT', payload: 'Restart Round' })
-            dispatch({type: 'SET_ROUND_RESULT', payload : data.statistic})
+            dispatch({
+              type: 'TOGGLE_START_BTN_TEXT',
+              payload: 'Restart Round',
+            })
+            dispatch({ type: 'SET_ROUND_RESULT', payload: data.statistic })
+            break
+
+          case 'UPDATE_CHAT':
+            console.log(data.msgChat)
+            dispatch(sendMsgChat(data.msgChat))
             break
         }
       }
 
       wsConnection.onclose = function (event) {
-        if (event.wasClean) closedConnection('Connection to session closed. Reason: ' + event.reason)
-        else closedConnection('Connection to session closed. Reason: Server disconnect...')
+        if (event.wasClean)
+          closedConnection(
+            'Connection to session closed. Reason: ' + event.reason
+          )
+        else
+          closedConnection(
+            'Connection to session closed. Reason: Server disconnect...'
+          )
         clearInterval(ping)
       }
     }
     wsConnection.onerror = function (err: Event) {
       const error = err as ErrorEvent
-      closedConnection('Error: no connection...'+ error.message)
+      closedConnection('Error: no connection...' + error.message)
     }
   }
 }
@@ -109,6 +134,12 @@ export const deletePlayerCard =
       )
   }
 
+  export const updateChatbar: AppThunk = (dispatch, getState) => {
+    const msgChat = getState().chat
+    getState().playerCards.ws?.send(
+      JSON.stringify({ type: 'UPDATE_CHAT', msgChat })
+    )
+  }
 export const closeSession =
   (id: number | undefined): AppThunk =>
   (dispatch, getState) => {
@@ -116,40 +147,54 @@ export const closeSession =
       getState().playerCards.ws?.send(
         JSON.stringify({ type: 'CLOSE_SESSION', playerId: id })
       )
-}
-export const cancelSession: AppThunk =
-  (dispatch, getState) => {
-    getState().playerCards.ws?.close(1000, 'Cancel session...')
+  }
+export const cancelSession: AppThunk = (dispatch, getState) => {
+  getState().playerCards.ws?.close(1000, 'Cancel session...')
 }
 
 export const startGame: AppThunk = (dispatch, getState) => {
-  const settings = getState().settings;
-  const issues = getState().issues.issueCard;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'START_GAME', issues, settings }))
+  const settings = getState().settings
+  const issues = getState().issues.issueCard
+  getState().playerCards.ws?.send(
+    JSON.stringify({ type: 'START_GAME', issues, settings })
+  )
 }
 
 export const setRoundStart: AppThunk = (dispatch, getState) => {
-  const issue = getState().game.idCurrentIssue;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_START', issue }))
+  const issue = getState().game.idCurrentIssue
+  getState().playerCards.ws?.send(
+    JSON.stringify({ type: 'SET_ROUND_START', issue })
+  )
 }
 
 export const restartRound: AppThunk = (dispatch, getState) => {
-  const issue = getState().game.idCurrentIssue;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'RESTART_ROUND', issue}))
+  const issue = getState().game.idCurrentIssue
+  getState().playerCards.ws?.send(
+    JSON.stringify({ type: 'RESTART_ROUND', issue })
+  )
 }
 
 export const restartTimer: AppThunk = (dispatch, getState) => {
   console.log('restartTimer')
-  const issue = getState().game.idCurrentIssue;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'RESTART_TIMER', issue}))
+  const issue = getState().game.idCurrentIssue
+  getState().playerCards.ws?.send(
+    JSON.stringify({ type: 'RESTART_TIMER', issue })
+  )
 }
 
 export const setRoundResult: AppThunk = (dispatch, getState) => {
-  const playerId = getState().playerCards.id;
-  const card = getState().game.selectedCardVote.idCard;
-  const issue = getState().game.idCurrentIssue;
-  const settings = getState().settings;
-  getState().playerCards.ws?.send(JSON.stringify({ type: 'SET_ROUND_RESULT', playerId, card, issue, settings }))
+  const playerId = getState().playerCards.id
+  const card = getState().game.selectedCardVote.idCard
+  const issue = getState().game.idCurrentIssue
+  const settings = getState().settings
+  getState().playerCards.ws?.send(
+    JSON.stringify({
+      type: 'SET_ROUND_RESULT',
+      playerId,
+      card,
+      issue,
+      settings,
+    })
+  )
 }
-
 

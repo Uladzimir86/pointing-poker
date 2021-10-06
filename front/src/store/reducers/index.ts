@@ -9,6 +9,7 @@ import { gameReducer } from './gameReducer/gameReducers'
 import { timerReducer } from './timerReducer/timerReducer'
 import { scoreReducer } from './scoreReducer/scoreReducer'
 import { sessionReducer } from './sessionReducer/sessionReducer'
+import { chatReducer } from './chatReducer/chatReducer'
 
 export const rootReducer = combineReducers({
   settings: gameSettingsReducer,
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
   timer: timerReducer,
   score: scoreReducer,
   session: sessionReducer,
+  chat: chatReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

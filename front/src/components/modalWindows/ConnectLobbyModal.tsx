@@ -120,8 +120,8 @@ export const ConnectLobbyModal: React.FC = () => {
             <img
               src={photo_member}
               alt="photo_member"
-              width="83px"
-              height="83px"
+              width="63px"
+              height="63px"
             />
           </div>
           <div className="connectLobby__register-form_buttons">

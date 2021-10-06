@@ -48,9 +48,11 @@
           display: flex;
           & > #output_text {
             display: flex;
+            align-items: center;
             justify-content: center;
             border: 1px solid #2b3a67;
             @include font-Roboto-24-700;
+            font-weight: 300;
             background: #ffffff;
             border: 1px solid #eeeeee;
             box-sizing: border-box;

@@ -74,6 +74,8 @@ export const CreateIssueModal: React.FC = () => {
           </div>
 
           <label htmlFor="">Link:</label>
+          <div className="createIssue__form_inputs_block">
+
           <input
             defaultValue={editIssueCard.link}
             className="inputElem"
@@ -88,6 +90,7 @@ export const CreateIssueModal: React.FC = () => {
           {errors.link && (
             <p className="error_validate">{errors.link.message}</p>
           )}
+           </div>
           <label htmlFor="">Priority:</label>
           <div className="container_drop-down">
             <select className="drop-down" {...register('priority')}>

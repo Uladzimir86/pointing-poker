@@ -77,12 +77,14 @@
     flex-wrap: nowrap;
 
     padding-top: 5rem;
-    & > input {
+    &>form{
+      display: flex;
+    }
+    & >form>input {
       border: 1px solid #2b3a67;
       font-family: Roboto;
       @include font-Ruda-24;
       font-size: 1.8rem;
-      width: 80%;
       padding-left: 10px;
       background: #ffffff;
       box-sizing: border-box;
