@@ -5,19 +5,19 @@ import { RootState } from '../../store'
 import { useSelector } from 'react-redux'
 
 type PropsHeader = {
-  toggleShowChatbar:Function
+  setShowChatbar:Function
   showChatbar : boolean;
 
 }
 
-const Header : React.FC<PropsHeader> = ({toggleShowChatbar, showChatbar}) => {
+const Header : React.FC<PropsHeader> = ({setShowChatbar, showChatbar}) => {
   const location = useSelector((state: RootState) => state.location)
 
 
   return (
     <header className="header">
       <div className="header__top">
-        <button type="button"  className="btn_chat" onClick = {()=>toggleShowChatbar(!showChatbar)}>
+        <button type="button"  className="btn_chat" onClick = {()=>setShowChatbar(!showChatbar)}>
           <img src={chatImg} alt="chat" hidden={location === '/'} />
         </button>
       </div>

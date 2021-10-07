@@ -29,34 +29,40 @@ export const Chat: React.FC<PropsChat> = ({ showChatbar }) => {
 
   function sendMsg(e: SyntheticEvent) {
     e.preventDefault()
-    console.log(currentMsg)
-    let sendObj: IChatData = {
+    const sendObj: IChatData = {
       userName: findCurrentNameUser(player)!,
       msg: currentMsg,
     }
-    dispatch({ type: 'UPDATE_CHAT', payload: sendObj })
-    dispatch(updateChatbar)
-    console.log(findCurrentNameUser(player)!, sendObj)
+  // dispatch({ type: 'UPDATE_CHAT', payload: sendObj })
+    
+    dispatch(updateChatbar(sendObj))
+    setCurrentMsg('')
   }
 
   return (
     <div id="#chatbar" className={showChatbar ? 'chatbar' : 'chatbar disabled'}>
       <div className="chat">
         <div className="chat_title">Start chatting</div>
-        {arrayMessages.map(({ msg, userName }) => (
-          <div className="chat_row">
-            <div className="chat_row__msg">
-              <div className="chat_row__msg_text">{msg}</div>
-            </div>
+        <div className="chat_msgs">
+        {arrayMessages.map(({ msg, userName },index) => (
+          <div key={index} className="chat_row">
             <div className="chat_row__user">
               <PlayerCard btnDelPlayer={false} name={userName} />
             </div>
+            <div className="chat_row__msg">
+              <div className="chat_row__msg_text">{msg}</div>
+            </div>
           </div>
         ))}
-        <div className="chat_control">
+        </div>
+       
+
+      </div>
+      <div className="chat_control">
           <form onSubmit={(e: SyntheticEvent) => sendMsg(e)}>
             <input
               placeholder="type your message"
+              value={currentMsg}
               type="text"
               name="msg"
               id="input_msg"
@@ -70,7 +76,6 @@ export const Chat: React.FC<PropsChat> = ({ showChatbar }) => {
             </button>
           </form>
         </div>
-      </div>
     </div>
   )
 }
