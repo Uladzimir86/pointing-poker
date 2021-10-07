@@ -16,17 +16,16 @@ function App() {
   const location = useSelector((state: RootState) => state.location)
   const alert = useSelector((state: RootState) => state.alert)
   const dispatch = useDispatch()
-  const [showChatbar, toggleShowChatbar] = useState<boolean>(false)
+  const [showChatbar, setShowChatbar] = useState<boolean>(false)
 
   useEffect(() => {
     history.push(location)
-    console.log(showChatbar)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, showChatbar])
+  }, [location])
 
   return (
     <div className="app">
-      <Header showChatbar={showChatbar} toggleShowChatbar={toggleShowChatbar} />
+      <Header showChatbar={showChatbar} setShowChatbar={setShowChatbar} />
       {alert && (
         <div className="alert">
           <span>{alert}</span>
@@ -41,18 +40,21 @@ function App() {
       <Switch>
         <Route exact path="/">
           <StartPage />
+          
         </Route>
         <Route exact path="/lobby">
           <LobbyPage/>
+          <Chat showChatbar={showChatbar}/>
         </Route>
         <Route exact path="/game">
           <GamePage />
+          <Chat showChatbar={showChatbar}/>
         </Route>
         <Route exact path="/results">
           <ResultsPage />
+          <Chat showChatbar={showChatbar}/>
         </Route>
-      </Switch>
-      <Chat showChatbar={showChatbar}/>
+      </Switch>    
       </div>
       
       <Footer />

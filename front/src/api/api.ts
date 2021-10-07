@@ -1,3 +1,4 @@
+import { IChatData } from './../common/interfaces';
 import {
   sendMsgChat,
 } from './../store/reducers/chatReducer/chatReducer'
@@ -15,10 +16,10 @@ export const setSession = (idSession?: string): AppThunk => {
     if (getState().playerCards.ws)
       getState().playerCards.ws!.close(1000, 'New connection...')
     const wsConnection =
-      new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/') /* new WebSocket(
+      new WebSocket('wss://pp-first-attempt-ws.herokuapp.com/') /* new WebSocket(
         'ws://localhost:4000'
-      )
- */
+      ) */
+
     wsConnection.onopen = () => {
       const ping = setInterval(
         () => wsConnection.send(JSON.stringify('ping')),
@@ -81,7 +82,7 @@ export const setSession = (idSession?: string): AppThunk => {
             break
 
           case 'UPDATE_CHAT':
-            console.log(data.msgChat)
+            console.log(data.msgChat,"data input")
             dispatch(sendMsgChat(data.msgChat))
             break
         }
@@ -135,13 +136,14 @@ export const deletePlayerCard =
         JSON.stringify({ type: 'DEL_PLAYER', playerId: id })
       )
   }
-
-  export const updateChatbar: AppThunk = (dispatch, getState) => {
-    const msgChat = getState().chat
-    getState().playerCards.ws?.send(
+export function updateChatbar(msgChat :IChatData){
+  return async  function updateChatbarThunk (dispatch : any, getState: any){
+    await getState().playerCards.ws?.send(
       JSON.stringify({ type: 'UPDATE_CHAT', msgChat })
     )
   }
+}
+
 export const closeSession =
   (id: number | undefined): AppThunk =>
   (dispatch, getState) => {
