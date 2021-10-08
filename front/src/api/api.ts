@@ -15,10 +15,8 @@ export const setSession = (idSession?: string): AppThunk => {
 
     if (getState().playerCards.ws)
       getState().playerCards.ws!.close(1000, 'New connection...')
-    const wsConnection =
-      new WebSocket('wss://pp-first-attempt-ws.herokuapp.com/') /* new WebSocket(
-        'ws://localhost:4000'
-      ) */
+     
+     const wsConnection = new WebSocket('ws://localhost:4000')// new WebSocket('wss://pp-first-attempt-ws.herokuapp.com/')//
 
     wsConnection.onopen = () => {
       const ping = setInterval(
@@ -131,10 +129,11 @@ export const sendPlayerForm = (playerForm: IPlayerForm): AppThunk => {
 export const deletePlayerCard =
   (id: number | undefined): AppThunk =>
   (dispatch, getState) => {
-    if (id)
+    if (id){
       getState().playerCards.ws?.send(
         JSON.stringify({ type: 'DEL_PLAYER', playerId: id })
       )
+    }
   }
 export function updateChatbar(msgChat :IChatData){
   return async  function updateChatbarThunk (dispatch : any, getState: any){

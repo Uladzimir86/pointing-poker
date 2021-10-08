@@ -15,7 +15,11 @@ const PlayerCard: React.FC<IPlayerCard> = ({
 
 /*   const ws = useSelector((state: RootState) => state.playerCards.ws)
  */  const dispatch = useDispatch();
-
+  const handleDeletePlayer = () => {
+    dispatch({type: 'SET_ID_DELETE_PLAYER', payload: id})
+    dispatch({type: 'TOGGLE_MODAL_WINDOW', payload: true})
+    dispatch({type: 'TYPE_MODAL_LOBBY', payload: 'kickModalWindow'})
+  }
   return (
     <div className="player-card">
       <div className="player-card__photo-container">
@@ -31,7 +35,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
       <button
         type="button"
         className="player-card__button"
-        onClick={() => dispatch(deletePlayerCard(id))}
+        onClick={handleDeletePlayer}
         hidden={!btnDelPlayer}
       ></button>
     </div>

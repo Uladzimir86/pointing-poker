@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  IStore, TypeUser } from '../../common/interfaces'
+import {  IStore, ModalType, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +15,9 @@ import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
 import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
 import { ChooseCard } from './ChooseCard'
+import { ModalWindow } from '../../components/modalWindows/modalWindow'
+import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
+import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
 
 
 export const GamePage: React.FC = () => {
@@ -29,7 +32,8 @@ export const GamePage: React.FC = () => {
   const currentIssue = useSelector((state: IStore) => state.game.idCurrentIssue);
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
   const showStatistic = useSelector((state: IStore) => state.game.statGame.showStatRound);
-
+  const typeModalWindow = useSelector((state: IStore) => state.globalSettings.typeModalWindow);
+  
   function onHandlerStopGame(){
     dispatch({ type: 'SET_LOCATION', payload: '/results' })
   }
@@ -64,7 +68,8 @@ export const GamePage: React.FC = () => {
 
   return (
     
-        <><div className="game_field">
+    <>
+    <div className="game_field">
       <div className="game_field__title">
         <div className="game_field__title-text">
           {titleGame}
@@ -148,7 +153,15 @@ export const GamePage: React.FC = () => {
 
       {showStatistic &&
         <ResultVoiting />}
-    </div><ScoreComponent /></>
+    </div><ScoreComponent />
+    <ModalWindow>
+      {typeModalWindow === ModalType.createIssueModalWindow ? (
+        <CreateIssueModal />
+      ) : (
+        <KickPlayerModal />
+      )}
+    </ModalWindow>
+  </>
    
     
   )
