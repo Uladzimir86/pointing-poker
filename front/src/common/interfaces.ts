@@ -34,6 +34,7 @@ export interface IStateGlobal {
   typeModalWindow: ModalType
   typeUser: TypeUser
   isEditIssue: boolean
+  idDeletePlayer: number
 }
 
 export interface IStore {

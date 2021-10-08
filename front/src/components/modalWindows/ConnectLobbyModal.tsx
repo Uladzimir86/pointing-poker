@@ -25,9 +25,11 @@ export const ConnectLobbyModal: React.FC = () => {
     }, [location])
 
   useEffect(() => {
-    if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
-    else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
-    }, [isObserver, dispatch])
+    if(location !== '/lobby') {
+      if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
+      else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }}, [isObserver, dispatch])
 
   const {
     register,
@@ -45,6 +47,7 @@ export const ConnectLobbyModal: React.FC = () => {
     console.log('onCloseModal')
   }
   const cancelCurrentSession = () => {
+    setIsConnection(false);
     onCloseModal();
     dispatch(cancelSession);
   }

@@ -19,9 +19,10 @@ function App() {
   const [showChatbar, setShowChatbar] = useState<boolean>(false)
 
   useEffect(() => {
-    history.push(location)
+   if (history.location.pathname !== location) history.push(location)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
+
 
   return (
     <div className="app">
@@ -40,7 +41,6 @@ function App() {
       <Switch>
         <Route exact path="/">
           <StartPage />
-          
         </Route>
         <Route exact path="/lobby">
           <LobbyPage/>

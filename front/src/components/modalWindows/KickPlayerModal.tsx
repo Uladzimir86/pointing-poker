@@ -1,4 +1,7 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deletePlayerCard } from '../../api/api'
+import { RootState } from '../../store/reducers'
 import { Button } from '../../UI-components/Button/button'
 import './KickPlayerModal.scss'
 
@@ -8,9 +11,17 @@ type PropsKickPlayer = {
 }
 
 export const KickPlayerModal: React.FC<PropsKickPlayer> = ({ name}) => {
+  const dispatch = useDispatch();
+  const id = useSelector((state: RootState) => state.globalSettings.idDeletePlayer)
+
   const handlerDelete = () => {
-    //TODO fetch delete player
-    console.log('delete player')
+    dispatch(deletePlayerCard(id))
+    dispatch({type: 'TOGGLE_MODAL_WINDOW', payload: false})
+    dispatch({type: 'SET_ID_DELETE_PLAYER', payload: 0})
+  }
+  const handlerCancelDelete = () => {
+    dispatch({type: 'SET_ID_DELETE_PLAYER', payload: 0})
+    dispatch({type: 'TOGGLE_MODAL_WINDOW', payload: false})
   }
 
   return (
@@ -29,7 +40,7 @@ export const KickPlayerModal: React.FC<PropsKickPlayer> = ({ name}) => {
             type="submit"
             onClick={handlerDelete}
           />
-          <Button text={'Cancel'} styleButton={'add'} onClick={handlerDelete}/>
+          <Button text={'Cancel'} styleButton={'add'} onClick={handlerCancelDelete}/>
         </div>
       </div>
     </div>
