@@ -1,9 +1,19 @@
 import {IPlayerCard } from '../../../common/interfaces'
 
 
-const initialState: {playerCards: IPlayerCard[], ws: WebSocket | null, id: number}  = 
+const initialState: {playerCards: IPlayerCard[], memberCards: IPlayerCard[], ws: WebSocket | null, id: number}  = 
   {
     playerCards: [
+    {
+      photo: 'PH',
+      name: 'Name',
+      position: 'Position',
+      btnDelPlayer: true,
+      above: false,
+      id: 0
+    }
+  ],
+    memberCards: [
     {
       photo: 'PH',
       name: 'Name',
@@ -24,7 +34,7 @@ export const playerCardsReducer = (
 ): any => {
   switch (action.type) {
     case 'SET_PLAYERS':
-      return  { ...state, playerCards: action.payload }
+      return  { ...state, playerCards: action.playerCards, memberCards: action.memberCards }
     case 'WS':
       return  { ...state, ws: action.ws }
     case 'SET_PLAYER_ID':

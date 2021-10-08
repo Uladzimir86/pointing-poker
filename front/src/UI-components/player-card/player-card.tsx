@@ -14,7 +14,6 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   id
 }) => {
 
-  const ws = useSelector((state: RootState) => state.playerCards.ws)
   const dispatch = useDispatch();
 
   return (

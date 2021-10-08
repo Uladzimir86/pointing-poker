@@ -25,6 +25,7 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
   const sessionTitle = useSelector((state: RootState) => state.settings.title)
   const location = useSelector((state: RootState) => state.location)
   const session = useSelector((state: RootState) => state.session)
+  const ws = useSelector((state: RootState) => state.playerCards.ws)
   const dispatch = useDispatch();
 
   
@@ -119,13 +120,13 @@ const SessionTitle: FC<ISTitle> = ({ photo, name, position }) => {
               text="Cancel Game" 
               type="button"
               styleButton="add"
-              onClick={() => dispatch(closeSession(id))}
+              onClick={() => dispatch(closeSession)}
             />
           </>
         )}
-        {typeUser === TypeUser.member && (
+        {typeUser !== TypeUser.master && (
           <div className="session-title__button-exit">
-            <Button  text="Exit" type="button" styleButton="add" onClick={() => dispatch(closeSession(id))}/>
+            <Button  text="Exit" type="button" styleButton="add" onClick={() => dispatch(closeSession)}/>
           </div>
         )}
       </div>

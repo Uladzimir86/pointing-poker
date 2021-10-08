@@ -1,15 +1,20 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleModalWindow } from '../../store/reducers/globalReducer/globalActions'
 import { Button } from '../../UI-components/Button/button'
 import './KickPlayerModal.scss'
 
 type PropsKickPlayer = {
   name?: string
-  
 }
 
 export const KickPlayerModal: React.FC<PropsKickPlayer> = ({ name}) => {
+
+  const dispatch = useDispatch();
+  
   const handlerDelete = () => {
     //TODO fetch delete player
+    dispatch(toggleModalWindow(false))
     console.log('delete player')
   }
 

@@ -1,5 +1,5 @@
-import { IPlayerForm, IPlayerCard } from '../common/interfaces'
-import { toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
+import { IPlayerForm, IPlayerCard, ModalType } from '../common/interfaces'
+import { setTypeModalWindow, toggleModalWindow } from '../store/reducers/globalReducer/globalActions'
 import { AppThunk } from '../types/reducers/game-settings'
 
 export const setSession = (idSession?: string): AppThunk => {
@@ -12,7 +12,7 @@ export const setSession = (idSession?: string): AppThunk => {
 
     if (getState().playerCards.ws)
       getState().playerCards.ws!.close(1000, 'New connection...')
-    const wsConnection =  new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000')//
+    const wsConnection =  new WebSocket('ws://localhost:4000')//new WebSocket('ws://pp-first-attempt-ws.herokuapp.com/')//
 
     wsConnection.onopen = () => {
       
@@ -35,7 +35,7 @@ export const setSession = (idSession?: string): AppThunk => {
         const data = JSON.parse(event.data)
         switch (data.type) {
           case 'SET_PLAYERS':
-            dispatch({ type: 'SET_PLAYERS', payload: data.players })
+            dispatch({ type: 'SET_PLAYERS', playerCards: data.players,  memberCards: data.members})
             break
           case 'SET_LOCATION':
             dispatch({ type: 'SET_LOCATION', payload: data.location })
@@ -106,20 +106,33 @@ export const sendPlayerForm = (playerForm: IPlayerForm): AppThunk => {
 export const deletePlayerCard =
   (id: number | undefined): AppThunk =>
   (dispatch, getState) => {
-    if (id)
+    if (id && getState().globalSettings.typeUser === 'master') {
       getState().playerCards.ws?.send(
         JSON.stringify({ type: 'DEL_PLAYER', playerId: id })
-      )
+    )} else if (getState().globalSettings.typeUser === 'observer') {
+      dispatch({ type: 'SHOW_ALERT', payload: 'You can only observe...'})
+    // } else if (getState().playerCards.playerCards.length < 4) {
+    //   dispatch({ type: 'SHOW_ALERT', payload: 'You need more players for voting to remove this player...'})
+    } else {
+      console.log('deletePlayerCard')
+      dispatch(toggleModalWindow(true))
+      dispatch(setTypeModalWindow(ModalType.kickModalWindow))
+    }
   }
 
-export const closeSession =
-  (id: number | undefined): AppThunk =>
+export const closeSession: AppThunk =
   (dispatch, getState) => {
-    if (id)
-      getState().playerCards.ws?.send(
-        JSON.stringify({ type: 'CLOSE_SESSION', playerId: id })
-      )
+      // const playerName = getState().playerCards.playerCards.find((item: any) => item.id === getState().playerCards.id)?.name;
+      getState().playerCards.ws?.close(1000, 'Session was closed...');
 }
+// export const closeSession =
+//   (id: number | undefined): AppThunk =>
+//   (dispatch, getState) => {
+//     if (id)
+//       getState().playerCards.ws?.send(
+//         JSON.stringify({ type: 'CLOSE_SESSION', playerId: id })
+//       )
+// }
 export const cancelSession: AppThunk =
   (dispatch, getState) => {
     getState().playerCards.ws?.close(1000, 'Cancel session...')

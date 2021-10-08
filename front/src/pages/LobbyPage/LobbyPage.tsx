@@ -21,7 +21,7 @@ const LobbyPage: FC = () => {
   )
 const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
 
-  const arrOfMembers = useSelector((state: RootState) => state.playerCards.playerCards)
+  const arrOfMembers = useSelector((state: RootState) => state.playerCards.memberCards)
 
   return (
     <div className="lobby-page">
@@ -31,15 +31,16 @@ const typeUser = useSelector((state: IStore) => state.globalSettings.typeUser)
         <>
           <Issues />
           <GameSettings />
-          <ModalWindow>
-            {typeModalWindow === ModalType.createIssueModalWindow ? (
-              <CreateIssueModal />
-            ) : (
-              <KickPlayerModal />
-            )}
-          </ModalWindow>
+          
         </>
       )}
+      <ModalWindow>
+        {typeModalWindow === ModalType.createIssueModalWindow ? (
+          <CreateIssueModal />
+        ) : (
+          <KickPlayerModal />
+        )}
+      </ModalWindow>
     </div>
   )
 }

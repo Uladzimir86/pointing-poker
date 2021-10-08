@@ -3,7 +3,7 @@ import { CustomIssueInterface, IStore, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
-import { restartRound, restartTimer, setRoundStart } from '../../api/api'
+import { closeSession, restartRound, restartTimer, setRoundStart } from '../../api/api'
 import { RootState } from '../../store/reducers'
 import { Button } from '../../UI-components/Button/button'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
@@ -89,10 +89,10 @@ export const GamePage: React.FC = () => {
                 styleButton={'add'}
                 onClick={onHandlerStopGame}
               />}
-              {typeUser===TypeUser.member && <Button
+              {typeUser !== TypeUser.master && <Button
                 text={'Exit'}
                 styleButton={'add'}
-                onClick={()=>alert('You leave on game')}
+                onClick={() => dispatch(closeSession)}
               />}
               
             </div>
