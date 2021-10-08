@@ -28,6 +28,7 @@ export const ConnectLobbyModal: React.FC = () => {
     if(location !== '/lobby') {
       if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
       else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }}, [isObserver, dispatch])
 
   const {
