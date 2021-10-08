@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {  IStore, ModalType, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
@@ -18,9 +18,20 @@ import { ChooseCard } from './ChooseCard'
 import { ModalWindow } from '../../components/modalWindows/modalWindow'
 import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
 import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
+import { useHistory } from 'react-router-dom'
 
 
 export const GamePage: React.FC = () => {
+
+  const location = useSelector((state: RootState) => state.location )
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log('GamePage',history)
+    if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [stopTimer, onStopTimer] = useState<boolean>(true)
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
@@ -33,7 +44,7 @@ export const GamePage: React.FC = () => {
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
   const showStatistic = useSelector((state: IStore) => state.game.statGame.showStatRound);
   const typeModalWindow = useSelector((state: IStore) => state.globalSettings.typeModalWindow);
-  
+
   function onHandlerStopGame(){
     dispatch({ type: 'SET_LOCATION', payload: '/results' })
   }

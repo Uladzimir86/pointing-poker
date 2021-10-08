@@ -1,15 +1,28 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
   IResponseResults,
   IStatiscicsCard,
   IStatiscicsRound,
   IStore,
 } from '../../common/interfaces'
+import { RootState } from '../../store'
 import StatiscicCard from '../../UI-components/custom-card/statistic-card'
 import './ResultsPage.scss'
 
 export const ResultsPage: React.FC = () => {
+  
+  const dispatch = useDispatch();
+  const location = useSelector((state: RootState) => state.location )
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log('GamePage',history)
+    if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const issueCard = useSelector((state: IStore) => state.issues.issueCard)
   const titleGame: string = useSelector((state: IStore) => state.settings.title)
 

@@ -25,9 +25,10 @@ export const ConnectLobbyModal: React.FC = () => {
     }, [location])
 
   useEffect(() => {
-    if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
-    else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
-    }, [isObserver, dispatch])
+    if(location !== '/lobby') {
+      if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
+      else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
+    }}, [isObserver, dispatch])
 
   const {
     register,
