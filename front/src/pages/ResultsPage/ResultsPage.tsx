@@ -18,7 +18,6 @@ export const ResultsPage: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('GamePage',history)
     if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

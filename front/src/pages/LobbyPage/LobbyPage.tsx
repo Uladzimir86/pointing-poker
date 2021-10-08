@@ -19,7 +19,6 @@ const LobbyPage: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('LobbyPag',history)
     if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

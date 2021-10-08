@@ -2,7 +2,6 @@ import React from 'react'
 import {  useDispatch } from 'react-redux'
 import './player-card.scss'
 import {IPlayerCard} from '../../common/interfaces'
-import { deletePlayerCard } from '../../api/api'
 
 const PlayerCard: React.FC<IPlayerCard> = ({
   photo,

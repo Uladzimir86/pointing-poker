@@ -19,8 +19,6 @@ function App() {
   const [showChatbar, setShowChatbar] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log('app',history)
-
    if (history.location.pathname !== location) history.push(location)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])

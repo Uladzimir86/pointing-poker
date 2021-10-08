@@ -3,7 +3,7 @@ import {  IStore, ModalType, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
-import { restartRound, restartTimer, setRoundStart } from '../../api/api'
+import { restartRound, restartTimer, setRoundStart, stopGame } from '../../api/api'
 import { RootState } from '../../store/reducers'
 import { Button } from '../../UI-components/Button/button'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
@@ -27,7 +27,6 @@ export const GamePage: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('GamePage',history)
     if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -46,7 +45,7 @@ export const GamePage: React.FC = () => {
   const typeModalWindow = useSelector((state: IStore) => state.globalSettings.typeModalWindow);
 
   function onHandlerStopGame(){
-    dispatch({ type: 'SET_LOCATION', payload: '/results' })
+    dispatch(stopGame)
   }
 
   const dispatch = useDispatch();

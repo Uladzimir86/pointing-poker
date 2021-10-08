@@ -178,7 +178,6 @@ export const restartRound: AppThunk = (dispatch, getState) => {
 }
 
 export const restartTimer: AppThunk = (dispatch, getState) => {
-  console.log('restartTimer')
   const issue = getState().game.idCurrentIssue
   getState().playerCards.ws?.send(
     JSON.stringify({ type: 'RESTART_TIMER', issue })
@@ -201,3 +200,8 @@ export const setRoundResult: AppThunk = (dispatch, getState) => {
   )
 }
 
+export const stopGame: AppThunk = (dispatch, getState) => {
+  getState().playerCards.ws?.send(
+    JSON.stringify({ type: 'STOP_GAME' })
+  )
+}
