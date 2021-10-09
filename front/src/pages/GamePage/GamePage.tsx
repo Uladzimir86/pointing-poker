@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import {  IStore, TypeUser } from '../../common/interfaces'
+import React, { useEffect, useState } from 'react'
+import {  IStore, ModalType, TypeUser } from '../../common/interfaces'
 import ScoreComponent from '../../components/scoreComponent/ScoreComponent'
 import { SettingsState } from '../../types/reducers/game-settings'
 import { useDispatch, useSelector } from 'react-redux'
-import { restartRound, restartTimer, setRoundStart } from '../../api/api'
+import { restartRound, restartTimer, setRoundStart, stopGame } from '../../api/api'
 import { RootState } from '../../store/reducers'
 import { Button } from '../../UI-components/Button/button'
 import CustomCardGame from '../../UI-components/custom-card/CustomCardGame'
@@ -14,9 +14,22 @@ import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
 import { ChooseCard } from './ChooseCard'
+import { ModalWindow } from '../../components/modalWindows/modalWindow'
+import { CreateIssueModal } from '../../components/modalWindows/CreateIssueModal'
+import { KickPlayerModal } from '../../components/modalWindows/KickPlayerModal'
+import { useHistory } from 'react-router-dom'
 
 
 export const GamePage: React.FC = () => {
+
+  const location = useSelector((state: RootState) => state.location )
+  const history = useHistory();
+
+  useEffect(() => {
+    if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [stopTimer, onStopTimer] = useState<boolean>(true)
   const master = useSelector((state: RootState) => state.playerCards.playerCards[0])
@@ -28,9 +41,10 @@ export const GamePage: React.FC = () => {
   const currentIssue = useSelector((state: IStore) => state.game.idCurrentIssue);
   const centerCardValue = useSelector((state: RootState) => state.settings.shortScoreType);
   const showStatistic = useSelector((state: IStore) => state.game.statGame.showStatRound);
+  const typeModalWindow = useSelector((state: IStore) => state.globalSettings.typeModalWindow);
 
   function onHandlerStopGame(){
-    dispatch({ type: 'SET_LOCATION', payload: '/results' })
+    dispatch(stopGame)
   }
 
   const dispatch = useDispatch();
@@ -64,7 +78,8 @@ export const GamePage: React.FC = () => {
 
   return (
     
-        <><div className="game_field">
+    <>
+    <div className="game_field">
       <div className="game_field__title">
         <div className="game_field__title-text">
           {titleGame}
@@ -148,7 +163,15 @@ export const GamePage: React.FC = () => {
 
       {showStatistic &&
         <ResultVoiting />}
-    </div><ScoreComponent /></>
+    </div><ScoreComponent />
+    <ModalWindow>
+      {typeModalWindow === ModalType.createIssueModalWindow ? (
+        <CreateIssueModal />
+      ) : (
+        <KickPlayerModal />
+      )}
+    </ModalWindow>
+  </>
    
     
   )

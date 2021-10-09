@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import './player-card.scss'
 import { IPlayerCard } from '../../common/interfaces'
-import { deletePlayerCard } from '../../api/api'
 
 const PlayerCard: React.FC<IPlayerCard> = ({
   photo,
@@ -12,12 +11,12 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   above = false,
   id,
 }) => {
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   function createShortName() {
     let firstName = ''
     let lastName = ''
-    if (name!.length>0) {
+    if (name!.length > 0) {
       firstName = name!.split(' ')[0]
       lastName = name!.split(' ')[1]
     }
@@ -25,6 +24,11 @@ const PlayerCard: React.FC<IPlayerCard> = ({
     return firstName[0] + lastName[0]
   }
 
+  const handleDeletePlayer = () => {
+    dispatch({ type: 'SET_ID_DELETE_PLAYER', payload: id })
+    dispatch({ type: 'TOGGLE_MODAL_WINDOW', payload: true })
+    dispatch({ type: 'TYPE_MODAL_LOBBY', payload: 'kickModalWindow' })
+  }
   return (
     <div className="player-card">
       <div className="player-card__photo-container">
@@ -40,7 +44,7 @@ const PlayerCard: React.FC<IPlayerCard> = ({
       <button
         type="button"
         className="player-card__button"
-        onClick={() => dispatch(deletePlayerCard(id))}
+        onClick={handleDeletePlayer}
         hidden={!btnDelPlayer}
       ></button>
     </div>

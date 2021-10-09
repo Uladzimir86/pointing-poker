@@ -3,7 +3,6 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
-import photo_member from '../../assets/icons/checkmark.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { IPlayerForm } from '../../common/interfaces'
 import {cancelSession, sendPlayerForm} from '../../api/api'
@@ -26,9 +25,11 @@ export const ConnectLobbyModal: React.FC = () => {
     }, [location])
 
   useEffect(() => {
-    if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
-    else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
-    }, [isObserver, dispatch])
+    if(location !== '/lobby') {
+      if (isObserver)  dispatch({type: 'SET_TYPE_USER', payload: 'observer'})
+      else dispatch({type: 'SET_TYPE_USER', payload: 'member'})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }}, [isObserver, dispatch])
 
     useEffect(() => {
      dispatch({type: 'SET_SHORT_NAME', payload: shortName})
@@ -52,6 +53,7 @@ export const ConnectLobbyModal: React.FC = () => {
     console.log('onCloseModal')
   }
   const cancelCurrentSession = () => {
+    setIsConnection(false);
     onCloseModal();
     dispatch(cancelSession);
   }

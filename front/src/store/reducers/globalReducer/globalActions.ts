@@ -27,6 +27,10 @@ export type ActionTypeModalWindow = {
   type: typeof TYPE_MODAL_LOBBY
   payload: ModalType
 }
+export type ActionSetIdDeletePlayer = {
+  type: 'SET_ID_DELETE_PLAYER'
+  payload: number
+}
 
 export const isEditIssue = (status: boolean): ActionIsEditIssue => ({
   type: IS_EDIT_ISSUE,
@@ -45,3 +49,5 @@ export const toggleModalWindow = (
 export const setTypeModalWindow = (
   typeModal: ModalType
 ): ActionTypeModalWindow => ({ type: TYPE_MODAL_LOBBY, payload: typeModal })
+
+// export const setIdDeletePlayer = (idPlayer:number) => ({ type: 'SET_ID_DELETE_PLAYER', payload: idPlayer})

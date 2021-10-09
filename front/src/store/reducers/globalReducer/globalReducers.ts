@@ -9,6 +9,7 @@ import {
   ActionSetTypeUser,
   ActionIsEditIssue,
   IS_EDIT_ISSUE,
+  ActionSetIdDeletePlayer,
 } from './globalActions'
 
 type globalActionsType =
@@ -16,12 +17,14 @@ type globalActionsType =
   | ActionTypeModalWindow
   | ActionSetTypeUser
   | ActionIsEditIssue
+  | ActionSetIdDeletePlayer
 
 const initialStateGlobal: IStateGlobal = {
   modalWindow: false,
   typeModalWindow: ModalType.createIssueModalWindow,
   typeUser: TypeUser.member,
-  isEditIssue : false
+  isEditIssue : false,
+  idDeletePlayer: 0,
 }
 
 export function globalReducer(
@@ -41,6 +44,8 @@ export function globalReducer(
     case IS_EDIT_ISSUE: {
         return {...state, isEditIssue: action.payload}
       }
+    case 'SET_ID_DELETE_PLAYER': 
+      return {...state, idDeletePlayer: action.payload}
     default:
       return state
   }
