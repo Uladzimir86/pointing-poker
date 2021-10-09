@@ -13,7 +13,6 @@ import { TimerElement } from '../../UI-components/timer/timer'
 import { onShiftTimer } from './gameFunc'
 import './GamePage.scss'
 import { ResultVoiting } from './ResultVoiting'
-import CreateIssueCard from '../../UI-components/custom-issue/CreateIssueCard'
 import { ChooseCard } from './ChooseCard'
 
 
@@ -61,6 +60,7 @@ export const GamePage: React.FC = () => {
       dispatch(restartTimer)
     }
   }
+            //TODO crete issue during the game
 
   return (
     
@@ -95,8 +95,8 @@ export const GamePage: React.FC = () => {
           <div className="game_field__playArea_issues-title">Issues:</div>
           <div className="game_field__playArea_issues-list ">
             {issue}
-            {typeUser === TypeUser.master &&
-              <CreateIssueCard />}
+            {/* {typeUser === TypeUser.master &&
+              <CreateIssueCard />} */}
           </div>
         </div>
         <div id="timer" className="game_field__playArea_timer">
