@@ -10,12 +10,12 @@ export const arrOfIssues: CustomIssueInterface[] = [
     priority: 'Medium',
     id: createID()
   },
-  {
+  /* {
     title: 'issue 06',
     link: 'https://react-hook-form.com/api/useform',
     priority: 'High',
     id: createID()
-  },
+  }, */
 ]
 
 export const initialEditIssueCard :CustomIssueInterface={

@@ -5,8 +5,8 @@ const initialState: {playerCards: IPlayerCard[], ws: WebSocket | null, id: numbe
   {
     playerCards: [
     {
-      photo: 'PH',
-      name: 'Name',
+      photo: '',
+      name: '',
       position: 'Position',
       btnDelPlayer: true,
       above: false,
