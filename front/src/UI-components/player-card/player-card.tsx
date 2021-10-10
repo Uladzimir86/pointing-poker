@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import './player-card.scss'
 import { IPlayerCard } from '../../common/interfaces'
