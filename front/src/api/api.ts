@@ -16,7 +16,7 @@ export const setSession = (idSession?: string): AppThunk => {
     if (getState().playerCards.ws)
       getState().playerCards.ws!.close(1000, 'New connection...')
      
-     const wsConnection = new WebSocket('wss://pp-first-attempt-ws.herokuapp.com/')//new WebSocket('ws://localhost:4000')// 
+     const wsConnection = new WebSocket('ws://localhost:4000')// new WebSocket('wss://pp-first-attempt-ws.herokuapp.com/')//
 
     wsConnection.onopen = () => {
       const ping = setInterval(

@@ -1,6 +1,7 @@
 @import '../../common/fonts.scss';
 
 .results {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 84vh;
@@ -33,6 +34,11 @@
       }
         }
     }
+  }
+  button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
   }
 }
 .footer{
