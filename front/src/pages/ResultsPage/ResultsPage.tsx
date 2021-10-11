@@ -30,9 +30,6 @@ export const ResultsPage: React.FC = () => {
   const arrResults: IResponseResults[] = useSelector(
     (state: IStore) => state.game.statGame.results
   )
-  const arrResultsStat: IResponseResults[] = useSelector(
-    (state: IStore) => state.game.statGame.results
-  )
 
   const cardStorage: string[] = useSelector(
     (state: IStore) => state.settings.cardStorage
