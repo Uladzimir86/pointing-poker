@@ -16,6 +16,8 @@ export const ResultsPage: React.FC = () => {
   const dispatch = useDispatch();
   const location = useSelector((state: RootState) => state.location )
   const history = useHistory();
+ // const data: any = useSelector((state: RootState) => state.game)
+
 
   useEffect(() => {
     if (location !== '/' && history.location.pathname !== location) dispatch({type: 'SET_LOCATION', payload: history.location.pathname})
@@ -33,7 +35,22 @@ export const ResultsPage: React.FC = () => {
     (state: IStore) => state.settings.cardStorage
   )
 
+  const downloadResult = () => {
+    const data = arrResults.map((item: IResponseResults) => {
+      const issue = issueCard.find((iss) => iss.id === item.idIssue)?.title
+      let res = '';
+      cardStorage.forEach((card, index) => res += `card ${card} :  ${item.resultsVote[index]}%,\n`)
+      return `${issue}:  \n${res}\n `
+    })
+    const blob = new Blob(data, {type : 'text/csv'});
+    const link = document.createElement('a');
+    link.download = "result.csv";
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  }
+
   function createCardsResults(id: string): IStatiscicsRound {
+
     const filterArray = arrResults.filter(({ idIssue }) => idIssue === id)
     let statCurrentId: IStatiscicsRound = {
       idIssue: '',
@@ -91,6 +108,7 @@ export const ResultsPage: React.FC = () => {
 
   return (
     <div className="results">
+      <button type="button" className="btn_primary" onClick={downloadResult}> Download</button>
       <div className="results_title">{titleGame}</div>
       <div className="results_content"> {results} </div>
     </div>
