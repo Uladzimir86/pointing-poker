@@ -3,7 +3,6 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '../../UI-components/Button/button'
 import Switcher from '../../UI-components/switcher/switcher'
 import './ConnectLobby.scss'
-import photo_member from '../../assets/icons/checkmark.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { IPlayerForm } from '../../common/interfaces'
 import {cancelSession, sendPlayerForm} from '../../api/api'
@@ -17,6 +16,7 @@ export const ConnectLobbyModal: React.FC = () => {
   const [isConnection, setIsConnection] = useState(false);
   const location = useSelector((state: RootState) => state.location)
   const user = useSelector((state: RootState) => state.globalSettings.typeUser)
+  const [shortName, setShortName] = useState<string>('')
   
   useEffect(() => {
       setIsConnection(false)
@@ -31,6 +31,10 @@ export const ConnectLobbyModal: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }}, [isObserver, dispatch])
 
+    useEffect(() => {
+     dispatch({type: 'SET_SHORT_NAME', payload: shortName})
+    }, [dispatch, shortName])
+
   const {
     register,
     handleSubmit,
@@ -38,6 +42,8 @@ export const ConnectLobbyModal: React.FC = () => {
   } = useForm<IPlayerForm>()
 
   const onSubmit: SubmitHandler<IPlayerForm> = (data) => {
+
+    setShortName(data.firstName[0]+data.lastName[0])
     setIsConnection(true)
     dispatch(sendPlayerForm(data))
   }
@@ -78,7 +84,7 @@ export const ConnectLobbyModal: React.FC = () => {
               {...register('firstName', {
                 required: true,
                 pattern: {
-                  value: /(^[A-Za-z-]+$)/,
+                  value: /(^[A-Za-zА-Яа-я-]+$)/,
                   message: 'First name must contain only letters',
                 },
               })}
@@ -94,7 +100,7 @@ export const ConnectLobbyModal: React.FC = () => {
               {...register('lastName', {
                 required: false,
                 pattern: {
-                  value: /(^[A-Za-z-]+$)/,
+                  value: /(^[A-Za-zА-Яа-я-]+$)/,
                   message: 'Last name must contain only letters',
                 },
               })}
@@ -110,7 +116,7 @@ export const ConnectLobbyModal: React.FC = () => {
               {...register('position', {
                 required: false,
                 pattern: {
-                  value: /(^[A-Za-z-]+$)/,
+                  value: /(^[A-Za-zА-Яа-я-]+$)/,
                   message: 'Invalid Job Position',
                 },
               })}
@@ -126,12 +132,12 @@ export const ConnectLobbyModal: React.FC = () => {
               <div id="output_text">Choose file</div>
               <Button text={'Choose'} styleButton={'primary'} />
             </div>
-            <img
-              src={photo_member}
-              alt="photo_member"
-              width="63px"
-              height="63px"
-            />
+            <div className= "connectLobby__register-form_image-img" >
+              <div id='shortNameUser'>
+              {shortName}
+              </div>
+              
+            </div>
           </div>
           <div className="connectLobby__register-form_buttons">
             <Button 

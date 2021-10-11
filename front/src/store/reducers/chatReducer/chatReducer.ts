@@ -24,7 +24,6 @@ export function chatReducer(
 ) {
   switch (action.type) {
     case UPDATE_CHAT: {
-      console.log([ ...state, action.payload], "reducer")
       return [ ...state, action.payload]
     }
     default:

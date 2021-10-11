@@ -1,7 +1,7 @@
 import React from 'react'
-import {  useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './player-card.scss'
-import {IPlayerCard} from '../../common/interfaces'
+import { IPlayerCard } from '../../common/interfaces'
 
 const PlayerCard: React.FC<IPlayerCard> = ({
   photo,
@@ -9,20 +9,30 @@ const PlayerCard: React.FC<IPlayerCard> = ({
   position,
   btnDelPlayer = true,
   above = false,
-  id
+  id,
 }) => {
+  const dispatch = useDispatch()
 
-/*   const ws = useSelector((state: RootState) => state.playerCards.ws)
- */  const dispatch = useDispatch();
+  function createShortName() {
+    let firstName = ''
+    let lastName = ''
+    if (name!.length > 0) {
+      firstName = name!.split(' ')[0]
+      lastName = name!.split(' ')[1]
+    }
+
+    return firstName[0] + lastName[0]
+  }
+
   const handleDeletePlayer = () => {
-    dispatch({type: 'SET_ID_DELETE_PLAYER', payload: id})
-    dispatch({type: 'TOGGLE_MODAL_WINDOW', payload: true})
-    dispatch({type: 'TYPE_MODAL_LOBBY', payload: 'kickModalWindow'})
+    dispatch({ type: 'SET_ID_DELETE_PLAYER', payload: id })
+    dispatch({ type: 'TOGGLE_MODAL_WINDOW', payload: true })
+    dispatch({ type: 'TYPE_MODAL_LOBBY', payload: 'kickModalWindow' })
   }
   return (
     <div className="player-card">
       <div className="player-card__photo-container">
-        <div className="player-card__photo">{photo}</div>
+        <div className="player-card__photo">{createShortName()}</div>
       </div>
       <div className="player-card__text-container">
         <div className="player-card__name-above" hidden={!above}>
